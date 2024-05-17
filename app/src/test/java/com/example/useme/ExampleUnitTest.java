@@ -1,4 +1,4 @@
-package com.example.usemt;
+package com.example.useme;
 
 import org.junit.Test;
 
