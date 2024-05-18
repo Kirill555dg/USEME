@@ -25,40 +25,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="@string/form_subject"/>
+            android:hint="@string/form_subject"
+            android:minHeight="48dp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/form_textFieldTopic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="@string/form_topic"/>
+            android:hint="@string/form_topic"
+            android:minHeight="48dp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/form_textFieldCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="@string/form_category"/>
+            android:hint="@string/form_category"
+            android:minHeight="48dp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/form_textFieldCondition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="@string/form_condition"/>
+            android:hint="@string/form_condition"
+            android:minHeight="48dp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/form_textFieldAnswer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="@string/form_answer"/>
+            android:hint="@string/form_answer"
+            android:minHeight="48dp" />
 
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/form_buttonSave"
+        android:id="@+id/form_saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
