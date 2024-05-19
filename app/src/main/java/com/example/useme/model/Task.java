@@ -10,6 +10,8 @@ public class Task {
     private String condition;   
     private String answer;
 
+
+
     public Long getId() {
         return id;
     }

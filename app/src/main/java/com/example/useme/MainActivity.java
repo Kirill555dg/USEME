@@ -29,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration
                 .Builder(navController.getGraph())
                 .build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
     }
 
-    @Override
+    /*@Override
     public boolean onSupportNavigateUp() {
         return Navigation.findNavController(this, R.id.nav_host_fragment_activity_main).navigateUp();
-    }
+    }*/
 }

@@ -3,11 +3,11 @@
     <string name="title_login">Login</string>
     <string name="title_add_task">Create task</string>
     <string name="title_settings">Settings</string>
-    <string name="form_subject">Предмет</string>
-    <string name="form_topic">Раздел</string>
-    <string name="form_category">Категория</string>
-    <string name="form_condition">Условие</string>
-    <string name="form_answer">Ответ</string>
+    <string name="form_subject">Выберите предмет</string>
+    <string name="form_topic">Выберите раздел</string>
+    <string name="form_category">Выберите категорию</string>
+    <string name="form_condition">Напишите условие</string>
+    <string name="form_answer">Напишите ответ</string>
     <string name="text_new_task">Новая задача</string>
     <string name="button_save_task">Сохранить задачу</string>
     <!-- Strings related to login -->

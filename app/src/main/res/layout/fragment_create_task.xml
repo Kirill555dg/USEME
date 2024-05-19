@@ -1,66 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="25dp"
     tools:context=".fragment.CreateTaskFragment">
 
-
-    <LinearLayout
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/new_task_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.google.android.material.textview.MaterialTextView
+        android:layout_marginBottom="30dp"
+        android:text="@string/text_new_task"
+        android:textAlignment="center"
+        android:textSize="40sp" />
+    
+    <!--<RelativeLayout
+        android:id="@+id/RL_FieldSubject"
+        android:layout_below="@+id/new_task_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:id="@+id/form_FieldSubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_marginBottom="30dp"
-            android:textSize="40sp"
-            android:text="@string/text_new_task"/>
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/form_textFieldSubject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:autofillHints="name"
+            android:gravity="center"
             android:layout_marginBottom="10dp"
-            android:hint="@string/form_subject"
-            android:minHeight="48dp" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/form_textFieldTopic"
+            android:minHeight="48dp"/>
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>-->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:id="@+id/TIL_Subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_task_text_view"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/form_subject"
+        android:minHeight="48dp">
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/form_topic"
-            android:minHeight="48dp" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/form_textFieldCategory"
+            android:id="@+id/form_FieldSubject"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:id="@+id/TIL_Topic"
+        android:layout_below="@+id/TIL_Subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/form_topic"
+        android:minHeight="48dp" >
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/form_category"
-            android:minHeight="48dp" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/form_textFieldCondition"
+            android:id="@+id/form_FieldTopic"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:id="@+id/TIL_Category"
+        android:layout_below="@+id/TIL_Topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/form_category"
+        android:minHeight="48dp" >
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/form_condition"
-            android:minHeight="48dp" />
+            android:id="@+id/form_FieldCategory"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <ScrollView
+        android:layout_below="@id/TIL_Category"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/form_textFieldAnswer"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/form_answer"
-            android:minHeight="48dp" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/form_FieldCondition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/form_condition"
+                android:minHeight="48dp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/form_FieldAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/form_answer"
+                android:minHeight="48dp" />
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/form_saveButton"
@@ -68,6 +122,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:minHeight="60dp"
-        android:text="@string/button_save_task"/>
+        android:text="@string/button_save_task" />
 
 </RelativeLayout>
