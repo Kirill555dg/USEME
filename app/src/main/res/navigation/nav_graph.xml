@@ -6,17 +6,18 @@
     app:startDestination="@id/createTaskFragment">
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.useme.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
-    <fragment
         android:id="@+id/createTaskFragment"
-        android:name="com.example.useme.fragment.CreateTaskFragment"
+        android:name="com.example.useme.teacher.CreateTaskFragment"
         android:label="fragment_create_task"
         tools:layout="@layout/fragment_create_task" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.useme.fragment.SettingsFragment"
-        android:label="SettingsFragment" />
+    <activity
+        android:id="@+id/teacherActivity"
+        android:name="com.example.useme.teacher.TeacherActivity"
+        android:label="activity_teacher"
+        tools:layout="@layout/activity_teacher" />
+    <activity
+        android:id="@+id/studentActivity"
+        android:name="com.example.useme.student.StudentActivity"
+        android:label="activity_student"
+        tools:layout="@layout/activity_student" />
 </navigation>

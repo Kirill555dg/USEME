@@ -1,20 +1,21 @@
 package com.example.useme;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import com.example.useme.databinding.ActivityMainBinding;
-import com.example.useme.retrofit.RetrofitService;
-import com.example.useme.retrofit.TaskApi;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.useme.authorization.AuthorizationActivity;
+import com.example.useme.student.StudentActivity;
+import com.example.useme.teacher.TeacherActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "user_pref";
+    private static final String KEY_EMAIL = "email";
+    private static final String KEY_ROLE = "role";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,19 +23,22 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration
-                .Builder(navController.getGraph())
-                .build();
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        String email = sharedPreferences.getString(KEY_EMAIL, null);
+        String role = sharedPreferences.getString(KEY_ROLE, null);
 
+        if (email == null && role == null) {
+            Intent intent = new Intent(MainActivity.this, AuthorizationActivity.class);
+            startActivity(intent);
+        } else if (email != null && role != null) {
+            if (role.equals("TEACHER")) {
+                Intent intent = new Intent(MainActivity.this, TeacherActivity.class);
+                startActivity(intent);
+            } else if (role.equals("STUDENT")) {
+                Intent intent = new Intent(MainActivity.this, StudentActivity.class);
+                startActivity(intent);
+            }
+        }
     }
-
-    /*@Override
-    public boolean onSupportNavigateUp() {
-        return Navigation.findNavController(this, R.id.nav_host_fragment_activity_main).navigateUp();
-    }*/
 }

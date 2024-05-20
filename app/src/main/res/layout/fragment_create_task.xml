@@ -6,89 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBackground"
     android:padding="25dp"
-    tools:context=".fragment.CreateTaskFragment">
+    tools:context=".teacher.CreateTaskFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/new_task_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/text_new_task"
         android:textAlignment="center"
-        android:textSize="40sp" />
-    
-    <!--<RelativeLayout
-        android:id="@+id/RL_FieldSubject"
-        android:layout_below="@+id/new_task_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Spinner
-            android:id="@+id/form_FieldSubject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="name"
-            android:gravity="center"
-            android:layout_marginBottom="10dp"
-            android:minHeight="48dp"/>
-        <ProgressBar
-            android:id="@+id/progress"
-            style="@android:style/Widget.ProgressBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>-->
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:id="@+id/TIL_Subject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/new_task_text_view"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/form_subject"
-        android:minHeight="48dp">
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/form_FieldSubject"
-            android:inputType="none"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:id="@+id/TIL_Topic"
-        android:layout_below="@+id/TIL_Subject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/form_topic"
-        android:minHeight="48dp" >
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/form_FieldTopic"
-            android:inputType="none"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:id="@+id/TIL_Category"
-        android:layout_below="@+id/TIL_Topic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/form_category"
-        android:minHeight="48dp" >
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/form_FieldCategory"
-            android:inputType="none"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        android:textStyle="bold" />
+
+
+
     <ScrollView
-        android:layout_below="@id/TIL_Category"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="440dp"
+        android:layout_below="@id/new_task_text_view">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -96,32 +34,104 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/form_FieldCondition"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TIL_Subject"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="@string/form_condition"
-                android:minHeight="48dp" />
+                android:hint="@string/form_subject"
+                android:minHeight="48dp"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/red_warning">
+                <AutoCompleteTextView
+                    android:id="@+id/form_FieldSubject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/form_FieldAnswer"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TIL_Topic"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="@string/form_answer"
-                android:minHeight="48dp" />
+                android:gravity="center"
+                android:hint="@string/form_topic"
+                android:minHeight="48dp"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/red_warning">
+
+                <AutoCompleteTextView
+                    android:id="@+id/form_FieldTopic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TIL_Category"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:hint="@string/form_category"
+                android:minHeight="48dp"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/red_warning">
+
+                <AutoCompleteTextView
+                    android:id="@+id/form_FieldCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/conditionContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/red_warning">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/form_FieldCondition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/form_condition"
+                    android:minHeight="48dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/answerContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@color/red_warning">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/form_FieldAnswer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/form_answer"
+                    android:minHeight="48dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
         </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/form_saveButton"
+        style="@style/Widget.Material3.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:minHeight="60dp"
-        android:text="@string/button_save_task" />
+        android:text="@string/button_save_task"
+        android:textSize="18sp"/>
 
 </RelativeLayout>

@@ -6,8 +6,8 @@
     <string name="form_subject">Выберите предмет</string>
     <string name="form_topic">Выберите раздел</string>
     <string name="form_category">Выберите категорию</string>
-    <string name="form_condition">Напишите условие</string>
-    <string name="form_answer">Напишите ответ</string>
+    <string name="form_condition">Введите условие</string>
+    <string name="form_answer">Введите ответ</string>
     <string name="text_new_task">Новая задача</string>
     <string name="button_save_task">Сохранить задачу</string>
     <!-- Strings related to login -->
@@ -35,4 +35,24 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="teacher">Учитель</string>
+    <string name="student">Студент</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
+    <string name="useme">USEME</string>
+    <string name="authorizationTitle">Авторизация</string>
+    <string name="sign_in_title">Вход</string>
+    <string name="registration_title">Регистрация</string>
+    <string name="already_not_have_account">Ещё нет аккаунта?</string>
+    <string name="fill_fields">Заполните форму регистрации</string>
+    <string name="lastname">Фамилия</string>
+    <string name="firstname">Имя</string>
+    <string name="passwordCheck">Подтверждение пароля</string>
+    <string name="female">Женский</string>
+    <string name="male">Мужской</string>
+    <string name="gender">Пол</string>
+    <string name="date_of_birth">Дата рождения</string>
+    <string name="middlename">Отчество</string>
+    <string name="required">Нужно заполнить</string>
 </resources>

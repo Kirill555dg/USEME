@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorBackground">#FFEEE9</color>
+    <color name="colorPrimary">#FFA200</color>
+    <color name="colorPrimaryVariant">#FFA200</color>
+    <color name="colorSecondary">#FFD740</color>
+    <color name="button_background">#FFC259</color>
+    <color name="holo_orange_light">#FFC1AC</color>
+    <color name="holo_red_light">#FF796F</color>
+    <color name="red_warning">#FF2B2B</color>
 </resources>

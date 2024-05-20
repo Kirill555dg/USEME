@@ -1,9 +1,11 @@
-package com.example.useme.fragment;
+package com.example.useme.teacher;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +47,16 @@ public class CreateTaskFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+    private Button saveButton;
+
+    private AutoCompleteTextView subjectACTV;
+    private AutoCompleteTextView topicACTV;
+    private AutoCompleteTextView categoryACTV;
+
+    private EditText conditionET;
+    private EditText answerET;
+
     public CreateTaskFragment() {
         // Required empty public constructor
     }
@@ -63,15 +75,15 @@ public class CreateTaskFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_task, container, false);
 
-        AutoCompleteTextView subjectACTV = view.findViewById(R.id.form_FieldSubject);
-        AutoCompleteTextView topicACTV = view.findViewById(R.id.form_FieldTopic);
-        AutoCompleteTextView categoryACTV = view.findViewById(R.id.form_FieldCategory);
+        subjectACTV = view.findViewById(R.id.form_FieldSubject);
+        topicACTV = view.findViewById(R.id.form_FieldTopic);
+        categoryACTV = view.findViewById(R.id.form_FieldCategory);
 
-        EditText conditionET = view.findViewById(R.id.form_FieldCondition);
-        EditText answerET = view.findViewById(R.id.form_FieldAnswer);
+        conditionET = view.findViewById(R.id.form_FieldCondition);
+        answerET = view.findViewById(R.id.form_FieldAnswer);
 
-        Button saveButton = view.findViewById(R.id.form_saveButton);
-
+        saveButton = view.findViewById(R.id.form_saveButton);
+        saveButton.setEnabled(false);
 
         RetrofitService retrofitService = new RetrofitService();
         taskApi = retrofitService.getRetrofit().create(TaskApi.class);
@@ -79,6 +91,7 @@ public class CreateTaskFragment extends Fragment {
         subjectACTV.setAdapter(getSubjectAdapter());
         setUnselectReaction(topicACTV, "Сначала выберите предмет");
         setUnselectReaction(categoryACTV, "Сначала выберите раздел");
+
         subjectACTV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,7 +113,34 @@ public class CreateTaskFragment extends Fragment {
             }
         });
 
+        addTextListener(conditionET);
+        addTextListener(answerET);
 
+        return view;
+    }
+
+    private void addTextListener(EditText ET) {
+        ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                enableSaveButtonIfReady();
+            }
+        });
+    }
+
+    private void enableSaveButtonIfReady() {
+
+        saveButton.setEnabled(true);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,11 +149,6 @@ public class CreateTaskFragment extends Fragment {
                 String category = String.valueOf(categoryACTV.getText());
                 String condition = String.valueOf(conditionET.getText());
                 String answer = String.valueOf(answerET.getText());
-
-                if (subject.isEmpty() || topic.isEmpty() || category.isEmpty() || condition.isEmpty() || answer.isEmpty()) {
-                    Toast.makeText(inflater.getContext(), "Заполните все поля", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 Task task = new Task();
                 task.setSubject(subject);
@@ -127,18 +162,17 @@ public class CreateTaskFragment extends Fragment {
                     @Override
                     public void onResponse(Call<Task> call, Response<Task> response) {
                         Log.d("CALL", "Task saved successfully");
-                        Toast.makeText(inflater.getContext(), "Task saved successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getLayoutInflater().getContext(), "Task saved successfully", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<Task> call, Throwable t) {
                         Log.d("CALL", t.toString());
-                        Toast.makeText(inflater.getContext(), "Task save FAILED", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getLayoutInflater().getContext(), "Task save FAILED", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
-        return view;
     }
 
     private ArrayAdapter<String> getCategoryAdapter(String selectedSubject, Short topicNum) {
