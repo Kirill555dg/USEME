@@ -19,6 +19,8 @@ import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.example.useme.R;
+import com.example.useme.authorization.RegistrationStudentFragment;
+import com.example.useme.authorization.RegistrationTeacherFragment;
 import com.example.useme.model.Task;
 import com.example.useme.model.data.Category;
 import com.example.useme.model.data.Subject;
@@ -51,11 +53,16 @@ public class CreateTaskFragment extends Fragment {
     private Button saveButton;
 
     private AutoCompleteTextView subjectACTV;
+    private TextInputLayout subjectTIL;
     private AutoCompleteTextView topicACTV;
+    private TextInputLayout topicTIL;
     private AutoCompleteTextView categoryACTV;
+    private TextInputLayout categoryTIL;
 
     private EditText conditionET;
+    private TextInputLayout conditionTIL;
     private EditText answerET;
+    private TextInputLayout answerTIL;
 
     public CreateTaskFragment() {
         // Required empty public constructor
@@ -76,11 +83,16 @@ public class CreateTaskFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_task, container, false);
 
         subjectACTV = view.findViewById(R.id.form_FieldSubject);
+        subjectTIL = view.findViewById(R.id.TIL_Subject);
         topicACTV = view.findViewById(R.id.form_FieldTopic);
+        topicTIL = view.findViewById(R.id.TIL_Topic);
         categoryACTV = view.findViewById(R.id.form_FieldCategory);
+        categoryTIL = view.findViewById(R.id.TIL_Category);
 
         conditionET = view.findViewById(R.id.form_FieldCondition);
+        conditionTIL = view.findViewById(R.id.TIL_Condition);
         answerET = view.findViewById(R.id.form_FieldAnswer);
+        answerTIL = view.findViewById(R.id.TIL_Answer);
 
         saveButton = view.findViewById(R.id.form_saveButton);
         saveButton.setEnabled(false);
@@ -96,10 +108,14 @@ public class CreateTaskFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedSubject = String.valueOf(subjectACTV.getText());
-                topicACTV.setText(null);
-                categoryACTV.setText(null);
+                subjectTIL.setHelperText(null);
+                topicACTV.setText("");
+                categoryACTV.setText("");
                 topicACTV.setAdapter(getTopicAdapter(selectedSubject));
                 categoryACTV.setAdapter(null);
+                topicTIL.setHelperText("Необходимо выбрать");
+                categoryTIL.setHelperText("Необходимо выбрать");
+                enableSaveButtonIfReady();
             }
         });
 
@@ -108,18 +124,29 @@ public class CreateTaskFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedSubject = String.valueOf(subjectACTV.getText());
                 Short topicNum = Short.valueOf(String.valueOf(topicACTV.getText()).split(". ")[0]);
-                categoryACTV.setText(null);
+                topicTIL.setHelperText(null);
+                categoryACTV.setText("");
                 categoryACTV.setAdapter(getCategoryAdapter(selectedSubject, topicNum));
+                categoryTIL.setHelperText("Необходимо выбрать");
+                enableSaveButtonIfReady();
             }
         });
 
-        addTextListener(conditionET);
-        addTextListener(answerET);
+        categoryACTV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                categoryTIL.setHelperText(null);
+                enableSaveButtonIfReady();
+            }
+        });
+
+        addTextListener(conditionTIL, conditionET);
+        addTextListener(answerTIL, answerET);
 
         return view;
     }
 
-    private void addTextListener(EditText ET) {
+    private void addTextListener(TextInputLayout TIL, EditText ET) {
         ET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -128,7 +155,12 @@ public class CreateTaskFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (!ET.getText().toString().isEmpty()) {
+                    TIL.setHelperText(null);
+                } else {
+                    TIL.setHelperText("Нужно заполнить");
+                }
+                enableSaveButtonIfReady();
             }
 
             @Override
@@ -139,40 +171,48 @@ public class CreateTaskFragment extends Fragment {
     }
 
     private void enableSaveButtonIfReady() {
+        if (!conditionET.getText().toString().isEmpty() &&
+            !answerET.getText().toString().isEmpty() &&
+            !subjectACTV.getText().toString().isEmpty() &&
+            !topicACTV.getText().toString().isEmpty() &&
+            !categoryACTV.getText().toString().isEmpty())
+        {
+            saveButton.setEnabled(true);
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String subject = String.valueOf(subjectACTV.getText());
+                    String topic = String.valueOf(topicACTV.getText());
+                    String category = String.valueOf(categoryACTV.getText());
+                    String condition = String.valueOf(conditionET.getText());
+                    String answer = String.valueOf(answerET.getText());
 
-        saveButton.setEnabled(true);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String subject = String.valueOf(subjectACTV.getText());
-                String topic = String.valueOf(topicACTV.getText());
-                String category = String.valueOf(categoryACTV.getText());
-                String condition = String.valueOf(conditionET.getText());
-                String answer = String.valueOf(answerET.getText());
+                    Task task = new Task();
+                    task.setSubject(subject);
+                    task.setTopic(topic);
+                    task.setCategory(category);
+                    task.setCondition(condition);
+                    task.setAnswer(answer);
 
-                Task task = new Task();
-                task.setSubject(subject);
-                task.setTopic(topic);
-                task.setCategory(category);
-                task.setCondition(condition);
-                task.setAnswer(answer);
+                    Call<Task> callSaveTask = taskApi.saveTask(task);
+                    callSaveTask.enqueue(new Callback<Task>() {
+                        @Override
+                        public void onResponse(Call<Task> call, Response<Task> response) {
+                            Log.d("CALL", "Task saved successfully");
+                            Toast.makeText(getLayoutInflater().getContext(), "Task saved successfully", Toast.LENGTH_SHORT).show();
+                        }
 
-                Call<Task> callSaveTask = taskApi.saveTask(task);
-                callSaveTask.enqueue(new Callback<Task>() {
-                    @Override
-                    public void onResponse(Call<Task> call, Response<Task> response) {
-                        Log.d("CALL", "Task saved successfully");
-                        Toast.makeText(getLayoutInflater().getContext(), "Task saved successfully", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Task> call, Throwable t) {
-                        Log.d("CALL", t.toString());
-                        Toast.makeText(getLayoutInflater().getContext(), "Task save FAILED", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+                        @Override
+                        public void onFailure(Call<Task> call, Throwable t) {
+                            Log.d("CALL", t.toString());
+                            Toast.makeText(getLayoutInflater().getContext(), "Task save FAILED", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        } else {
+            saveButton.setEnabled(false);
+        }
     }
 
     private ArrayAdapter<String> getCategoryAdapter(String selectedSubject, Short topicNum) {
@@ -249,4 +289,5 @@ public class CreateTaskFragment extends Fragment {
             }
         });
     }
+
 }

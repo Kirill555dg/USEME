@@ -1,14 +1,31 @@
 package com.example.useme.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDate;
 
 public class Teacher {
+    @SerializedName("email")
+    @Expose
     private String email;
+    @SerializedName("password")
+    @Expose
     private String password;
+    @SerializedName("firstName")
+    @Expose
     private String firstName;
+    @SerializedName("lastName")
+    @Expose
     private String lastName;
+    @SerializedName("middleName")
+    @Expose
     private String middleName;
-    private LocalDate dateOfBirth;
+    @SerializedName("dateOfBirth")
+    @Expose
+    private String dateOfBirth;
+    @SerializedName("isMale")
+    @Expose
     private Boolean isMale;
 
     public String getEmail() {
@@ -51,11 +68,11 @@ public class Teacher {
         this.middleName = middleName;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

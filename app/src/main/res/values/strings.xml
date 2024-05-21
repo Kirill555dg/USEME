@@ -37,7 +37,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="teacher">Учитель</string>
-    <string name="student">Студент</string>
+    <string name="student">Ученик</string>
     <string name="email">Почта</string>
     <string name="password">Пароль</string>
     <string name="useme">USEME</string>
@@ -51,8 +51,9 @@
     <string name="passwordCheck">Подтверждение пароля</string>
     <string name="female">Женский</string>
     <string name="male">Мужской</string>
-    <string name="gender">Пол</string>
+    <string name="gender">Выберите пол</string>
     <string name="date_of_birth">Дата рождения</string>
     <string name="middlename">Отчество</string>
     <string name="required">Нужно заполнить</string>
+    <string name="required_chose">Необходимо выбрать</string>
 </resources>

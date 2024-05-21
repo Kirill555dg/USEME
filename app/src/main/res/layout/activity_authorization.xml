@@ -1,144 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
     android:background="@color/colorBackground">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/titleview"
+
+    <RelativeLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/authorizationTitle"
-        android:gravity="center"
-        android:textSize="48sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="72dp"/>
+        android:padding="30dp">
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/containerRBs"
-        android:gravity="center"
-        android:layout_below="@id/titleview">
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Выберите тип акканута"
-            android:textSize="18sp"/>
-
-        <RadioGroup
-            android:id="@+id/RG"
+            android:id="@+id/titleview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="72dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:text="@string/authorizationTitle"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/RBT"
-                android:layout_width="140dp"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:background="@drawable/bg_radio_button"
-                android:gravity="center"
-                android:layoutDirection="rtl"
-                android:text="@string/teacher"
-                android:textSize="18sp" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/RBS"
-                android:layout_width="140dp"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:background="@drawable/bg_radio_button"
-                android:gravity="center"
-                android:layoutDirection="rtl"
-                android:text="@string/student"
-                android:textSize="18sp" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/containerETs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/containerRBs"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ET_email"
+        <LinearLayout
+            android:id="@+id/containerRBs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:textSize="18sp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            tools:ignore="VisualLintTextFieldSize" />
+            android:layout_below="@id/titleview"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/roleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выберите тип акканута"
+                android:textSize="18sp"
+                android:textColor="@color/red_warning"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ET_password"
+            <RadioGroup
+                android:id="@+id/RG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/RBT"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bg_radio_button"
+                    android:gravity="center"
+                    android:layoutDirection="rtl"
+                    android:text="@string/teacher"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/RBS"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bg_radio_button"
+                    android:gravity="center"
+                    android:layoutDirection="rtl"
+                    android:text="@string/student"
+                    android:textSize="18sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/containerETs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:textSize="18sp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:minHeight="48dp" />
-    </LinearLayout>
+            android:layout_below="@+id/containerRBs"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_sign_in"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/containerETs"
-        style="@style/Widget.Material3.Button"
-        android:minHeight="60dp"
-        android:layout_centerInParent="true"
-        android:text="@string/sign_in_title"
-        android:textSize="18sp"
-        android:layout_marginBottom="30dp"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/containerEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:helperTextTextColor="@color/red_warning">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/auth_Email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:lines="1"
+                    android:ems="10"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
+                    android:textSize="18sp"
+                    tools:ignore="VisualLintTextFieldSize" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/button_sign_in"
-        android:gravity="center">
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/already_not_have_account"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/containerPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:layout_marginBottom="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/auth_Password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:lines="1"
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_registration"
+            android:id="@+id/button_sign_in"
+            style="@style/Widget.Material3.Button"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            app:strokeColor="@color/colorPrimary"
+            android:layout_below="@id/containerETs"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="30dp"
             android:minHeight="60dp"
-            android:textSize="18sp"
-            android:text="@string/registration_title" />
-    </LinearLayout>
+            android:text="@string/sign_in_title"
+            android:textSize="18sp" />
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_sign_in"
+            android:gravity="center"
+            android:orientation="vertical">
 
-</RelativeLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/already_not_have_account" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_registration"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:minHeight="60dp"
+                android:text="@string/registration_title"
+                android:textSize="18sp"
+                app:strokeColor="@color/colorPrimary" />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

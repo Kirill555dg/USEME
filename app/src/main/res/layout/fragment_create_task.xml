@@ -18,14 +18,14 @@
         android:text="@string/text_new_task"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="48sp"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="440dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/new_task_text_view">
 
         <LinearLayout
@@ -42,7 +42,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="@string/form_subject"
                 android:minHeight="48dp"
-                app:helperText="@string/required"
+                app:helperText="@string/required_chose"
                 app:helperTextTextColor="@color/red_warning">
                 <AutoCompleteTextView
                     android:id="@+id/form_FieldSubject"
@@ -60,7 +60,7 @@
                 android:gravity="center"
                 android:hint="@string/form_topic"
                 android:minHeight="48dp"
-                app:helperText="@string/required"
+                app:helperText="@string/required_chose"
                 app:helperTextTextColor="@color/red_warning">
 
                 <AutoCompleteTextView
@@ -79,7 +79,7 @@
                 android:gravity="center"
                 android:hint="@string/form_category"
                 android:minHeight="48dp"
-                app:helperText="@string/required"
+                app:helperText="@string/required_chose"
                 app:helperTextTextColor="@color/red_warning">
 
                 <AutoCompleteTextView
@@ -90,7 +90,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/conditionContainer"
+                android:id="@+id/TIL_Condition"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,12 +106,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/answerContainer"
+                android:id="@+id/TIL_Answer"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:helperText="@string/required"
-                app:helperTextTextColor="@color/red_warning">
+                app:helperTextTextColor="@color/red_warning"
+                android:layout_marginBottom="20dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/form_FieldAnswer"
                     android:layout_width="match_parent"
@@ -121,17 +122,17 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/form_saveButton"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:minHeight="60dp"
+                android:text="@string/button_save_task"
+                android:textSize="18sp"/>
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/form_saveButton"
-        style="@style/Widget.Material3.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:minHeight="60dp"
-        android:text="@string/button_save_task"
-        android:textSize="18sp"/>
 
 </RelativeLayout>

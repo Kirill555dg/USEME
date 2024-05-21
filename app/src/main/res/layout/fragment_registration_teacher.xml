@@ -104,11 +104,13 @@
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/teacher_genderTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/gender"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/red_warning"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"

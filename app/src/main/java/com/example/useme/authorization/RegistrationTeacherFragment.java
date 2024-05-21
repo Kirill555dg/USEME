@@ -2,7 +2,9 @@ package com.example.useme.authorization;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,25 +18,27 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
+import com.example.useme.MainActivity;
 import com.example.useme.R;
-import com.example.useme.model.Task;
 import com.example.useme.model.Teacher;
+import com.example.useme.retrofit.MyErrorMessage;
 import com.example.useme.retrofit.RetrofitService;
-import com.example.useme.retrofit.TaskApi;
 import com.example.useme.retrofit.TeacherApi;
+import com.example.useme.teacher.TeacherActivity;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,12 +47,7 @@ import retrofit2.Response;
 
 public class RegistrationTeacherFragment extends DialogFragment {
 
-
     SharedPreferences sharedPreferences;
-    private static final String SHARED_PREF_NAME = "user_pref";
-    private static final String KEY_EMAIL = "email";
-    private static final String KEY_PASSWORD = "password";
-    private static final String KEY_ROLE = "role";
 
     private TeacherApi teacherApi;
     private EditText firstnameET;
@@ -62,6 +61,7 @@ public class RegistrationTeacherFragment extends DialogFragment {
     private TextInputLayout passwordCheckTIL;
 
     private DatePicker dateOfBirthDP;
+    private TextView genderTV;
     private RadioButton maleRB;
     private RadioButton femaleRB;
 
@@ -88,6 +88,8 @@ public class RegistrationTeacherFragment extends DialogFragment {
         passwordCheckTIL = view.findViewById(R.id.teacher_containerPasswordCheck);
 
         dateOfBirthDP = view.findViewById(R.id.teacher_DP);
+
+        genderTV = view.findViewById(R.id.teacher_genderTV);
         maleRB = view.findViewById(R.id.teacher_RB_male);
         femaleRB = view.findViewById(R.id.teacher_RB_female);
 
@@ -110,7 +112,9 @@ public class RegistrationTeacherFragment extends DialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                isEmailCorrect();
+                if (isEmailCorrect()) {
+                    enableRegisterButtonIfReady();
+                }
             }
         });
 
@@ -128,8 +132,9 @@ public class RegistrationTeacherFragment extends DialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                isPasswordCorrect();
-                isPasswordCheckCorrect();
+                if (isPasswordCorrect() &&  isPasswordCheckCorrect()) {
+                    enableRegisterButtonIfReady();
+                }
             }
         });
 
@@ -146,7 +151,9 @@ public class RegistrationTeacherFragment extends DialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                isPasswordCheckCorrect();
+                if (isPasswordCheckCorrect()) {
+                    enableRegisterButtonIfReady();
+                }
             }
         });
 
@@ -211,6 +218,8 @@ public class RegistrationTeacherFragment extends DialogFragment {
         RB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                genderTV.setTextColor(Color.GRAY);
+                genderTV.setText("Пол");
                 enableRegisterButtonIfReady();
             }
         });
@@ -220,8 +229,7 @@ public class RegistrationTeacherFragment extends DialogFragment {
     private void enableRegisterButtonIfReady() {
 
         if (isPasswordCorrect() && isPasswordCheckCorrect() && isEmailCorrect()
-            && (maleRB.isChecked() || femaleRB.isChecked()))
-        {
+                && (maleRB.isChecked() || femaleRB.isChecked())) {
             registerButton.setEnabled(true);
             registerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -229,7 +237,7 @@ public class RegistrationTeacherFragment extends DialogFragment {
                     String firstname = firstnameET.getText().toString();
                     String lastname = lastnameET.getText().toString();
                     String middlename = middlenameET.getText().toString();
-                    LocalDate dateOfBirth = LocalDate.of(dateOfBirthDP.getYear(), dateOfBirthDP.getMonth()+1, dateOfBirthDP.getDayOfMonth());
+                    LocalDate dateOfBirth = LocalDate.of(dateOfBirthDP.getYear(), dateOfBirthDP.getMonth() + 1, dateOfBirthDP.getDayOfMonth());
                     Boolean isMale = maleRB.isChecked();
                     String email = emailET.getText().toString();
                     String password = passwordET.getText().toString();
@@ -238,42 +246,66 @@ public class RegistrationTeacherFragment extends DialogFragment {
                     teacher.setFirstName(firstname);
                     teacher.setLastName(lastname);
                     teacher.setMiddleName(middlename);
-                    teacher.setDateOfBirth(dateOfBirth);
+                    teacher.setDateOfBirth(dateOfBirth.toString());
                     teacher.setMale(isMale);
                     teacher.setEmail(email);
                     teacher.setPassword(password);
-
+                    Log.d("TEACHER", teacher.toString());
                     Call<Teacher> callRegisterTeacher = teacherApi.register(teacher);
+
                     callRegisterTeacher.enqueue(new Callback<Teacher>() {
                         @Override
                         public void onResponse(Call<Teacher> call, Response<Teacher> response) {
-                            sharedPreferences = getContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(KEY_EMAIL, email);
-                            editor.putString(KEY_PASSWORD, password);
-                            editor.putString(KEY_ROLE, "TEACHER");
-                            editor.apply();
+                            if (response.isSuccessful()) {
+                                sharedPreferences = getContext()
+                                        .getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString(MainActivity.KEY_EMAIL, email);
+                                editor.putString(MainActivity.KEY_PASSWORD, password);
+                                editor.putString(MainActivity.KEY_ROLE, MainActivity.TEACHER_ROLE);
+                                editor.apply();
 
-                            Toast.makeText(getLayoutInflater().getContext(), "Регистрация прошла успешно", Toast.LENGTH_SHORT).show();
-                            Log.d("CALL", response.toString());
+                                Toast.makeText(getLayoutInflater().getContext(), "Регистрация прошла успешно", Toast.LENGTH_SHORT).show();
+                                Log.d("RESPONSE", response.toString());
+
+                                Intent intent = new Intent(getActivity(), TeacherActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Log.d("ERROR_RESPONSE", response.toString());
+                                if (response.code() == 409) {
+                                    Gson gson = new GsonBuilder().create();
+                                    MyErrorMessage message;
+                                    try {
+                                        message = gson.fromJson(response.errorBody().string(), MyErrorMessage.class);
+                                        Toast.makeText(getLayoutInflater().getContext(), message.getError(), Toast.LENGTH_LONG).show();
+                                    } catch (IOException e) {
+                                        Toast.makeText(getLayoutInflater().getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getLayoutInflater().getContext(), response.message(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+
                         }
 
                         @Override
                         public void onFailure(Call<Teacher> call, Throwable t) {
-                            Toast.makeText(getLayoutInflater().getContext(), "Регистрация не пройдена", Toast.LENGTH_SHORT).show();
-                            Log.d("CALL", t.toString());
+                            Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
+                            Log.d("FAIL", t.toString());
                         }
                     });
                 }
             });
+        } else {
+            registerButton.setEnabled(false);
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        getDialog().getWindow().setLayout(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        DisplayMetrics newDisplayMetrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(newDisplayMetrics);
+        getDialog().getWindow().setLayout(newDisplayMetrics.widthPixels, (int)(newDisplayMetrics.heightPixels*0.7));
     }
 }

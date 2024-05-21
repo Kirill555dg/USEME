@@ -1,13 +1,28 @@
 package com.example.useme.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDate;
 
 public class Student {
+    @SerializedName("email")
+    @Expose
     private String email;
+    @SerializedName("password")
+    @Expose
     private String password;
+    @SerializedName("firstName")
+    @Expose
     private String firstName;
+    @SerializedName("lastName")
+    @Expose
     private String lastName;
-    private LocalDate dateOfBirth;
+    @SerializedName("dateOfBirth")
+    @Expose
+    private String dateOfBirth;
+    @SerializedName("isMale")
+    @Expose
     private Boolean isMale;
 
     public String getEmail() {
@@ -42,11 +57,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -56,5 +71,17 @@ public class Student {
 
     public void setMale(Boolean male) {
         isMale = male;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", isMale=" + isMale +
+                '}';
     }
 }
