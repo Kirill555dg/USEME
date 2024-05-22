@@ -303,6 +303,6 @@ public class RegistrationStudentFragment extends DialogFragment {
         super.onResume();
         DisplayMetrics newDisplayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(newDisplayMetrics);
-        getDialog().getWindow().setLayout(newDisplayMetrics.widthPixels, (int)(newDisplayMetrics.heightPixels*0.7));
+        getDialog().getWindow().setLayout(newDisplayMetrics.widthPixels, newDisplayMetrics.heightPixels);
     }
 }

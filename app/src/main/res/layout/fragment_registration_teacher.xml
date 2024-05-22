@@ -90,9 +90,9 @@
             <DatePicker
                 android:id="@+id/teacher_DP"
                 android:layout_width="wrap_content"
-                android:layout_height="160dp"
+                android:layout_height="150dp"
                 android:calendarViewShown="false"
-                android:datePickerMode="spinner"/>
+                android:datePickerMode="spinner" />
         </LinearLayout>
 
         <LinearLayout
