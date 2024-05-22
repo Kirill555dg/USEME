@@ -3,6 +3,7 @@ package com.example.useme.app.teacher;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.useme.R;
@@ -18,6 +20,7 @@ import com.example.useme.data.model.Task;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.StudentApi;
 import com.example.useme.retrofit.api.TaskApi;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -68,6 +71,23 @@ public class TaskFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.task_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+
+        FloatingActionButton addTaskButton = view.findViewById(R.id.add_task_button);
+        addTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_taskFragment_to_createTaskFragment);
+            }
+        });
+
+        Button filterButton = view.findViewById(R.id.task_filter_button);
+
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
     }

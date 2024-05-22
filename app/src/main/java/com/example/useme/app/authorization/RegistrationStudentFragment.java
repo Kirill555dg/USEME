@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -307,8 +308,9 @@ public class RegistrationStudentFragment extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
+        getDialog().getWindow().setGravity(Gravity.TOP);
         DisplayMetrics newDisplayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(newDisplayMetrics);
-        getDialog().getWindow().setLayout(newDisplayMetrics.widthPixels, newDisplayMetrics.heightPixels);
+        getDialog().getWindow().setLayout(newDisplayMetrics.widthPixels, (int)(newDisplayMetrics.heightPixels*0.85));
     }
 }

@@ -225,6 +225,7 @@ public class AuthorizationActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(AuthorizationActivity.this, TeacherActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     Log.d("ERROR_RESPONSE", response.toString());
                     if (response.code() == 401 || response.code() == 404) {

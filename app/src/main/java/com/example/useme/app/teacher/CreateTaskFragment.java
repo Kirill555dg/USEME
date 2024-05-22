@@ -201,6 +201,7 @@ public class CreateTaskFragment extends Fragment {
                         public void onResponse(Call<Task> call, Response<Task> response) {
                             Log.d("CALL", "Task saved successfully");
                             Toast.makeText(getLayoutInflater().getContext(), "Task saved successfully", Toast.LENGTH_SHORT).show();
+                            getActivity().getSupportFragmentManager().popBackStack();
                         }
 
                         @Override

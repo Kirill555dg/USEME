@@ -11,9 +11,12 @@ import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -312,8 +315,9 @@ public class RegistrationTeacherFragment extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
+        getDialog().getWindow().setGravity(Gravity.TOP);
         DisplayMetrics newDisplayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(newDisplayMetrics);
-        getDialog().getWindow().setLayout(newDisplayMetrics.widthPixels, newDisplayMetrics.heightPixels);
+        getDialog().getWindow().setLayout(newDisplayMetrics.widthPixels, (int)(newDisplayMetrics.heightPixels*0.85));
     }
 }
