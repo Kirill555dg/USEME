@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/student_nav_graph"
+    app:startDestination="@id/homeworkFragment">
+
+    <fragment
+        android:id="@+id/studentProfileFragment"
+        android:name="com.example.useme.app.student.StudentProfileFragment"
+        android:label="fragment_student_profile"
+        tools:layout="@layout/fragment_student_profile" />
+    <fragment
+        android:id="@+id/invitesFragment"
+        android:name="com.example.useme.app.student.InvitesFragment"
+        android:label="fragment_invites"
+        tools:layout="@layout/fragment_invites" />
+    <fragment
+        android:id="@+id/statisticFragment"
+        android:name="com.example.useme.app.student.StatisticFragment"
+        android:label="fragment_statistic"
+        tools:layout="@layout/fragment_statistic" />
+    <fragment
+        android:id="@+id/studentGroupsFragment"
+        android:name="com.example.useme.app.student.StudentGroupsFragment"
+        android:label="fragment_student_groups"
+        tools:layout="@layout/fragment_student_groups" >
+        <action
+            android:id="@+id/action_studentGroupsFragment_to_groupPageFragment2"
+            app:destination="@id/groupPageFragment2" />
+        <action
+            android:id="@+id/action_studentGroupsFragment_to_invitesFragment"
+            app:destination="@id/invitesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeworkFragment"
+        android:name="com.example.useme.app.student.HomeworkFragment"
+        android:label="fragment_homework"
+        tools:layout="@layout/fragment_homework" >
+        <action
+            android:id="@+id/action_homeworkFragment_to_solveFragment"
+            app:destination="@id/solveFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/solveFragment"
+        android:name="com.example.useme.app.student.SolveFragment"
+        android:label="fragment_solve"
+        tools:layout="@layout/fragment_solve" />
+    <fragment
+        android:id="@+id/groupPageFragment2"
+        android:name="com.example.useme.app.group.GroupPageFragment"
+        android:label="fragment_group_page"
+        tools:layout="@layout/fragment_group_page" />
+</navigation>

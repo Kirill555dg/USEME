@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authorization.RegistrationTeacherFragment">
+    tools:context=".app.authorization.RegistrationTeacherFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="160dp"
                 android:calendarViewShown="false"
-                android:datePickerMode="spinner" />
+                android:datePickerMode="spinner"/>
         </LinearLayout>
 
         <LinearLayout

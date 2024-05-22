@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/teacher_nav_graph"
+    app:startDestination="@id/teacherGroupsFragment">
+
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.example.useme.app.teacher.CreateTaskFragment"
+        android:label="fragment_create_task"
+        tools:layout="@layout/fragment_create_task" />
+    <fragment
+        android:id="@+id/teacherProfileFragment"
+        android:name="com.example.useme.app.teacher.TeacherProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/teacherGroupsFragment"
+        android:name="com.example.useme.app.teacher.TeacherGroupsFragment"
+        android:label="fragment_groups_list"
+        tools:layout="@layout/fragment_groups_list" >
+        <action
+            android:id="@+id/action_teacherGroupsFragment_to_groupActivity"
+            app:destination="@id/groupActivity" />
+        <action
+            android:id="@+id/action_teacherGroupsFragment_to_createGroupFragment"
+            app:destination="@id/createGroupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.example.useme.app.teacher.TaskFragment"
+        android:label="fragment_task"
+        tools:layout="@layout/fragment_task" >
+        <action
+            android:id="@+id/action_taskFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createGroupFragment"
+        android:name="com.example.useme.app.teacher.CreateGroupFragment"
+        android:label="fragment_create_group"
+        tools:layout="@layout/fragment_create_group" />
+    <activity
+        android:id="@+id/groupActivity"
+        android:name="com.example.useme.app.group.GroupActivity"
+        android:label="activity_group"
+        tools:layout="@layout/activity_group" />
+</navigation>

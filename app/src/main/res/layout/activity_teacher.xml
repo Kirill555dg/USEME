@@ -2,24 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/teacher_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".teacher.TeacherActivity">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/title"
-        android:scaleType="center"/>
+    tools:context=".app.teacher.TeacherActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <fragment
+        android:id="@+id/teacher_nav_graph"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="431dp"
-        android:text="Я УЧИТЕЛЬ УРА"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/holo_red_light"
-        android:textSize="40sp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/teacher_bottom_nav_menu"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/teacher_nav_graph" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/teacher_bottom_nav_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/teacher_bottom_nav_menu" />
 
 </RelativeLayout>

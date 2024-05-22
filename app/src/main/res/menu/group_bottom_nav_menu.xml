@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/groupPageFragment"
+        android:icon="@drawable/ic_student_24dp"
+        android:title="@string/group_members_bottom" />
+
+    <item
+        android:id="@+id/groupStatisticFragment"
+        android:icon="@drawable/ic_statistic_24dp"
+        android:title="@string/statistic_bottom" />
+
+    <item
+        android:id="@+id/addHomeworkFragment"
+        android:icon="@drawable/ic_add_homework_24dp"
+        android:title="@string/new_homework_bottom" />
+
+    <item
+        android:id="@+id/groupProfileFragment"
+        android:icon="@drawable/ic_group_profile_24dp"
+        android:title="@string/group_profile_bottom" />
+</menu>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/teacherGroupsFragment"
+        android:icon="@drawable/ic_group_24dp"
+        android:title="@string/groups_bottom" />
+
+    <item
+        android:id="@+id/taskFragment"
+        android:icon="@drawable/ic_task_24dp"
+        android:title="@string/tasks_bottom" />
+
+    <item
+        android:id="@+id/teacherProfileFragment"
+        android:icon="@drawable/ic_account_24dp"
+        android:title="@string/Profile_bottom" />
+
+</menu>

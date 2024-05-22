@@ -56,4 +56,17 @@
     <string name="middlename">Отчество</string>
     <string name="required">Нужно заполнить</string>
     <string name="required_chose">Необходимо выбрать</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="Profile_bottom">Профиль</string>
+    <string name="statistic_bottom">Статистика</string>
+    <string name="groups_bottom">Группы</string>
+    <string name="homeworks_bottom">Мои ДЗ</string>
+    <string name="tasks_bottom">Задачи</string>
+    <string name="group_profile_bottom">Профиль группы</string>
+    <string name="new_homework_bottom">Новое ДЗ</string>
+    <string name="group_members_bottom">Ученики</string>
 </resources>
