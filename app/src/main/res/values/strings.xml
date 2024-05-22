@@ -69,4 +69,11 @@
     <string name="group_profile_bottom">Профиль группы</string>
     <string name="new_homework_bottom">Новое ДЗ</string>
     <string name="group_members_bottom">Ученики</string>
+    <string name="exit_from_account">Выйти из акканута</string>
+    <string name="firstname_profile">Имя:</string>
+    <string name="lastname_profile">Фамилия:</string>
+    <string name="gender_profile">Пол:</string>
+    <string name="date_of_birth_profile">Дата рождения:</string>
+    <string name="change_info">Изменить данные</string>
+    <string name="profile_middlename">Отчество:</string>
 </resources>

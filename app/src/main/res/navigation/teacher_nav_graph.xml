@@ -14,7 +14,7 @@
         android:id="@+id/teacherProfileFragment"
         android:name="com.example.useme.app.teacher.TeacherProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_teacher_profile" />
     <fragment
         android:id="@+id/teacherGroupsFragment"
         android:name="com.example.useme.app.teacher.TeacherGroupsFragment"

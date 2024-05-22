@@ -173,7 +173,7 @@ public class AuthorizationActivity extends AppCompatActivity {
     }
 
     private void enableSignInIfReady() {
-        if (!emailET.getText().toString().isEmpty() &&
+        if (!isEmailCorrect() &&
             !passwordET.getText().toString().isEmpty() &&
             (teacherRB.isChecked() || studentRB.isChecked()))
         {
