@@ -21,6 +21,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_ROLE = "role";
 
+    public static final String KEY_FIRSTNAME = "firstname";
+    public static final String KEY_LASTNAME = "lastname";
+    public static final String KEY_MIDDLENAME = "middlename";
+
+    public static final String KEY_GENDER = "gender";
+    public static final String KEY_DATE_OF_BIRTH = "date_of_birth";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

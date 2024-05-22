@@ -256,9 +256,15 @@ public class RegistrationStudentFragment extends DialogFragment {
                                 sharedPreferences = getContext()
                                         .getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                Student realStudent = response.body();
+                                editor.putString(MainActivity.KEY_FIRSTNAME, realStudent.getFirstName());
+                                editor.putString(MainActivity.KEY_LASTNAME, realStudent.getLastName());
+                                editor.putString(MainActivity.KEY_DATE_OF_BIRTH, realStudent.getDateOfBirth());
+                                editor.putString(MainActivity.KEY_GENDER, realStudent.getMale().toString());
                                 editor.putString(MainActivity.KEY_EMAIL, email);
                                 editor.putString(MainActivity.KEY_PASSWORD, password);
-                                editor.putString(MainActivity.KEY_ROLE, MainActivity.TEACHER_ROLE);
+                                editor.putString(MainActivity.KEY_ROLE, MainActivity.STUDENT_ROLE);
                                 editor.apply();
 
                                 Toast.makeText(getLayoutInflater().getContext(), "Регистрация прошла успешно", Toast.LENGTH_SHORT).show();

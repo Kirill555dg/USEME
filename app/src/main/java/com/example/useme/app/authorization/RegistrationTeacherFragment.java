@@ -260,6 +260,13 @@ public class RegistrationTeacherFragment extends DialogFragment {
                                 sharedPreferences = getContext()
                                         .getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                Teacher realTeacher = response.body();
+                                editor.putString(MainActivity.KEY_FIRSTNAME, realTeacher.getFirstName());
+                                editor.putString(MainActivity.KEY_LASTNAME, realTeacher.getLastName());
+                                editor.putString(MainActivity.KEY_MIDDLENAME, realTeacher.getMiddleName());
+                                editor.putString(MainActivity.KEY_DATE_OF_BIRTH, realTeacher.getDateOfBirth());
+                                editor.putString(MainActivity.KEY_GENDER, realTeacher.getMale().toString());
                                 editor.putString(MainActivity.KEY_EMAIL, email);
                                 editor.putString(MainActivity.KEY_PASSWORD, password);
                                 editor.putString(MainActivity.KEY_ROLE, MainActivity.TEACHER_ROLE);
