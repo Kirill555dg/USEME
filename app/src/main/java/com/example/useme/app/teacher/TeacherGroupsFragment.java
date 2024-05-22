@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.useme.MyGroupItemRecyclerViewAdapter;
+import com.example.useme.adapter.MyGroupItemRecyclerViewAdapter;
 import com.example.useme.R;
 import com.example.useme.placeholder.PlaceholderContent;
 

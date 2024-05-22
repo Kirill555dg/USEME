@@ -1,13 +1,30 @@
 package com.example.useme.data.model;
 
 
+import com.example.useme.data.model.taskdata.TopicPK;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Task {
 
+    @SerializedName("id")
+    @Expose
     private Long id;
-    private String subject;
-    private String topic;
+
+    @SerializedName("topicPK")
+    @Expose
+    private TopicPK topicPK;
+
+    @SerializedName("category")
+    @Expose
     private String category;
-    private String condition;   
+
+    @SerializedName("condition")
+    @Expose
+    private String condition;
+
+    @SerializedName("answer")
+    @Expose
     private String answer;
 
 
@@ -20,20 +37,12 @@ public class Task {
         this.id = id;
     }
 
-    public String getSubject() {
-        return subject;
+    public TopicPK getTopicPK() {
+        return topicPK;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setTopicPK(TopicPK topicPK) {
+        this.topicPK = topicPK;
     }
 
     public String getCategory() {
@@ -59,8 +68,5 @@ public class Task {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-
-
-
 
 }

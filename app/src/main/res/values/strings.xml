@@ -76,4 +76,7 @@
     <string name="date_of_birth_profile">Дата рождения:</string>
     <string name="change_info">Изменить данные</string>
     <string name="profile_middlename">Отчество:</string>
+    <string name="task_item_condition">Условие:</string>
+    <string name="task_item_answer">Ответ:</string>
+    <string name="add_task_button_text">Добавить задачу</string>
 </resources>

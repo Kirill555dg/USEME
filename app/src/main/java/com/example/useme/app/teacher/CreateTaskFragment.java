@@ -22,6 +22,7 @@ import com.example.useme.data.model.Task;
 import com.example.useme.data.model.taskdata.Category;
 import com.example.useme.data.model.taskdata.Subject;
 import com.example.useme.data.model.taskdata.Topic;
+import com.example.useme.data.model.taskdata.TopicPK;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.TaskApi;
 import com.google.android.material.textfield.TextInputLayout;
@@ -179,14 +180,17 @@ public class CreateTaskFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     String subject = String.valueOf(subjectACTV.getText());
-                    String topic = String.valueOf(topicACTV.getText());
+                    Short topicNum = Short.valueOf(String.valueOf(topicACTV.getText()).split(". ")[0]);
                     String category = String.valueOf(categoryACTV.getText());
                     String condition = String.valueOf(conditionET.getText());
                     String answer = String.valueOf(answerET.getText());
 
+                    TopicPK topicPK = new TopicPK();
+                    topicPK.setSubject(subject);
+                    topicPK.setTopicNumber(topicNum);
+
                     Task task = new Task();
-                    task.setSubject(subject);
-                    task.setTopic(topic);
+                    task.setTopicPK(topicPK);
                     task.setCategory(category);
                     task.setCondition(condition);
                     task.setAnswer(answer);
