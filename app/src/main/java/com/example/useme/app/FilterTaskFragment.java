@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +55,7 @@ public class FilterTaskFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View view = inflater.inflate(R.layout.fragment_registration_student, container, false);
+        View view = inflater.inflate(R.layout.fragment_filter_task, container, false);
 
 
         RetrofitService retrofitService = new RetrofitService();
@@ -67,9 +69,7 @@ public class FilterTaskFragment extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        DisplayMetrics newDisplayMetrics = new DisplayMetrics();
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(newDisplayMetrics);
-        getDialog().getWindow().setLayout(newDisplayMetrics.widthPixels, newDisplayMetrics.heightPixels);
+        getDialog().getWindow().setGravity(Gravity.TOP);
     }
 }
 

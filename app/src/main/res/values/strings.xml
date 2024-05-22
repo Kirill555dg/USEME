@@ -79,4 +79,10 @@
     <string name="task_item_condition">Условие:</string>
     <string name="task_item_answer">Ответ:</string>
     <string name="add_task_button_text">Добавить задачу</string>
+    <string name="subject_title">Предмет</string>
+    <string name="topic_title">Раздел</string>
+    <string name="category_topic">Категория</string>
+    <string name="id">ID</string>
+    <string name="filter_title">Фильтр</string>
+    <string name="apply">Применить</string>
 </resources>

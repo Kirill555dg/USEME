@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.useme.R;
 import com.example.useme.adapter.TaskAdapter;
+import com.example.useme.app.FilterTaskFragment;
+import com.example.useme.app.authorization.RegistrationTeacherFragment;
 import com.example.useme.data.model.Task;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.StudentApi;
@@ -85,7 +87,8 @@ public class TaskFragment extends Fragment {
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FilterTaskFragment fragment = new FilterTaskFragment();
+                fragment.show(getActivity().getSupportFragmentManager(), "Task filter");
             }
         });
 

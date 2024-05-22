@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.Material3.Button"
-            android:text="Фильтр"
+            android:text="@string/filter_title"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="10dp"/>
