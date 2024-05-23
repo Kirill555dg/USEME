@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TEACHER_ROLE = "TEACHER";
     public static final String STUDENT_ROLE = "STUDENT";
     public static final String SHARED_PREF_NAME = "user_pref";
+    public static final String KEY_ID = "id";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_ROLE = "role";

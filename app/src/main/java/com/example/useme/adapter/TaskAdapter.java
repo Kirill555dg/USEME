@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
+import com.example.useme.data.model.Group;
 import com.example.useme.data.model.Task;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
     public int getItemCount() {
         return tasks.size();
     }
+
 
     public class TaskHolder extends RecyclerView.ViewHolder {
 

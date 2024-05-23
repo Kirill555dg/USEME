@@ -35,7 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class TaskFragment extends Fragment implements TaskContract {
+public class TaskFragment extends Fragment  {
 
     private TaskAdapter adapter;
     RecyclerView recyclerView;
@@ -54,20 +54,6 @@ public class TaskFragment extends Fragment implements TaskContract {
         adapter = new TaskAdapter();
         RetrofitService retrofitService = new RetrofitService();
         taskApi = retrofitService.getRetrofit().create(TaskApi.class);
-
-        Call<List<Task>> callGetTasks = taskApi.getAllTasks();
-        callGetTasks.enqueue(new Callback<List<Task>>() {
-            @Override
-            public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
-                adapter.setTasks(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Task>> call, Throwable t) {
-                Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
-                Log.d("FAIL", t.toString());
-            }
-        });
     }
 
     @Override
@@ -77,7 +63,20 @@ public class TaskFragment extends Fragment implements TaskContract {
 
         recyclerView = view.findViewById(R.id.task_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+
+        Call<List<Task>> callGetTasks = taskApi.getAllTasks();
+        callGetTasks.enqueue(new Callback<List<Task>>() {
+            @Override
+            public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
+                setTaskAdapter(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Task>> call, Throwable t) {
+                Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
+                Log.d("FAIL", t.toString());
+            }
+        });
 
         FloatingActionButton addTaskButton = view.findViewById(R.id.add_task_button);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -105,11 +104,6 @@ public class TaskFragment extends Fragment implements TaskContract {
         adapter = new TaskAdapter();
         adapter.setTasks(list);
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public List<Task> getFilterTasks() {
-        return null;
     }
 
     @Override

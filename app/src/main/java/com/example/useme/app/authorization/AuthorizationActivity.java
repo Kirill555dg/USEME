@@ -210,6 +210,7 @@ public class AuthorizationActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
                     Teacher realTeacher = response.body();
+                    editor.putLong(MainActivity.KEY_ID, realTeacher.getId());
                     editor.putString(MainActivity.KEY_FIRSTNAME, realTeacher.getFirstName());
                     editor.putString(MainActivity.KEY_LASTNAME, realTeacher.getLastName());
                     editor.putString(MainActivity.KEY_MIDDLENAME, realTeacher.getMiddleName());
@@ -267,6 +268,7 @@ public class AuthorizationActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
                     Student realStudent = response.body();
+                    editor.putLong(MainActivity.KEY_ID, realStudent.getId());
                     editor.putString(MainActivity.KEY_FIRSTNAME, realStudent.getFirstName());
                     editor.putString(MainActivity.KEY_LASTNAME, realStudent.getLastName());
                     editor.putString(MainActivity.KEY_DATE_OF_BIRTH, realStudent.getDateOfBirth());

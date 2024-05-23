@@ -260,6 +260,7 @@ public class RegistrationStudentFragment extends DialogFragment {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                                 Student realStudent = response.body();
+                                editor.putLong(MainActivity.KEY_ID, realStudent.getId());
                                 editor.putString(MainActivity.KEY_FIRSTNAME, realStudent.getFirstName());
                                 editor.putString(MainActivity.KEY_LASTNAME, realStudent.getLastName());
                                 editor.putString(MainActivity.KEY_DATE_OF_BIRTH, realStudent.getDateOfBirth());

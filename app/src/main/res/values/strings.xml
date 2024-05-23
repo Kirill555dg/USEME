@@ -87,4 +87,6 @@
     <string name="reset">Сброс</string>
     <string name="save_info">Сохранить данные</string>
     <string name="date_of_birth_profile">Дата\nрождения:</string>
+    <string name="groups_title">Группы</string>
+    <string name="task_title">Задачи</string>
 </resources>

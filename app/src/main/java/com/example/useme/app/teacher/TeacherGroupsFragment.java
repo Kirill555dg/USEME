@@ -1,55 +1,50 @@
 package com.example.useme.app.teacher;
 
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.example.useme.adapter.MyGroupItemRecyclerViewAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.useme.R;
-import com.example.useme.placeholder.PlaceholderContent;
+import com.example.useme.adapter.GroupAdapter;
+import com.example.useme.data.model.Group;
+import com.example.useme.retrofit.RetrofitService;
+import com.example.useme.retrofit.api.GroupApi;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-/**
- * A fragment representing a list of Items.
- */
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
 public class TeacherGroupsFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private GroupAdapter adapter;
+    private RecyclerView recyclerView;
+    private GroupApi groupApi;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    private static final String ARG_PARAM1 = "param1";
+
+    private String mParam1;
+
     public TeacherGroupsFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static TeacherGroupsFragment newInstance(int columnCount) {
-        TeacherGroupsFragment fragment = new TeacherGroupsFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+        adapter = new GroupAdapter();
+        RetrofitService retrofitService = new RetrofitService();
+        groupApi = retrofitService.getRetrofit().create(GroupApi.class);
     }
 
     @Override
@@ -57,17 +52,38 @@ public class TeacherGroupsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_groups_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        FloatingActionButton addGroupButton = view.findViewById(R.id.add_group_button);
+        addGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_teacherGroupsFragment_to_createGroupFragment);
             }
-            recyclerView.setAdapter(new MyGroupItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
-        }
+        });
+
+        recyclerView = view.findViewById(R.id.groups_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        Log.d("DEBUG", String.valueOf(TeacherActivity.id));
+        Call<List<Group>> callGetGroups = groupApi.getGroups(TeacherActivity.id);
+        callGetGroups.enqueue(new Callback<List<Group>>() {
+            @Override
+            public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
+                setTaskAdapter(response.body());
+                Log.d("RESPONSE", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<List<Group>> call, Throwable t) {
+                Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
+                Log.d("FAIL", t.toString());
+            }
+        });
+
         return view;
+    }
+
+    public void setTaskAdapter(List<Group> list){
+        adapter = new GroupAdapter();
+        adapter.setGroups(list);
+        recyclerView.setAdapter(adapter);
     }
 }

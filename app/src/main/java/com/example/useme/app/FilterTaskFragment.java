@@ -74,6 +74,7 @@ public class FilterTaskFragment extends DialogFragment {
         categoryTIL = view.findViewById(R.id.filter_TIL_category);
 
         filterButton = view.findViewById(R.id.filter_button);
+        filterButton.setEnabled(false);
         RetrofitService retrofitService = new RetrofitService();
         taskApi = retrofitService.getRetrofit().create(TaskApi.class);
 
@@ -129,7 +130,7 @@ public class FilterTaskFragment extends DialogFragment {
             }
         });
 
-
+        activateButton();
 
         return view;
     }
