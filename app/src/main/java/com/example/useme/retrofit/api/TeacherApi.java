@@ -4,6 +4,7 @@ import com.example.useme.data.model.Teacher;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 
 public interface TeacherApi {
@@ -15,4 +16,7 @@ public interface TeacherApi {
 
     @POST(path+"/authorization")
     Call<Teacher> auth(@Body Teacher teacher);
+
+    @PATCH(path+"/change_info")
+    Call<Teacher> changeInfo(@Body Teacher teacher);
 }

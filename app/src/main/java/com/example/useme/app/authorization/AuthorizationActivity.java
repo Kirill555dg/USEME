@@ -214,7 +214,7 @@ public class AuthorizationActivity extends AppCompatActivity {
                     editor.putString(MainActivity.KEY_LASTNAME, realTeacher.getLastName());
                     editor.putString(MainActivity.KEY_MIDDLENAME, realTeacher.getMiddleName());
                     editor.putString(MainActivity.KEY_DATE_OF_BIRTH, realTeacher.getDateOfBirth());
-                    editor.putString(MainActivity.KEY_GENDER, realTeacher.getMale().toString());
+                    editor.putBoolean(MainActivity.KEY_GENDER, realTeacher.getMale());
                     editor.putString(MainActivity.KEY_EMAIL, email);
                     editor.putString(MainActivity.KEY_PASSWORD, password);
                     editor.putString(MainActivity.KEY_ROLE, MainActivity.TEACHER_ROLE);
@@ -270,7 +270,7 @@ public class AuthorizationActivity extends AppCompatActivity {
                     editor.putString(MainActivity.KEY_FIRSTNAME, realStudent.getFirstName());
                     editor.putString(MainActivity.KEY_LASTNAME, realStudent.getLastName());
                     editor.putString(MainActivity.KEY_DATE_OF_BIRTH, realStudent.getDateOfBirth());
-                    editor.putString(MainActivity.KEY_GENDER, realStudent.getMale().toString());
+                    editor.putBoolean(MainActivity.KEY_GENDER, realStudent.getMale());
                     editor.putString(MainActivity.KEY_EMAIL, email);
                     editor.putString(MainActivity.KEY_PASSWORD, password);
                     editor.putString(MainActivity.KEY_ROLE, MainActivity.STUDENT_ROLE);

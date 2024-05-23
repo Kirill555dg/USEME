@@ -35,117 +35,215 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
 
                 <TextView
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
                     android:text="@string/firstname_profile"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/teacher_profile_firstname"
+                <RelativeLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginHorizontal="12dp">
+                    <TextView
+                        android:id="@+id/teacher_profile_firstname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/teacher_profile_change_firstname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_margin="8dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/gray"
+                        />
+                </RelativeLayout>
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
 
                 <TextView
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
                     android:text="@string/lastname_profile"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/teacher_profile_lastname"
+                <RelativeLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginHorizontal="12dp">
+                    <TextView
+                        android:id="@+id/teacher_profile_lastname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/teacher_profile_change_lastname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_margin="8dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/gray"
+                        />
+                </RelativeLayout>
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
 
                 <TextView
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
-                    android:text="@string/profile_middlename"
+                    android:text="@string/middlename_profile"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/teacher_profile_middlename"
+                <RelativeLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginHorizontal="12dp">
+                    <TextView
+                        android:id="@+id/teacher_profile_middlename"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/teacher_profile_change_middlename"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_margin="8dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/gray"
+                        />
+                </RelativeLayout>
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
 
                 <TextView
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
                     android:text="@string/gender_profile"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/teacher_profile_gender"
+                <RelativeLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginHorizontal="12dp">
+                    <TextView
+                        android:id="@+id/teacher_profile_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <RadioGroup
+                        android:id="@+id/teacher_change_RG"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/teacher_profile_change_gender_male"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/bg_radio_button"
+                            android:gravity="center"
+                            android:layoutDirection="rtl"
+                            
+                            android:padding="2dp"
+                            android:text="@string/male"
+                            android:textSize="16sp" />
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/teacher_profile_change_gender_female"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/bg_radio_button"
+                            android:gravity="center"
+                            android:layoutDirection="rtl"
+                            
+                            android:padding="2dp"
+                            android:text="@string/female"
+                            android:textSize="16sp" />
+                    </RadioGroup>
+                </RelativeLayout>
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
 
                 <TextView
+                    android:layout_margin="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
                     android:text="@string/date_of_birth_profile"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/teacher_profile_date_of_birth"
+                <RelativeLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginHorizontal="12dp">
+                    <TextView
+                        android:id="@+id/teacher_profile_date_of_birth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <DatePicker
+                        android:id="@+id/teacher_profile_change_date_of_birth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="160dp"
+                        android:visibility="gone"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner" />
+                </RelativeLayout>
             </TableRow>
         </TableLayout>
 
@@ -166,15 +264,32 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/teacher_profile_change_info_button"
             style="@style/Widget.Material3.Button.TextButton"
-            android:layout_width="160dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/change_info"
             android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/tableLayout"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tableLayout"
             app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+            app:strokeColor="@color/colorPrimary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/teacher_profile_save_info_button"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            
+            android:text="@string/save_info"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/teacher_profile_change_info_button"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="@+id/teacher_profile_change_info_button"
+            app:layout_constraintTop_toTopOf="@+id/teacher_profile_change_info_button"
             app:strokeColor="@color/colorPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
