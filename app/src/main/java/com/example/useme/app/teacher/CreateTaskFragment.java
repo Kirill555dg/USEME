@@ -106,13 +106,7 @@ public class CreateTaskFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedSubject = String.valueOf(subjectACTV.getText());
-                subjectTIL.setHelperText(null);
-                topicACTV.setText("");
-                categoryACTV.setText("");
                 topicACTV.setAdapter(getTopicAdapter(selectedSubject));
-                categoryACTV.setAdapter(null);
-                topicTIL.setHelperText("Необходимо выбрать");
-                categoryTIL.setHelperText("Необходимо выбрать");
                 enableSaveButtonIfReady();
             }
         });
@@ -122,10 +116,7 @@ public class CreateTaskFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedSubject = String.valueOf(subjectACTV.getText());
                 Short topicNum = Short.valueOf(String.valueOf(topicACTV.getText()).split(". ")[0]);
-                topicTIL.setHelperText(null);
-                categoryACTV.setText("");
                 categoryACTV.setAdapter(getCategoryAdapter(selectedSubject, topicNum));
-                categoryTIL.setHelperText("Необходимо выбрать");
                 enableSaveButtonIfReady();
             }
         });
@@ -133,7 +124,6 @@ public class CreateTaskFragment extends Fragment {
         categoryACTV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                categoryTIL.setHelperText(null);
                 enableSaveButtonIfReady();
             }
         });

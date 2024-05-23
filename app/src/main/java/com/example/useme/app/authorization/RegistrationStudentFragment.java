@@ -1,6 +1,7 @@
 package com.example.useme.app.authorization;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -306,11 +307,14 @@ public class RegistrationStudentFragment extends DialogFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getDialog().getWindow().setGravity(Gravity.TOP);
-        DisplayMetrics newDisplayMetrics = new DisplayMetrics();
-        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(newDisplayMetrics);
-        getDialog().getWindow().setLayout(newDisplayMetrics.widthPixels, (int)(newDisplayMetrics.heightPixels*0.85));
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            DisplayMetrics newDisplayMetrics = new DisplayMetrics();
+            ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(newDisplayMetrics);
+            dialog.getWindow().setGravity(Gravity.TOP);
+            dialog.getWindow().setLayout(newDisplayMetrics.widthPixels, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
     }
 }

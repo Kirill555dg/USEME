@@ -1,7 +1,10 @@
 package com.example.useme.app.teacher;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +27,7 @@ import com.example.useme.retrofit.api.StudentApi;
 import com.example.useme.retrofit.api.TaskApi;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,9 +35,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class TaskFragment extends Fragment {
+public class TaskFragment extends Fragment implements TaskContract {
 
     private TaskAdapter adapter;
+    RecyclerView recyclerView;
     private TaskApi taskApi;
 
     private static final String ARG_PARAM1 = "param1";
@@ -70,7 +75,7 @@ public class TaskFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.task_recycler_view);
+        recyclerView = view.findViewById(R.id.task_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
@@ -88,10 +93,34 @@ public class TaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FilterTaskFragment fragment = new FilterTaskFragment();
-                fragment.show(getActivity().getSupportFragmentManager(), "Task filter");
+                fragment.setTargetFragment(TaskFragment.this, 0);
+                fragment.show(getParentFragmentManager(), fragment.getClass().getName());
             }
         });
 
         return view;
+    }
+
+    public void setTaskAdapter(List<Task> list){
+        adapter = new TaskAdapter();
+        adapter.setTasks(list);
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public List<Task> getFilterTasks() {
+        return null;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Intent intent = data;
+            Bundle args = intent.getBundleExtra("BUNDLE");
+            ArrayList<Task> tasks = (ArrayList<Task>) args.getSerializable("TASKS");
+            setTaskAdapter(tasks);
+            Log.d("DEBUG", tasks.toString());
+        }
     }
 }

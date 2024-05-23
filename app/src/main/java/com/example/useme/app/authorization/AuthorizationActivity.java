@@ -163,10 +163,10 @@ public class AuthorizationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (teacherRB.isChecked()) {
                     RegistrationTeacherFragment fragment = new RegistrationTeacherFragment();
-                    fragment.show(getSupportFragmentManager(), "Teacher registration");
+                    fragment.show(getSupportFragmentManager(), fragment.getClass().getName());
                 } else if (studentRB.isChecked()) {
                     RegistrationStudentFragment fragment = new RegistrationStudentFragment();
-                    fragment.show(getSupportFragmentManager(), "Student registration");
+                    fragment.show(getSupportFragmentManager(), fragment.getClass().getName());
                 }
             }
         });

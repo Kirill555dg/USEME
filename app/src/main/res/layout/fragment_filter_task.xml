@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    app:layout_constraintWidth_percent="100">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,13 +18,20 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            app:helperTextTextColor="@color/red_warning">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/filter_TIET_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/id"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="или"
+            android:layout_gravity="center"
+            android:textSize="16sp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/filter_TIL_subject"
@@ -74,14 +82,30 @@
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/task_filter_button"
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.Material3.Button"
-            android:text="@string/apply"
-            android:textSize="24sp"
-            android:layout_marginBottom="10dp"/>
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/reset_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Button"
+                android:text="@string/reset"
+                android:textSize="24sp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/filter_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Button"
+                android:layout_alignParentEnd="true"
+                android:text="@string/apply"
+                android:textSize="24sp"/>
+        </RelativeLayout>
+
 
     </LinearLayout>
 
