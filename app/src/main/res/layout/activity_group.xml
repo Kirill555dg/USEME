@@ -8,7 +8,7 @@
     tools:context=".app.group.GroupActivity">
 
     <fragment
-        android:id="@+id/student_nav_graph"
+        android:id="@+id/group_nav_graph"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"

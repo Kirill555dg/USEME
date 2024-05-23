@@ -1,6 +1,7 @@
 package com.example.useme.app.group;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +15,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class GroupActivity extends AppCompatActivity {
 
+    private static final String KEY_ID = "ID";
+    private static Long id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id = getIntent().getLongExtra(KEY_ID, -1L);
+        Log.d("DEBUUUG", String.valueOf(id));
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_group);
 

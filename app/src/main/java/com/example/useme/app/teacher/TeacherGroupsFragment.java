@@ -26,7 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class TeacherGroupsFragment extends Fragment {
+public class TeacherGroupsFragment extends Fragment  {
 
     private GroupAdapter adapter;
     private RecyclerView recyclerView;
@@ -62,7 +62,7 @@ public class TeacherGroupsFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.groups_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        Log.d("DEBUG", String.valueOf(TeacherActivity.id));
+
         Call<List<Group>> callGetGroups = groupApi.getGroups(TeacherActivity.id);
         callGetGroups.enqueue(new Callback<List<Group>>() {
             @Override
