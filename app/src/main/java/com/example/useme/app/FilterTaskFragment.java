@@ -55,7 +55,6 @@ public class FilterTaskFragment extends DialogFragment {
     private TextInputLayout categoryTIL;
 
     private Button filterButton;
-    private Button resetButton;
 
     @Nullable
     @Override
@@ -74,9 +73,7 @@ public class FilterTaskFragment extends DialogFragment {
         categoryACTV = view.findViewById(R.id.filter_ACTV_category);
         categoryTIL = view.findViewById(R.id.filter_TIL_category);
 
-        resetButton = view.findViewById(R.id.reset_button);
         filterButton = view.findViewById(R.id.filter_button);
-
         RetrofitService retrofitService = new RetrofitService();
         taskApi = retrofitService.getRetrofit().create(TaskApi.class);
 
@@ -105,7 +102,10 @@ public class FilterTaskFragment extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedSubject = String.valueOf(subjectACTV.getText());
+                topicACTV.setText("");
+                categoryACTV.setText("");
                 topicACTV.setAdapter(getTopicAdapter(selectedSubject));
+                categoryACTV.setAdapter(null);
                 activateButton();
             }
         });
@@ -115,6 +115,8 @@ public class FilterTaskFragment extends DialogFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedSubject = String.valueOf(subjectACTV.getText());
                 Short topicNum = Short.valueOf(String.valueOf(topicACTV.getText()).split(". ")[0]);
+                topicTIL.setHelperText(null);
+                categoryACTV.setText("");
                 categoryACTV.setAdapter(getCategoryAdapter(selectedSubject, topicNum));
                 activateButton();
             }
@@ -127,29 +129,6 @@ public class FilterTaskFragment extends DialogFragment {
             }
         });
 
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Call<List<Task>> callGetTasks = taskApi.getAllTasks();
-                callGetTasks.enqueue(new Callback<List<Task>>() {
-                    @Override
-                    public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
-                        Intent intent = new Intent();
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("TASKS", (Serializable) response.body());
-                        intent.putExtra("BUNDLE", bundle);
-                        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
-                        getDialog().dismiss();
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Task>> call, Throwable t) {
-                        Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
-                        Log.d("FAIL", t.toString());
-                    }
-                });
-            }
-        });
 
 
         return view;
@@ -158,12 +137,8 @@ public class FilterTaskFragment extends DialogFragment {
 
     private boolean isIDCorrect() {
         String id = idTIET.getText().toString();
-        if (!id.matches("[0-9]+")) {
-            if (!id.isEmpty()) {
-                idTIL.setHelperText("ID может состоять только из цифр");
-            } else {
-                idTIL.setHelperText(null);
-            }
+        if (!id.matches("[0-9]+") && !id.isEmpty()) {
+            idTIL.setHelperText("ID может состоять только из цифр");
             return false;
         } else {
             idTIL.setHelperText(null);
@@ -172,22 +147,47 @@ public class FilterTaskFragment extends DialogFragment {
     }
 
     private void activateButton(){
-        if (
-                isIDCorrect()
-                &&
-                (!subjectACTV.getText().toString().isEmpty()) ||
-                !topicACTV.getText().toString().isEmpty() ||
-                !categoryACTV.getText().toString().isEmpty()
-        )
-        {
+        if (!isIDCorrect()) {
             filterButton.setEnabled(false);
-        }
-        else if (!filterButton.isEnabled()) {
+        } else if (!filterButton.isEnabled()) {
             filterButton.setEnabled(true);
             filterButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    Log.d("DEBUG", "click");
+                    String id_s = idTIET.getText().toString();
+                    Long id = -1L;
+                    if (!id_s.isEmpty()) {
+                        id = Long.valueOf(id_s);
+                    }
+                    String subject = subjectACTV.getText().toString();
+                    String topic_s = String.valueOf(topicACTV.getText());
+                    Short topic = -1;
+                    if (!topic_s.isEmpty()) {
+                        topic = Short.valueOf(topic_s.split(". ")[0]);
+                    }
+                    String category = categoryACTV.getText().toString();
+                    Call<List<Task>> callGetTasks = taskApi.filterTasks(id, subject, topic, category);
+
+                    callGetTasks.enqueue(new Callback<List<Task>>() {
+                        @Override
+                        public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
+                            Intent intent = new Intent();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("TASKS", (Serializable) response.body());
+                            intent.putExtra("BUNDLE", bundle);
+                            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+                            getDialog().dismiss();
+                            Log.d("SUCCESS", response.body().toString());
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<Task>> call, Throwable t) {
+                            Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
+                            Log.d("FAIL", t.toString());
+                        }
+                    });
                 }
             });
         }

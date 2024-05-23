@@ -83,28 +83,15 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/reset_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button"
-                android:text="@string/reset"
-                android:textSize="24sp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/filter_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.Material3.Button"
                 android:layout_alignParentEnd="true"
                 android:text="@string/apply"
                 android:textSize="24sp"/>
-        </RelativeLayout>
 
 
     </LinearLayout>

@@ -19,6 +19,12 @@ public interface TaskApi {
     @GET("api/v1/tasks")
     Call<List<Task>> getAllTasks();
 
+    @GET("api/v1/tasks/search")
+    Call<List<Task>> filterTasks(@Query("id") Long id,
+                                 @Query("subjectName") String subject,
+                                 @Query("topicNum") Short topic,
+                                 @Query("categoryName") String category);
+
     @GET("api/v1/tasks/{id}")
     Call<Task> getOneTask(@Path("id") Long id);
 
