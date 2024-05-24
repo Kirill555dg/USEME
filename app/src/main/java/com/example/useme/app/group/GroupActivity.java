@@ -2,6 +2,7 @@ package com.example.useme.app.group;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,17 +12,34 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.useme.R;
+import com.example.useme.data.model.Group;
+import com.example.useme.retrofit.RetrofitService;
+import com.example.useme.retrofit.api.GroupApi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GroupActivity extends AppCompatActivity {
 
-    private static final String KEY_ID = "ID";
+    public static final String KEY_ID = "ID";
+    public static final String KEY_COUNT_MEMBERS = "COUNT_MEMBERS";
+    public static final String KEY_COUNT_HOMEWORKS = "COUNT_HOMEWORKS";
+
     public static Long id;
+    public static Integer countHomeworks;
+    public static Integer countMembers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         id = getIntent().getLongExtra(KEY_ID, -1L);
+        countHomeworks = getIntent().getIntExtra(KEY_COUNT_HOMEWORKS, -1);
+        countMembers = getIntent().getIntExtra(KEY_COUNT_MEMBERS, -1);
+
+
         Log.d("DEBUUUG", String.valueOf(id));
 
         EdgeToEdge.enable(this);

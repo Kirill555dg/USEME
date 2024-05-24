@@ -17,13 +17,20 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
+import com.example.useme.app.group.GroupActivity;
 import com.example.useme.app.student.StudentActivity;
 import com.example.useme.app.teacher.TeacherActivity;
 import com.example.useme.data.model.Group;
 import com.example.useme.data.model.Task;
+import com.example.useme.retrofit.RetrofitService;
+import com.example.useme.retrofit.api.GroupApi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>  {
     private List<Group> groups = new ArrayList<>();
@@ -80,9 +87,29 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putLong("ID", id);
-                    Navigation.findNavController(itemView).navigate(R.id.action_teacherGroupsFragment_to_groupActivity, bundle);
+                    RetrofitService retrofitService = new RetrofitService();
+                    GroupApi groupApi = retrofitService.getRetrofit().create(GroupApi.class);
+                    Call<Group> getGroup = groupApi.findGroup(id);
+                    getGroup.enqueue(new Callback<Group>() {
+                        @Override
+                        public void onResponse(Call<Group> call, Response<Group> response) {
+                            Group group = response.body();
+                            Log.d("RESPONSE", group.toString());
+                            GroupActivity.countHomeworks = group.getCountHomeworks();
+                            GroupActivity.countMembers = group.getCountMembers();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putLong(GroupActivity.KEY_ID, id);
+                            bundle.putInt(GroupActivity.KEY_COUNT_MEMBERS, group.getCountMembers());
+                            bundle.putInt(GroupActivity.KEY_COUNT_HOMEWORKS, group.getCountHomeworks());
+
+                            Navigation.findNavController(itemView).navigate(R.id.action_teacherGroupsFragment_to_groupActivity, bundle);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Group> call, Throwable t) {
+                        }
+                    });
                 }
             });
         }

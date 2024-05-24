@@ -25,4 +25,21 @@
         android:name="com.example.useme.app.group.GroupProfileFragment"
         android:label="fragment_group_profile"
         tools:layout="@layout/fragment_group_profile" />
+    <fragment
+        android:id="@+id/groupHomeworksFragment"
+        android:name="com.example.useme.app.group.GroupHomeworksFragment"
+        android:label="fragment_group_homeworks"
+        tools:layout="@layout/fragment_group_homeworks" >
+        <action
+            android:id="@+id/action_groupHomeworksFragment_to_addHomeworkFragment"
+            app:destination="@id/addHomeworkFragment" />
+        <action
+            android:id="@+id/action_groupHomeworksFragment_to_changeHomeworkFragment"
+            app:destination="@id/changeHomeworkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeHomeworkFragment"
+        android:name="com.example.useme.app.group.ChangeHomeworkFragment"
+        android:label="fragment_change_homework"
+        tools:layout="@layout/fragment_change_homework" />
 </navigation>

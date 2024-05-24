@@ -11,8 +11,8 @@
         android:title="@string/statistic_bottom" />
 
     <item
-        android:id="@+id/addHomeworkFragment"
-        android:icon="@drawable/ic_add_homework_24dp"
+        android:id="@+id/groupHomeworksFragment"
+        android:icon="@drawable/ic_homework_24dp"
         android:title="@string/new_homework_bottom" />
 
     <item

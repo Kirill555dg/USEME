@@ -10,7 +10,7 @@ public class Homework {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Long id;
     @SerializedName("title")
     @Expose
     private String title;
@@ -34,11 +34,33 @@ public class Homework {
     @Expose
     private int countTasks;
 
-    public Integer getId() {
+    @SerializedName("countCompleted")
+    @Expose
+    private int countCompleted;
+
+    private int countStudents;
+
+    public int getCountStudents() {
+        return countStudents;
+    }
+
+    public void setCountStudents(int countStudents) {
+        this.countStudents = countStudents;
+    }
+
+    public int getCountCompleted() {
+        return countCompleted;
+    }
+
+    public void setCountCompleted(int countCompleted) {
+        this.countCompleted = countCompleted;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -96,5 +118,21 @@ public class Homework {
 
     public void setCountTasks(int countTasks) {
         this.countTasks = countTasks;
+    }
+
+    @Override
+    public String toString() {
+        return "Homework{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", dateOfIssue='" + dateOfIssue + '\'' +
+                ", deadline='" + deadline + '\'' +
+                ", group=" + group +
+                ", tasks=" + tasks +
+                ", statistics=" + statistics +
+                ", countTasks=" + countTasks +
+                ", countCompleted=" + countCompleted +
+                ", countStudents=" + countStudents +
+                '}';
     }
 }

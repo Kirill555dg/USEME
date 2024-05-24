@@ -39,8 +39,6 @@ public class GroupPageFragment extends Fragment {
     private StatisticApi statisticApi;
     private GroupApi groupApi;
 
-    private Integer countHomeworks;
-
     public GroupPageFragment() {
     }
 
@@ -51,22 +49,6 @@ public class GroupPageFragment extends Fragment {
         studentApi = retrofitService.getRetrofit().create(StudentApi.class);
         groupApi = retrofitService.getRetrofit().create(GroupApi.class);
         statisticApi = retrofitService.getRetrofit().create(StatisticApi.class);
-
-        Call<Group> getGroup = groupApi.findGroup(GroupActivity.id);
-        getGroup.enqueue(new Callback<Group>() {
-            @Override
-            public void onResponse(Call<Group> call, Response<Group> response) {
-                Group group = response.body();
-                Log.d("RESPONSE", group.toString());
-                countHomeworks = group.getCountHomeworks();
-            }
-
-            @Override
-            public void onFailure(Call<Group> call, Throwable t) {
-                Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
-                Log.d("FAIL", t.toString());
-            }
-        });
     }
 
     @Override
@@ -78,7 +60,7 @@ public class GroupPageFragment extends Fragment {
         recyclerView = view.findViewById(R.id.students_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        new GetStudentAsyncTask().execute();
+        new GroupPageFragment.GetStudentAsyncTask().execute();
 
         return view;
     }
@@ -97,10 +79,9 @@ public class GroupPageFragment extends Fragment {
             try {
                 students = callGetGroupStudents.execute().body();
                 Log.d("RESPONSE", students.toString());
-                boolean isDone = false;
                 for (int i = 0; i < students.size(); i++) {
                     Student student = students.get(i);
-                    student.setCountHomeworks(countHomeworks);
+                    student.setCountHomeworks(GroupActivity.countHomeworks);
                     Call<List<Statistic>> callStatistic = statisticApi.findStudentStatisticInGroup(student.getId(), GroupActivity.id);
                     List<Statistic> statistics = callStatistic.execute().body();
                     Log.d("RESPONSE", statistics.toString());
@@ -126,5 +107,4 @@ public class GroupPageFragment extends Fragment {
             setStudentAdapter(students);
         }
     }
-
 }
