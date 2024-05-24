@@ -18,9 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/groups_title"
-            android:textSize="40sp"
+            android:textSize="36sp"
             android:textStyle="bold"
-            android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             android:textAlignment="center"/>
 
@@ -29,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/teacher_title_group"
-            tools:listitem="@layout/group_item" />
+            tools:listitem="@layout/teacher_group_item" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -13,7 +13,7 @@ public class Group {
     private Long id;
     @SerializedName("teacher")
     @Expose
-    private Long teacher;
+    private Teacher teacher;
     @SerializedName("name")
     @Expose
     private String name;
@@ -44,11 +44,11 @@ public class Group {
         this.id = id;
     }
 
-    public Long getTeacher() {
+    public Teacher getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(Long teacher) {
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
 

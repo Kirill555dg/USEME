@@ -16,8 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class StudentActivity extends AppCompatActivity {
 
-    private static Long id;
-    private static String email;
+    public static Long id;
+    public static String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

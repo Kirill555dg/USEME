@@ -46,11 +46,11 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/student_item_firstname"
+                android:id="@+id/student_item_fullname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/student_item_gender"
-                android:text="Имя"
+                android:text="ФИО"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -58,24 +58,10 @@
                 android:layout_marginRight="10dp"/>
 
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/student_item_lastname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/student_item_firstname"
-                android:layout_alignBottom="@+id/student_item_firstname"
-                android:layout_toEndOf="@+id/student_item_firstname"
-                android:text="Фамилия"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-
-
             <TableLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/student_item_firstname"
+                android:layout_below="@id/student_item_fullname"
                 android:layout_marginStart="10dp">
 
                 <TableRow

@@ -38,8 +38,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
         Boolean gender = student.getMale();
         holder.genderTV.setText(gender ? "Ученик" : "Ученица");
         holder.id = student.getId();
-        holder.firstnameTV.setText(student.getFirstName());
-        holder.lastnameTV.setText(student.getLastName());
+        if ((student.getLastName() == null || student.getLastName().isEmpty()) && (student.getFirstName() == null || student.getFirstName().isEmpty())){
+            holder.fullnameTV.setVisibility(View.GONE);
+        }
+        holder.fullnameTV.setText(student.getLastName() + " " + student.getFirstName());
         holder.emailTV.setText(student.getEmail());
         holder.ageTV.setText("" + student.getAge());
         holder.idTV.setText("#" + holder.id);
@@ -62,8 +64,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
         private Long id;
         private TextView genderTV;
         private TextView idTV;
-        private TextView firstnameTV;
-        private TextView lastnameTV;
+        private TextView fullnameTV;
         private TextView emailTV;
         private TextView ageTV;
         private TextView completeHomeworksTV;
@@ -74,8 +75,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
             genderTV = itemView.findViewById(R.id.student_item_gender);
             idTV = itemView.findViewById(R.id.student_item_id);
 
-            firstnameTV = itemView.findViewById(R.id.student_item_firstname);
-            lastnameTV = itemView.findViewById(R.id.student_item_lastname);
+            fullnameTV = itemView.findViewById(R.id.student_item_fullname);
 
             emailTV = itemView.findViewById(R.id.student_item_email);
             ageTV = itemView.findViewById(R.id.student_item_age);

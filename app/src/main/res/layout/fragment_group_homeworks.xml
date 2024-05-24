@@ -18,9 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/homeworks_title"
-            android:textSize="40sp"
+            android:textSize="36sp"
             android:textStyle="bold"
-            android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             android:textAlignment="center"/>
 
@@ -31,7 +30,7 @@
             android:layout_below="@+id/homework_page_title"
             tools:listitem="@layout/homework_item" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_hometask_button"
+            android:id="@+id/add_homework_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

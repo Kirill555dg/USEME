@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/student_nav_graph"
-    app:startDestination="@id/homeworkFragment">
+    app:startDestination="@id/studentGroupsFragment">
 
     <fragment
         android:id="@+id/studentProfileFragment"
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeworkFragment"
-        android:name="com.example.useme.app.student.HomeworkFragment"
+        android:name="com.example.useme.app.student.HomeworksFragment"
         android:label="fragment_homework"
         tools:layout="@layout/fragment_homework" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/solveFragment"
-        android:name="com.example.useme.app.student.SolveFragment"
+        android:name="com.example.useme.app.student.SolveHomeworkFragment"
         android:label="fragment_solve"
         tools:layout="@layout/fragment_solve" />
 </navigation>

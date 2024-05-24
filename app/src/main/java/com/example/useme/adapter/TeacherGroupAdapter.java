@@ -1,27 +1,19 @@
 package com.example.useme.adapter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
 import com.example.useme.app.group.GroupActivity;
-import com.example.useme.app.student.StudentActivity;
-import com.example.useme.app.teacher.TeacherActivity;
 import com.example.useme.data.model.Group;
-import com.example.useme.data.model.Task;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.GroupApi;
 
@@ -32,20 +24,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>  {
+public class TeacherGroupAdapter extends RecyclerView.Adapter<TeacherGroupAdapter.GroupHolder>  {
     private List<Group> groups = new ArrayList<>();
 
     @NonNull
     @Override
-    public GroupAdapter.GroupHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TeacherGroupAdapter.GroupHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.group_item, parent, false);
+                .inflate(R.layout.teacher_group_item, parent, false);
 
-        return new GroupAdapter.GroupHolder(itemView);
+        return new TeacherGroupAdapter.GroupHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GroupAdapter.GroupHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TeacherGroupAdapter.GroupHolder holder, int position) {
 
         Group group = groups.get(position);
         holder.id = group.getId();
@@ -89,8 +81,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
                 public void onClick(View v) {
                     RetrofitService retrofitService = new RetrofitService();
                     GroupApi groupApi = retrofitService.getRetrofit().create(GroupApi.class);
-                    Call<Group> getGroup = groupApi.findGroup(id);
-                    getGroup.enqueue(new Callback<Group>() {
+                    Call<Group> callGetGroup = groupApi.findGroup(id);
+                    callGetGroup.enqueue(new Callback<Group>() {
                         @Override
                         public void onResponse(Call<Group> call, Response<Group> response) {
                             Group group = response.body();

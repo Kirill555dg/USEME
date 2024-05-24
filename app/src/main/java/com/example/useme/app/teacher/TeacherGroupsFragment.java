@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
-import com.example.useme.adapter.GroupAdapter;
+import com.example.useme.adapter.TeacherGroupAdapter;
 import com.example.useme.data.model.Group;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.GroupApi;
@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class TeacherGroupsFragment extends Fragment  {
 
-    private GroupAdapter adapter;
+    private TeacherGroupAdapter adapter;
     private RecyclerView recyclerView;
     private GroupApi groupApi;
 
@@ -79,7 +79,7 @@ public class TeacherGroupsFragment extends Fragment  {
     }
 
     public void setGroupAdapter(List<Group> list){
-        adapter = new GroupAdapter();
+        adapter = new TeacherGroupAdapter();
         adapter.setGroups(list);
         recyclerView.setAdapter(adapter);
     }

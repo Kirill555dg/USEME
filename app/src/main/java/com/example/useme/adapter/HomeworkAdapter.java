@@ -1,18 +1,28 @@
 package com.example.useme.adapter;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
+import com.example.useme.data.model.Group;
 import com.example.useme.data.model.Homework;
+import com.example.useme.retrofit.RetrofitService;
+import com.example.useme.retrofit.api.GroupApi;
+import com.example.useme.retrofit.api.HomeworkApi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.HomeworkHolder>{
     private List<Homework> homeworks = new ArrayList<>();
@@ -70,14 +80,28 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.Homewo
             deadlineTV = itemView.findViewById(R.id.homework_item_deadline);
             countCompletedTV = itemView.findViewById(R.id.homework_item_count_completed);
 
-            /*itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putLong("ID", id);
-                    Navigation.findNavController(itemView).navigate(R.id.action_teacherGroupsFragment_to_groupActivity, bundle);
+                    RetrofitService retrofitService = new RetrofitService();
+                    HomeworkApi homeworkApi = retrofitService.getRetrofit().create(HomeworkApi.class);
+                    Call<Homework> callGetHomework = homeworkApi.findHomework(id);
+                    callGetHomework.enqueue(new Callback<Homework>() {
+                        @Override
+                        public void onResponse(Call<Homework> call, Response<Homework> response) {
+                            Homework homework = response.body();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putLong("ID", id);
+                            Navigation.findNavController(itemView).navigate(R.id.action_groupHomeworksFragment_to_changeHomeworkFragment, bundle);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Homework> call, Throwable t) {
+                        }
+                    });
                 }
-            });*/
+            });
         }
     }
 }

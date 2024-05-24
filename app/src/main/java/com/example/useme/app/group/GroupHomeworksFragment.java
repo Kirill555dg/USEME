@@ -3,6 +3,7 @@ package com.example.useme.app.group;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import com.example.useme.retrofit.api.GroupApi;
 import com.example.useme.retrofit.api.HomeworkApi;
 import com.example.useme.retrofit.api.StatisticApi;
 import com.example.useme.retrofit.api.StudentApi;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -76,6 +78,14 @@ public class GroupHomeworksFragment extends Fragment {
             public void onFailure(Call<List<Homework>> call, Throwable t) {
                 Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
                 Log.d("FAIL", t.toString());
+            }
+        });
+
+        FloatingActionButton addTaskButton = view.findViewById(R.id.add_homework_button);
+        addTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_groupHomeworksFragment_to_addHomeworkFragment);
             }
         });
 

@@ -12,10 +12,10 @@ import com.example.useme.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SolveFragment#newInstance} factory method to
+ * Use the {@link SolveHomeworkFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SolveFragment extends Fragment {
+public class SolveHomeworkFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class SolveFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SolveFragment() {
+    public SolveHomeworkFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class SolveFragment extends Fragment {
      * @return A new instance of fragment SolveFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SolveFragment newInstance(String param1, String param2) {
-        SolveFragment fragment = new SolveFragment();
+    public static SolveHomeworkFragment newInstance(String param1, String param2) {
+        SolveHomeworkFragment fragment = new SolveHomeworkFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

@@ -1,6 +1,7 @@
 package com.example.useme.retrofit.api;
 
 import com.example.useme.data.model.Homework;
+import com.example.useme.data.model.Task;
 
 import java.util.List;
 
@@ -21,6 +22,9 @@ public interface HomeworkApi {
 
     @GET("api/v1/homeworks/{id}")
     Call<Homework> findHomework(@Path("id") Long homeworkId);
+
+    @GET("api/v1/homeworks/{id}/tasks")
+    Call<List<Task>> getHomeworkTasks(@Path("id") Long homeworkId);
 
     @GET("api/v1/homeworks/group")
     Call<List<Homework>> findGroupHomeworks(@Query("group_id") Long groupId);
