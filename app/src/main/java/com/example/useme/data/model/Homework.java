@@ -34,9 +34,9 @@ public class Homework {
     @Expose
     private int countTasks;
 
-    @SerializedName("countCompleted")
+    @SerializedName("completed")
     @Expose
-    private int countCompleted;
+    private List<Long> completed;
 
     private int countStudents;
 
@@ -48,12 +48,12 @@ public class Homework {
         this.countStudents = countStudents;
     }
 
-    public int getCountCompleted() {
-        return countCompleted;
+    public List<Long> getCompleted() {
+        return completed;
     }
 
-    public void setCountCompleted(int countCompleted) {
-        this.countCompleted = countCompleted;
+    public void setCompleted(List<Long> completed) {
+        this.completed = completed;
     }
 
     public Long getId() {
@@ -131,7 +131,7 @@ public class Homework {
                 ", tasks=" + tasks +
                 ", statistics=" + statistics +
                 ", countTasks=" + countTasks +
-                ", countCompleted=" + countCompleted +
+                ", completed=" + completed +
                 ", countStudents=" + countStudents +
                 '}';
     }

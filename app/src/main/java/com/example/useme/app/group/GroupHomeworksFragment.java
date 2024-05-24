@@ -14,15 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.useme.R;
-import com.example.useme.adapter.HomeworkAdapter;
-import com.example.useme.adapter.StudentAdapter;
+import com.example.useme.adapter.TeacherHomeworkAdapter;
 import com.example.useme.data.model.Homework;
-import com.example.useme.data.model.Student;
 import com.example.useme.retrofit.RetrofitService;
-import com.example.useme.retrofit.api.GroupApi;
 import com.example.useme.retrofit.api.HomeworkApi;
-import com.example.useme.retrofit.api.StatisticApi;
-import com.example.useme.retrofit.api.StudentApi;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -35,7 +30,7 @@ import retrofit2.Response;
 public class GroupHomeworksFragment extends Fragment {
 
 
-    private HomeworkAdapter adapter;
+    private TeacherHomeworkAdapter adapter;
     private RecyclerView recyclerView;
     private HomeworkApi homeworkApi;
 
@@ -93,7 +88,7 @@ public class GroupHomeworksFragment extends Fragment {
     }
 
     public void setHomeworkAdapter(List<Homework> list){
-        adapter = new HomeworkAdapter();
+        adapter = new TeacherHomeworkAdapter();
         adapter.setHomeworks(list);
         recyclerView.setAdapter(adapter);
     }
