@@ -94,4 +94,5 @@
     <string name="homeworks_title">Домашние задания</string>
     <string name="add_hometask">Добавить Д/З</string>
     <string name="invites">Приглашения</string>
+    <string name="solve_title">Решение</string>
 </resources>

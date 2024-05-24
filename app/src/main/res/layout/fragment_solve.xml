@@ -3,12 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBackground"
     tools:context=".app.student.SolveHomeworkFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginTop="10dp"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/solve_title_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/solve_title"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/solve_title_group"
+            android:id="@+id/mini_task_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/mini_task_item"
+            android:layout_marginTop="8dp"
+            />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/solve_task_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mini_task_recycler_view"
+            android:name="com.example.useme.app.student.SolveTaskFragment"
+            />
+    </RelativeLayout>
 
 </FrameLayout>
