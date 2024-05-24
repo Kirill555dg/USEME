@@ -1,5 +1,7 @@
 package com.example.useme.data.model;
 
+import android.content.Intent;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -29,7 +31,17 @@ public class Teacher {
     @SerializedName("isMale")
     @Expose
     private Boolean isMale;
+    @SerializedName("age")
+    @Expose
+    private Integer age;
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
     public Long getId() {
         return id;
     }
@@ -97,13 +109,15 @@ public class Teacher {
     @Override
     public String toString() {
         return "Teacher{" +
-                "email='" + email + '\'' +
+                "id=" + id +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", middleName='" + middleName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", isMale=" + isMale +
+                ", age=" + age +
                 '}';
     }
 }

@@ -42,7 +42,7 @@
             android:clickable="true"
             android:src="@drawable/baseline_add_100"
             app:maxImageSize="40dp"
-            android:contentDescription="@string/add_task_button_text" />
+            android:contentDescription="@string/create_group_button" />
     </RelativeLayout>
 
 </FrameLayout>

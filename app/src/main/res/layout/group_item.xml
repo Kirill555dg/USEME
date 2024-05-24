@@ -66,18 +66,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_alignTop="@+id/materialTextView"
+                android:layout_alignTop="@+id/student_item_gender"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="8dp"
                 android:layout_toStartOf="@+id/group_item_id"
-                android:layout_toEndOf="@+id/materialTextView"
+                android:layout_toEndOf="@+id/student_item_gender"
                 android:text="Шаблон описания"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView"
+                android:id="@+id/student_item_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 

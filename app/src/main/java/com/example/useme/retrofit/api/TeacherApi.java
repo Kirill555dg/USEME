@@ -9,14 +9,12 @@ import retrofit2.http.POST;
 
 public interface TeacherApi {
 
-    String path = "api/v1/teachers";
-
-    @POST(path+"/registration")
+    @POST("api/v1/teachers/registration")
     Call<Teacher> register(@Body Teacher teacher);
 
-    @POST(path+"/authorization")
+    @POST("api/v1/teachers/authorization")
     Call<Teacher> auth(@Body Teacher teacher);
 
-    @PATCH(path+"/change_info")
+    @PATCH("api/v1/teachers/change_info")
     Call<Teacher> changeInfo(@Body Teacher teacher);
 }

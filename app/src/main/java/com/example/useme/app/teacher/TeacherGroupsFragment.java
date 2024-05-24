@@ -32,17 +32,12 @@ public class TeacherGroupsFragment extends Fragment  {
     private RecyclerView recyclerView;
     private GroupApi groupApi;
 
-    private static final String ARG_PARAM1 = "param1";
-
-    private String mParam1;
-
     public TeacherGroupsFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new GroupAdapter();
         RetrofitService retrofitService = new RetrofitService();
         groupApi = retrofitService.getRetrofit().create(GroupApi.class);
     }
@@ -63,12 +58,14 @@ public class TeacherGroupsFragment extends Fragment  {
         recyclerView = view.findViewById(R.id.groups_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Call<List<Group>> callGetGroups = groupApi.getGroups(TeacherActivity.id);
+        Call<List<Group>> callGetGroups = groupApi.getTeacherGroups(TeacherActivity.id);
         callGetGroups.enqueue(new Callback<List<Group>>() {
             @Override
             public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
-                setTaskAdapter(response.body());
-                Log.d("RESPONSE", response.body().toString());
+                if (response.body() != null) {
+                    setGroupAdapter(response.body());
+                    Log.d("RESPONSE", response.body().toString());
+                }
             }
 
             @Override
@@ -81,7 +78,7 @@ public class TeacherGroupsFragment extends Fragment  {
         return view;
     }
 
-    public void setTaskAdapter(List<Group> list){
+    public void setGroupAdapter(List<Group> list){
         adapter = new GroupAdapter();
         adapter.setGroups(list);
         recyclerView.setAdapter(adapter);

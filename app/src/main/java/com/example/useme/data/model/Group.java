@@ -26,6 +26,9 @@ public class Group {
     @SerializedName("countMembers")
     @Expose
     private Integer countMembers;
+    @SerializedName("countHomeworks")
+    @Expose
+    private Integer countHomeworks;
     @SerializedName("invites")
     @Expose
     private List<Invite> invites;
@@ -79,6 +82,14 @@ public class Group {
 
     public void setCountMembers(Integer countMembers) {
         this.countMembers = countMembers;
+    }
+
+    public Integer getCountHomeworks() {
+        return countHomeworks;
+    }
+
+    public void setCountHomeworks(Integer countHomeworks) {
+        this.countHomeworks = countHomeworks;
     }
 
     public List<Invite> getInvites() {

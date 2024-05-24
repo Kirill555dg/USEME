@@ -45,10 +45,5 @@
         android:id="@+id/groupActivity"
         android:name="com.example.useme.app.group.GroupActivity"
         android:label="activity_group"
-        tools:layout="@layout/activity_group" >
-        <argument
-            android:name="ID"
-            app:argType="long"
-            android:defaultValue="-1L" />
-    </activity>
+        tools:layout="@layout/activity_group" />
 </navigation>

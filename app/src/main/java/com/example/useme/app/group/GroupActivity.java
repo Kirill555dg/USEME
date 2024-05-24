@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class GroupActivity extends AppCompatActivity {
 
     private static final String KEY_ID = "ID";
-    private static Long id;
+    public static Long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

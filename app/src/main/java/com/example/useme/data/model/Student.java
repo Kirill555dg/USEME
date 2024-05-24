@@ -27,6 +27,37 @@ public class Student {
     @Expose
     private Boolean isMale;
 
+    @SerializedName("age")
+    @Expose
+    private Integer age;
+
+    private int countHomeworks;
+    private int countCompleteHomeworks;
+
+    public int getCountHomeworks() {
+        return countHomeworks;
+    }
+
+    public void setCountHomeworks(int countHomeworks) {
+        this.countHomeworks = countHomeworks;
+    }
+
+    public int getCountCompleteHomeworks() {
+        return countCompleteHomeworks;
+    }
+
+    public void setCountCompleteHomeworks(int countCompleteHomeworks) {
+        this.countCompleteHomeworks = countCompleteHomeworks;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
     public Long getId() {
         return id;
     }
@@ -85,13 +116,17 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "email='" + email + '\'' +
+        return "Student{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", isMale=" + isMale +
+                ", age=" + age +
+                ", countHomeworks=" + countHomeworks +
+                ", countCompleteHomeworks=" + countCompleteHomeworks +
                 '}';
     }
 }

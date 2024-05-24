@@ -26,11 +26,11 @@
         android:label="fragment_student_groups"
         tools:layout="@layout/fragment_student_groups" >
         <action
-            android:id="@+id/action_studentGroupsFragment_to_groupPageFragment2"
-            app:destination="@id/groupPageFragment2" />
-        <action
             android:id="@+id/action_studentGroupsFragment_to_invitesFragment"
             app:destination="@id/invitesFragment" />
+        <action
+            android:id="@+id/action_studentGroupsFragment_to_homeworkFragment"
+            app:destination="@id/homeworkFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeworkFragment"
@@ -46,9 +46,4 @@
         android:name="com.example.useme.app.student.SolveFragment"
         android:label="fragment_solve"
         tools:layout="@layout/fragment_solve" />
-    <fragment
-        android:id="@+id/groupPageFragment2"
-        android:name="com.example.useme.app.group.GroupPageFragment"
-        android:label="fragment_group_page"
-        tools:layout="@layout/fragment_group_page" />
 </navigation>
