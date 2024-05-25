@@ -16,7 +16,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:background="@color/mini_task"
-                    android:id="@+id/task_item_topic"
+                    android:id="@+id/mini_task_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="40dp"

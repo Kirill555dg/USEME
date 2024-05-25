@@ -95,4 +95,6 @@
     <string name="add_hometask">Добавить Д/З</string>
     <string name="invites">Приглашения</string>
     <string name="solve_title">Решение</string>
+    <string name="answer">Ответ</string>
+    <string name="save">сохранить</string>
 </resources>

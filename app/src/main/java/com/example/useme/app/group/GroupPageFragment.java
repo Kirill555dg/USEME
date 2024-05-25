@@ -87,7 +87,7 @@ public class GroupPageFragment extends Fragment {
                     Log.d("RESPONSE", statistics.toString());
                     HashSet<Long> set = new HashSet<>();
                     for (Statistic statistic : statistics) {
-                        set.add(statistic.getPk().getHomeworkId());
+                        set.add(statistic.getPk().getHomework().getId());
                     }
                     Log.d("DEBUG", String.valueOf(set.size()));
                     student.setCountCompleteHomeworks(set.size());

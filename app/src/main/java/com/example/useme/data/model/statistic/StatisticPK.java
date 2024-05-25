@@ -1,49 +1,53 @@
 package com.example.useme.data.model.statistic;
 
+import com.example.useme.data.model.Homework;
+import com.example.useme.data.model.Student;
+import com.example.useme.data.model.Task;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 
 public class StatisticPK {
     @SerializedName("student")
     @Expose
-    private Long studentId;
+    private Student student;
     @SerializedName("homework")
     @Expose
-    private Long homeworkId;
+    private Homework homework;
     @SerializedName("task")
     @Expose
-    private Long taskId;
+    private Task task;
 
-    public Long getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public Long getHomeworkId() {
-        return homeworkId;
+    public Homework getHomework() {
+        return homework;
     }
 
-    public void setHomeworkId(Long homeworkId) {
-        this.homeworkId = homeworkId;
+    public void setHomework(Homework homework) {
+        this.homework = homework;
     }
 
-    public Long getTaskId() {
-        return taskId;
+    public Task getTask() {
+        return task;
     }
 
-    public void setTaskId(Long taskId) {
-        this.taskId = taskId;
+    public void setTask(Task task) {
+        this.task = task;
     }
 
     @Override
     public String toString() {
         return "StatisticPK{" +
-                "studentId=" + studentId +
-                ", homeworkId=" + homeworkId +
-                ", taskId=" + taskId +
+                "student=" + student +
+                ", homework=" + homework +
+                ", task=" + task +
                 '}';
     }
 }

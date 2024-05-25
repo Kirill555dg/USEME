@@ -10,6 +10,8 @@ import com.example.useme.R;
 import com.example.useme.app.authorization.AuthorizationActivity;
 import com.example.useme.app.student.StudentActivity;
 import com.example.useme.app.teacher.TeacherActivity;
+import com.example.useme.data.LocalDatabase;
+import com.example.useme.data.repository.LocalStatisticRepository;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-
         String email = sharedPreferences.getString(KEY_EMAIL, null);
         String role = sharedPreferences.getString(KEY_ROLE, null);
 

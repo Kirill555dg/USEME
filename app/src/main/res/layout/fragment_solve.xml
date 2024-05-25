@@ -14,6 +14,7 @@
         android:padding="8dp">
 
         <TextView
+            android:layout_below="@id/send_solve_button"
             android:id="@+id/solve_title_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,6 +23,15 @@
             android:textColor="@color/black"
             android:textSize="36sp"
             android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/send_solve_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:text="отправить\nна проверку"
+            android:textSize="16sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_below="@+id/solve_title_group"

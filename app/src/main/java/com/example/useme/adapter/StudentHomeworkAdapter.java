@@ -51,9 +51,9 @@ public class StudentHomeworkAdapter extends RecyclerView.Adapter<StudentHomework
         holder.idTV.setText("#"+holder.id);
         holder.dateOfIssueTV.setText(homework.getDateOfIssue());
         holder.deadlineTV.setText(homework.getDeadline());
-        Boolean isCompleted = (studentIds.indexOf(StudentActivity.id) != -1);
-        holder.completedTV.setText(isCompleted ? "да" : "нет");
-        holder.completedTV.setBackgroundResource(isCompleted ? R.color.completed : R.color.failed);
+        holder.isCompleted = (studentIds.indexOf(StudentActivity.id) != -1);
+        holder.completedTV.setText(holder.isCompleted ? "да" : "нет");
+        holder.completedTV.setBackgroundResource(holder.isCompleted ? R.color.completed : R.color.failed);
     }
 
     public void setHomeworks(List<Homework> homeworks) {
@@ -75,6 +75,7 @@ public class StudentHomeworkAdapter extends RecyclerView.Adapter<StudentHomework
         private TextView dateOfIssueTV;
         private TextView deadlineTV;
         private TextView completedTV;
+        private Boolean isCompleted;
 
         public HomeworkHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,6 +100,7 @@ public class StudentHomeworkAdapter extends RecyclerView.Adapter<StudentHomework
 
                             Bundle bundle = new Bundle();
                             bundle.putLong("ID", id);
+                            bundle.putBoolean("COMPLETE", isCompleted);
                             Navigation.findNavController(itemView).navigate(R.id.action_homeworkFragment_to_solveFragment, bundle);
                         }
 

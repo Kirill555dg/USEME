@@ -3,6 +3,7 @@ package com.example.useme.data.model.statistic;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
 public class Statistic {
 
     @SerializedName("pk")
