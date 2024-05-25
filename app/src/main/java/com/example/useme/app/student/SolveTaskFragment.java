@@ -131,7 +131,7 @@ public class SolveTaskFragment extends Fragment {
                         }
                     }).start();
 
-                    Toast.makeText(getContext(), "Ответ сохранен", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(), "Ответ сохранен", Toast.LENGTH_SHORT).show();
                 }
             });
         }
