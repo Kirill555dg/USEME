@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_student_profile" />
     <fragment
         android:id="@+id/invitesFragment"
-        android:name="com.example.useme.app.student.InvitesFragment"
+        android:name="com.example.useme.app.student.SendApplicationFragment"
         android:label="fragment_invites"
-        tools:layout="@layout/fragment_invites" />
+        tools:layout="@layout/fragment_send_application" />
     <fragment
         android:id="@+id/statisticFragment"
         android:name="com.example.useme.app.student.StatisticFragment"

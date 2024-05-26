@@ -12,10 +12,10 @@ import android.widget.Button;
 import com.example.useme.R;
 
 
-public class InvitesFragment extends Fragment {
+public class SendApplicationFragment extends Fragment {
 
 
-    public InvitesFragment() {
+    public SendApplicationFragment() {
     }
 
     @Override
@@ -27,7 +27,7 @@ public class InvitesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_invites, container, false);
+        View view = inflater.inflate(R.layout.fragment_send_application, container, false);
 
         Button backButton = view.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
