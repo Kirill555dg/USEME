@@ -45,14 +45,5 @@
         android:id="@+id/solveFragment"
         android:name="com.example.useme.app.student.SolveHomeworkFragment"
         android:label="fragment_solve"
-        tools:layout="@layout/fragment_solve" >
-        <action
-            android:id="@+id/action_solveFragment_to_solveTaskFragment"
-            app:destination="@id/solveTaskFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/solveTaskFragment"
-        android:name="com.example.useme.app.student.SolveTaskFragment"
-        android:label="fragment_solve_task"
-        tools:layout="@layout/fragment_solve_task" />
+        tools:layout="@layout/fragment_solve" />
 </navigation>

@@ -9,7 +9,7 @@
     <string name="form_condition">Введите условие</string>
     <string name="form_answer">Введите ответ</string>
     <string name="text_new_task">Новая задача</string>
-    <string name="button_save_task">Сохранить задачу</string>
+    <string name="button_save_task">Создать задачу</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -97,4 +97,10 @@
     <string name="solve_title">Решение</string>
     <string name="answer">Ответ</string>
     <string name="save">сохранить</string>
+    <string name="exit">выйти</string>
+    <string name="new_group">Новая группа</string>
+    <string name="create_group">Создать группу</string>
+    <string name="target_subject">Выберите целевой предмет</string>
+    <string name="fill_group_name">Введите название группы</string>
+    <string name="fill_group_description">Введите описание группы</string>
 </resources>

@@ -4,63 +4,161 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.useme.R;
+import com.example.useme.data.model.Group;
+import com.example.useme.data.model.Task;
+import com.example.useme.data.model.Teacher;
+import com.example.useme.data.model.taskdata.Subject;
+import com.example.useme.data.model.taskdata.TopicPK;
+import com.example.useme.retrofit.RetrofitService;
+import com.example.useme.retrofit.api.GroupApi;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateGroupFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
 public class CreateGroupFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private GroupApi groupApi;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+    private TextInputEditText groupNameTIET;
+    private TextInputLayout groupNameTIL;
+    private AutoCompleteTextView targetSubjectACTV;
+    private TextInputEditText descriptionTIET;
+
+    private Button createButton;
 
     public CreateGroupFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateGroupFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CreateGroupFragment newInstance(String param1, String param2) {
-        CreateGroupFragment fragment = new CreateGroupFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        RetrofitService retrofitService = new RetrofitService();
+        groupApi = retrofitService.getRetrofit().create(GroupApi.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_group, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_group, container, false);
+
+        groupNameTIL = view.findViewById(R.id.TIL_GroupName);
+        groupNameTIET = view.findViewById(R.id.TIET_GroupName);
+
+        targetSubjectACTV = view.findViewById(R.id.ACTV_TargetSubject);
+        descriptionTIET = view.findViewById(R.id.TIET_Description);
+
+        createButton = view.findViewById(R.id.create_group_button);
+        createButton.setEnabled(false);
+
+        targetSubjectACTV.setAdapter(getTargetSubjectAdapter());
+
+        addTextListener(groupNameTIL, groupNameTIET);
+
+        return view;
+    }
+
+    private void addTextListener(TextInputLayout TIL, TextInputEditText ET) {
+        ET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!ET.getText().toString().isEmpty()) {
+                    TIL.setHelperText(null);
+                } else {
+                    TIL.setHelperText("Нужно заполнить");
+                }
+                enableCreateButtonIfReady();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                enableCreateButtonIfReady();
+            }
+        });
+    }
+
+    private void enableCreateButtonIfReady() {
+        if (!groupNameTIET.getText().toString().isEmpty())
+        {
+            createButton.setEnabled(true);
+            createButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String groupName = groupNameTIET.getText().toString();
+                    String targetSubject = targetSubjectACTV.getText().toString();
+                    String description = descriptionTIET.getText().toString();
+
+                    Group group = new Group();
+                    group.setName(groupName);
+                    group.setTargetSubject(targetSubject);
+                    group.setDescription(description);
+                    group.setTeacher(new Teacher(TeacherActivity.id));
+
+                    Call<Group> callCreateGroup = groupApi.createGroup(group);
+                    callCreateGroup.enqueue(new Callback<Group>() {
+                        @Override
+                        public void onResponse(Call<Group> call, Response<Group> response) {
+                            Toast.makeText(getLayoutInflater().getContext(), "Группа успешно создана", Toast.LENGTH_SHORT).show();
+                            getActivity().getSupportFragmentManager().popBackStack();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Group> call, Throwable t) {
+                            Log.d("CALL", t.toString());
+                            Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        } else {
+            createButton.setEnabled(false);
+        }
+    }
+
+    private ArrayAdapter<String> getTargetSubjectAdapter() {
+        ArrayList<String> subjects = new ArrayList<>();
+        Call<List<Subject>> callSubjects = groupApi.getTargetSubjects();
+        callSubjects.enqueue(new Callback<List<Subject>>() {
+            @Override
+            public void onResponse(Call<List<Subject>> call, Response<List<Subject>> response) {
+                List<Subject> subjectList = response.body();
+                for (Subject subj : subjectList) {
+                    subjects.add(subj.getSubject());
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Subject>> call, Throwable t) {
+                Log.d("CALL", t.toString());
+                Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return new ArrayAdapter<>(requireContext(), R.layout.drop_down_item, subjects);
     }
 }

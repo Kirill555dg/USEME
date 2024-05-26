@@ -2,6 +2,9 @@ package com.example.useme.app.group;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -26,10 +29,12 @@ public class GroupActivity extends AppCompatActivity {
     public static final String KEY_ID = "ID";
     public static final String KEY_COUNT_MEMBERS = "COUNT_MEMBERS";
     public static final String KEY_COUNT_HOMEWORKS = "COUNT_HOMEWORKS";
+    public static final String KEY_NAME = "NAME";
 
     public static Long id;
     public static Integer countHomeworks;
     public static Integer countMembers;
+    private static String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +43,21 @@ public class GroupActivity extends AppCompatActivity {
         id = getIntent().getLongExtra(KEY_ID, -1L);
         countHomeworks = getIntent().getIntExtra(KEY_COUNT_HOMEWORKS, -1);
         countMembers = getIntent().getIntExtra(KEY_COUNT_MEMBERS, -1);
-
-
-        Log.d("DEBUUUG", String.valueOf(id));
+        name = getIntent().getStringExtra(KEY_NAME);
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_group);
+
+        TextView nameTV = findViewById(R.id.group_title);
+        nameTV.setText(name);
+
+        Button exitButton = findViewById(R.id.group_exit_button);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.group_bottom_nav_menu);
         NavController navController = Navigation.findNavController(this, R.id.group_nav_graph);

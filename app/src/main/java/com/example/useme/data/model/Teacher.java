@@ -35,6 +35,14 @@ public class Teacher {
     @Expose
     private Integer age;
 
+    public Teacher(){
+
+    }
+
+    public Teacher(Long id) {
+        this.id = id;
+    }
+
     public Integer getAge() {
         return age;
     }

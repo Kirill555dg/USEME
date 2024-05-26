@@ -9,24 +9,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:id="@+id/group_page_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/group_page_title"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textAlignment="center"/>
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/students_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/group_page_title"
             tools:listitem="@layout/student_item" />
 
     </RelativeLayout>

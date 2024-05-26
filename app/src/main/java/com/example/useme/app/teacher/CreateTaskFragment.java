@@ -36,17 +36,7 @@ import retrofit2.Response;
 
 public class CreateTaskFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     private TaskApi taskApi;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
 
     private Button saveButton;
 
@@ -69,10 +59,8 @@ public class CreateTaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        RetrofitService retrofitService = new RetrofitService();
+        taskApi = retrofitService.getRetrofit().create(TaskApi.class);
     }
 
     @Override
@@ -94,9 +82,6 @@ public class CreateTaskFragment extends Fragment {
 
         saveButton = view.findViewById(R.id.form_saveButton);
         saveButton.setEnabled(false);
-
-        RetrofitService retrofitService = new RetrofitService();
-        taskApi = retrofitService.getRetrofit().create(TaskApi.class);
 
         subjectACTV.setAdapter(getSubjectAdapter());
         setUnselectReaction(topicACTV, "Сначала выберите предмет");
@@ -199,15 +184,14 @@ public class CreateTaskFragment extends Fragment {
                     callSaveTask.enqueue(new Callback<Task>() {
                         @Override
                         public void onResponse(Call<Task> call, Response<Task> response) {
-                            Log.d("CALL", "Task saved successfully");
-                            Toast.makeText(getLayoutInflater().getContext(), "Task saved successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getLayoutInflater().getContext(), "Задача успешно создана", Toast.LENGTH_SHORT).show();
                             getActivity().getSupportFragmentManager().popBackStack();
                         }
 
                         @Override
                         public void onFailure(Call<Task> call, Throwable t) {
                             Log.d("CALL", t.toString());
-                            Toast.makeText(getLayoutInflater().getContext(), "Task save FAILED", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -224,16 +208,14 @@ public class CreateTaskFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 List<Category> subjectList = response.body();
-                Log.d("RESPONSE", response.body().toString());
                 for (Category cat : subjectList) {
-                    Log.d("RESPONSE_CAT", cat.toString());
                     categories.add(cat.getCategory());
                 }
-                Log.d("CALL", "Categories loaded successfully");
             }
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
                 Log.d("CALL", t.toString());
+                Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_SHORT).show();
             }
         });
         return new ArrayAdapter<>(requireContext(), R.layout.drop_down_item, categories);
@@ -246,16 +228,14 @@ public class CreateTaskFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Topic>> call, Response<List<Topic>> response) {
                 List<Topic> subjectList = response.body();
-                Log.d("RESPONSE", response.body().toString());
                 for (Topic top : subjectList) {
-                    Log.d("RESPONSE_TOP", top.toString());
                     topics.add(top.toString());
                 }
-                Log.d("CALL", "Topics loaded successfully");
             }
             @Override
             public void onFailure(Call<List<Topic>> call, Throwable t) {
                 Log.d("CALL", t.toString());
+                Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_SHORT).show();
             }
         });
         return new ArrayAdapter<>(requireContext(), R.layout.drop_down_item, topics);
@@ -271,11 +251,11 @@ public class CreateTaskFragment extends Fragment {
                 for (Subject subj : subjectList) {
                     subjects.add(subj.getSubject());
                 }
-                Log.d("CALL", "Subjects loaded successfully");
             }
             @Override
             public void onFailure(Call<List<Subject>> call, Throwable t) {
                 Log.d("CALL", t.toString());
+                Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_SHORT).show();
             }
         });
         return new ArrayAdapter<>(requireContext(), R.layout.drop_down_item, subjects);

@@ -10,24 +10,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:id="@+id/homework_page_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/homeworks_title"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textAlignment="center"/>
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/homeworks_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/homework_page_title"
             tools:listitem="@layout/homework_item" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_homework_button"
