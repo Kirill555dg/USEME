@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".app.group.GroupApplicationsFragment"
     android:background="@color/colorBackground"
-    android:padding="12dp"
-    tools:context=".app.student.HomeworksFragment">
+    android:padding="8dp">
 
     <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
-
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/back_button"
             style="@style/Widget.Material3.Button.IconButton"
+            android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             app:icon="@drawable/ic_back_24dp"
             app:iconTint="@color/black" />
 
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/homeworks_title"
+            android:text="@string/application_title"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="28sp"
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/student_homeworks_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/container"
-        tools:listitem="@layout/student_homework_item" />
 
-</RelativeLayout>
+</FrameLayout>

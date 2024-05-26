@@ -162,6 +162,21 @@ public class StudentProfileFragment extends Fragment {
 
                             Toast.makeText(getLayoutInflater().getContext(), "Данные успешно изменены", Toast.LENGTH_SHORT).show();
                             Log.d("RESPONSE", response.toString());
+
+                            onUpdateView();
+                            reverseReplaceViews(firstnameET, firstnameTV);
+                            reverseReplaceViews(lastnameET, lastnameTV);
+
+                            RG.setVisibility(View.GONE);
+                            genderTV.setVisibility(View.VISIBLE);
+
+                            dateOfBirthDP.setVisibility(View.GONE);
+                            dateOfBirthTV.setVisibility(View.VISIBLE);
+
+                            changeInfoButton.setEnabled(true);
+                            changeInfoButton.setVisibility(View.VISIBLE);
+                            saveInfoButton.setEnabled(false);
+                            saveInfoButton.setVisibility(View.INVISIBLE);
                         } else {
                             Log.d("ERROR_RESPONSE", response.toString());
                             if (response.code() == 409) {
@@ -181,26 +196,10 @@ public class StudentProfileFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<Student> call, Throwable t) {
-                        Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
                         Log.d("FAIL", t.toString());
                     }
                 });
-
-                reverseReplaceViews(firstnameET, firstnameTV);
-                reverseReplaceViews(lastnameET, lastnameTV);
-
-                RG.setVisibility(View.GONE);
-                genderTV.setVisibility(View.VISIBLE);
-
-                dateOfBirthDP.setVisibility(View.GONE);
-                dateOfBirthTV.setVisibility(View.VISIBLE);
-
-                changeInfoButton.setEnabled(true);
-                changeInfoButton.setVisibility(View.VISIBLE);
-                saveInfoButton.setEnabled(false);
-                saveInfoButton.setVisibility(View.INVISIBLE);
-
-                onUpdateView();
             }
         });
 

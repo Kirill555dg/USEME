@@ -70,12 +70,33 @@ public class TeacherGroupsFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<List<Group>> call, Throwable t) {
-                Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
                 Log.d("FAIL", t.toString());
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Call<List<Group>> callGetGroups = groupApi.getTeacherGroups(TeacherActivity.id);
+        callGetGroups.enqueue(new Callback<List<Group>>() {
+            @Override
+            public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
+                if (response.body() != null) {
+                    setGroupAdapter(response.body());
+                    Log.d("RESPONSE", response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Group>> call, Throwable t) {
+                Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
+                Log.d("FAIL", t.toString());
+            }
+        });
     }
 
     public void setGroupAdapter(List<Group> list){

@@ -9,7 +9,11 @@
         android:id="@+id/groupPageFragment"
         android:name="com.example.useme.app.group.GroupPageFragment"
         tools:layout="@layout/fragment_group_page"
-        android:label="fragment_group_page" />
+        android:label="fragment_group_page" >
+        <action
+            android:id="@+id/action_groupPageFragment_to_applicationsFragment"
+            app:destination="@id/applicationsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addHomeworkFragment"
         android:name="com.example.useme.app.group.AddHomeworkFragment"
@@ -42,4 +46,9 @@
         android:name="com.example.useme.app.group.ChangeHomeworkFragment"
         android:label="fragment_change_homework"
         tools:layout="@layout/fragment_change_homework" />
+    <fragment
+        android:id="@+id/applicationsFragment"
+        android:name="com.example.useme.app.group.GroupApplicationsFragment"
+        android:label="fragment_applications"
+        tools:layout="@layout/fragment_group_applications" />
 </navigation>

@@ -30,11 +30,15 @@ public class GroupActivity extends AppCompatActivity {
     public static final String KEY_COUNT_MEMBERS = "COUNT_MEMBERS";
     public static final String KEY_COUNT_HOMEWORKS = "COUNT_HOMEWORKS";
     public static final String KEY_NAME = "NAME";
+    public static final String KEY_TARGET_SUBJECT = "TARGET_SUBJECT";
+    public static final String KEY_DESCRIPTION = "DESCRIPTION";
 
     public static Long id;
     public static Integer countHomeworks;
     public static Integer countMembers;
-    private static String name;
+    public static String name;
+    public static String targetSubject;
+    public static String description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class GroupActivity extends AppCompatActivity {
         countHomeworks = getIntent().getIntExtra(KEY_COUNT_HOMEWORKS, -1);
         countMembers = getIntent().getIntExtra(KEY_COUNT_MEMBERS, -1);
         name = getIntent().getStringExtra(KEY_NAME);
+        targetSubject = getIntent().getStringExtra(KEY_TARGET_SUBJECT);
+        description = getIntent().getStringExtra(KEY_DESCRIPTION);
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_group);

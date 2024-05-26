@@ -7,26 +7,39 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
-    android:padding="25dp"
+    android:padding="8dp"
     tools:context=".app.teacher.CreateTaskFragment">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/new_task_text_view"
+    <RelativeLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/text_new_task"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="20dp">
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.IconButton"
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:icon="@drawable/ic_back_24dp"
+            app:iconTint="@color/black" />
 
-
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/new_task_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_new_task"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/new_task_text_view">
+        android:layout_below="@id/container"
+        android:padding="14dp">
 
         <LinearLayout
             android:id="@+id/linearLayout"

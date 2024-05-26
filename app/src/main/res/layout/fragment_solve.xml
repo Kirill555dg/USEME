@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
+    android:padding="8dp"
     tools:context=".app.student.SolveHomeworkFragment">
 
     <RelativeLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:padding="8dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
-        <TextView
-            android:layout_below="@id/send_solve_button"
-            android:id="@+id/solve_title_group"
-            android:layout_width="match_parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/back_button"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/solve_title"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            app:icon="@drawable/ic_back_24dp"
+            app:iconTint="@color/black" />
+
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/send_solve_button"
@@ -31,24 +33,32 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_vertical"
             android:text="отправить\nна проверку"
-            android:textSize="16sp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_below="@+id/solve_title_group"
-            android:id="@+id/mini_task_recycler_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/mini_task_item"
-            android:layout_marginTop="8dp"
-            />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/solve_task_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/mini_task_recycler_view"
-            android:name="com.example.useme.app.student.SolveTaskFragment"
-            />
+            android:textSize="16sp" />
     </RelativeLayout>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/solve_title_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container"
+        android:text="@string/solve_title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mini_task_recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/solve_title_group"
+        android:layout_marginTop="8dp"
+        tools:listitem="@layout/mini_task_item" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/solve_task_container"
+        android:name="com.example.useme.app.student.SolveTaskFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mini_task_recycler_view" />
+</RelativeLayout>

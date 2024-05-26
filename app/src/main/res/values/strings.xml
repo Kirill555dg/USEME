@@ -103,4 +103,8 @@
     <string name="target_subject">Выберите целевой предмет</string>
     <string name="fill_group_name">Введите название группы</string>
     <string name="fill_group_description">Введите описание группы</string>
+    <string name="group_name_text">Название:</string>
+    <string name="target_subject_text">Целевой предмет:</string>
+    <string name="description_text">Описание:</string>
+    <string name="application_title">Заявки на вступление</string>
 </resources>

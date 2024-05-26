@@ -89,11 +89,8 @@ public class GroupPageFragment extends Fragment {
                     for (Statistic statistic : statistics) {
                         set.add(statistic.getPk().getHomework().getId());
                     }
-                    Log.d("DEBUG", String.valueOf(set.size()));
                     student.setCountCompleteHomeworks(set.size());
-                    Log.d("DEBUG", student.toString());
                 }
-                Log.d("DEBUG", students.toString());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -103,7 +100,6 @@ public class GroupPageFragment extends Fragment {
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            Log.d("DEBUG", students.toString());
             setStudentAdapter(students);
         }
     }
