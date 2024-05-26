@@ -39,7 +39,6 @@ public class CreateTaskFragment extends Fragment {
     private TaskApi taskApi;
 
     private Button saveButton;
-    private Button backButton;
 
     private AutoCompleteTextView subjectACTV;
     private TextInputLayout subjectTIL;
@@ -84,7 +83,7 @@ public class CreateTaskFragment extends Fragment {
         saveButton = view.findViewById(R.id.form_saveButton);
         saveButton.setEnabled(false);
 
-        backButton = view.findViewById(R.id.back_button);
+        Button backButton = view.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
