@@ -44,7 +44,6 @@ public class MiniTaskAdapter extends RecyclerView.Adapter<com.example.useme.adap
         }
 
         holder.taskNumTV.setText(""+(position+1));
-        holder.task = task;
     }
 
     public void setMiniTasks(List<Task> tasks) {
@@ -70,18 +69,10 @@ public class MiniTaskAdapter extends RecyclerView.Adapter<com.example.useme.adap
     public class MiniTaskHolder extends RecyclerView.ViewHolder {
 
         private TextView taskNumTV;
-        private Task task;
 
         public MiniTaskHolder(@NonNull View itemView) {
             super(itemView);
-
             taskNumTV = itemView.findViewById(R.id.mini_task_num);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
     }
 }

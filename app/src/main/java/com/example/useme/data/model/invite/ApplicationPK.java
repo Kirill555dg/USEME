@@ -14,6 +14,14 @@ public class ApplicationPK {
     @Expose
     private Group group;
 
+    public ApplicationPK(){
+
+    }
+    public ApplicationPK(Student student, Group group) {
+        this.student = student;
+        this.group = group;
+    }
+
     public Student getStudent() {
         return student;
     }

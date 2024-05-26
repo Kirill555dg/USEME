@@ -82,6 +82,15 @@ public class CreateGroupFragment extends Fragment {
 
         addTextListener(groupNameTIL, groupNameTIET);
         addTextListener(passwordTIL, passwordTIET);
+
+        Button backButton = view.findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
         return view;
     }
 

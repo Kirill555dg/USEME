@@ -40,6 +40,12 @@ public class Group {
     @Expose
     private List<Long> homeworks_id;
 
+    public Group(){
+    }
+    public Group(Long id) {
+        this.id = id;
+    }
+
 
     public Long getId() {
         return id;

@@ -111,4 +111,6 @@
     <string name="form_group_id">ID группы</string>
     <string name="group_password">Пароль:</string>
     <string name="fill_group_password">Введите пароль для вступления</string>
+    <string name="accept">Принять</string>
+    <string name="decline">Отклонить</string>
 </resources>

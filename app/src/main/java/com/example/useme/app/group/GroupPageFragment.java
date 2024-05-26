@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.GroupApi;
 import com.example.useme.retrofit.api.StatisticApi;
 import com.example.useme.retrofit.api.StudentApi;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -61,6 +63,14 @@ public class GroupPageFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         new GroupPageFragment.GetStudentAsyncTask().execute();
+
+        FloatingActionButton applicationsButton = view.findViewById(R.id.application_button);
+        applicationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_groupPageFragment_to_applicationsFragment);
+            }
+        });
 
         return view;
     }
