@@ -11,7 +11,7 @@
         android:label="fragment_student_profile"
         tools:layout="@layout/fragment_student_profile" />
     <fragment
-        android:id="@+id/invitesFragment"
+        android:id="@+id/sendApplicationFragment"
         android:name="com.example.useme.app.student.SendApplicationFragment"
         android:label="fragment_invites"
         tools:layout="@layout/fragment_send_application" />
@@ -27,22 +27,22 @@
         tools:layout="@layout/fragment_student_groups" >
         <action
             android:id="@+id/action_studentGroupsFragment_to_invitesFragment"
-            app:destination="@id/invitesFragment" />
+            app:destination="@id/sendApplicationFragment" />
         <action
             android:id="@+id/action_studentGroupsFragment_to_homeworkFragment"
-            app:destination="@id/homeworkFragment" />
+            app:destination="@id/homeworksFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeworkFragment"
+        android:id="@+id/homeworksFragment"
         android:name="com.example.useme.app.student.HomeworksFragment"
         android:label="fragment_homework"
         tools:layout="@layout/fragment_homework" >
         <action
             android:id="@+id/action_homeworkFragment_to_solveFragment"
-            app:destination="@id/solveFragment" />
+            app:destination="@id/solveHomeworkFragment" />
     </fragment>
     <fragment
-        android:id="@+id/solveFragment"
+        android:id="@+id/solveHomeworkFragment"
         android:name="com.example.useme.app.student.SolveHomeworkFragment"
         android:label="fragment_solve"
         tools:layout="@layout/fragment_solve" />
