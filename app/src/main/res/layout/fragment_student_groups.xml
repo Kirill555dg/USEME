@@ -38,7 +38,7 @@
             android:layout_margin="10dp"
             android:clickable="true"
             android:src="@drawable/ic_application_24dp"
-            android:contentDescription="@string/invites" />
+            android:contentDescription="@string/applications" />
 
     </RelativeLayout>
 

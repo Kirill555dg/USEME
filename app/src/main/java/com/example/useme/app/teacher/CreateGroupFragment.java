@@ -43,6 +43,8 @@ public class CreateGroupFragment extends Fragment {
     private TextInputLayout groupNameTIL;
     private AutoCompleteTextView targetSubjectACTV;
     private TextInputEditText descriptionTIET;
+    private TextInputEditText passwordTIET;
+    private TextInputLayout passwordTIL;
 
     private Button createButton;
 
@@ -67,6 +69,9 @@ public class CreateGroupFragment extends Fragment {
         groupNameTIL = view.findViewById(R.id.TIL_GroupName);
         groupNameTIET = view.findViewById(R.id.TIET_GroupName);
 
+        passwordTIL = view.findViewById(R.id.TIL_Password);
+        passwordTIET = view.findViewById(R.id.TIET_Password);
+
         targetSubjectACTV = view.findViewById(R.id.ACTV_TargetSubject);
         descriptionTIET = view.findViewById(R.id.TIET_Description);
 
@@ -76,7 +81,7 @@ public class CreateGroupFragment extends Fragment {
         targetSubjectACTV.setAdapter(getTargetSubjectAdapter());
 
         addTextListener(groupNameTIL, groupNameTIET);
-
+        addTextListener(passwordTIL, passwordTIET);
         return view;
     }
 
@@ -105,7 +110,8 @@ public class CreateGroupFragment extends Fragment {
     }
 
     private void enableCreateButtonIfReady() {
-        if (!groupNameTIET.getText().toString().isEmpty())
+        if (!groupNameTIET.getText().toString().isEmpty() &&
+            !passwordTIET.getText().toString().isEmpty())
         {
             createButton.setEnabled(true);
             createButton.setOnClickListener(new View.OnClickListener() {
@@ -114,12 +120,14 @@ public class CreateGroupFragment extends Fragment {
                     String groupName = groupNameTIET.getText().toString();
                     String targetSubject = targetSubjectACTV.getText().toString();
                     String description = descriptionTIET.getText().toString();
+                    String password = passwordTIET.getText().toString();
 
                     Group group = new Group();
                     group.setName(groupName);
                     group.setTargetSubject(targetSubject);
                     group.setDescription(description);
                     group.setTeacher(new Teacher(TeacherActivity.id));
+                    group.setPassword(password);
 
                     Call<Group> callCreateGroup = groupApi.createGroup(group);
                     callCreateGroup.enqueue(new Callback<Group>() {

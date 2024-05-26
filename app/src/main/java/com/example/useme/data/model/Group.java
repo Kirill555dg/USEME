@@ -1,6 +1,6 @@
 package com.example.useme.data.model;
 
-import com.example.useme.data.model.invite.Invite;
+import com.example.useme.data.model.invite.Application;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -23,6 +23,10 @@ public class Group {
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("password")
+    @Expose
+    private String password;
+
     @SerializedName("countMembers")
     @Expose
     private Integer countMembers;
@@ -31,10 +35,11 @@ public class Group {
     private Integer countHomeworks;
     @SerializedName("invites")
     @Expose
-    private List<Invite> invites;
+    private List<Application> applications;
     @SerializedName("homeworks")
     @Expose
     private List<Long> homeworks_id;
+
 
     public Long getId() {
         return id;
@@ -76,6 +81,14 @@ public class Group {
         this.description = description;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Integer getCountMembers() {
         return countMembers;
     }
@@ -92,12 +105,12 @@ public class Group {
         this.countHomeworks = countHomeworks;
     }
 
-    public List<Invite> getInvites() {
-        return invites;
+    public List<Application> getInvites() {
+        return applications;
     }
 
-    public void setInvites(List<Invite> invites) {
-        this.invites = invites;
+    public void setInvites(List<Application> applications) {
+        this.applications = applications;
     }
 
     public List<Long> getHomeworks_id() {

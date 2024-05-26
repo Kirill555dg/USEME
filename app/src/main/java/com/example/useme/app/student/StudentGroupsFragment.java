@@ -74,7 +74,7 @@ public class StudentGroupsFragment extends Fragment {
         addGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_studentGroupsFragment_to_invitesFragment);
+                Navigation.findNavController(view).navigate(R.id.action_studentGroupsFragment_to_sendApplicationFragment);
             }
         });
 

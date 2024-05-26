@@ -34,6 +34,13 @@ public class Student {
     private int countHomeworks;
     private int countCompleteHomeworks;
 
+    public Student(){
+
+    }
+    public Student(Long id) {
+        this.id = id;
+    }
+
     public int getCountHomeworks() {
         return countHomeworks;
     }

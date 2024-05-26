@@ -26,7 +26,7 @@
         android:label="fragment_student_groups"
         tools:layout="@layout/fragment_student_groups" >
         <action
-            android:id="@+id/action_studentGroupsFragment_to_invitesFragment"
+            android:id="@+id/action_studentGroupsFragment_to_sendApplicationFragment"
             app:destination="@id/sendApplicationFragment" />
         <action
             android:id="@+id/action_studentGroupsFragment_to_homeworkFragment"
