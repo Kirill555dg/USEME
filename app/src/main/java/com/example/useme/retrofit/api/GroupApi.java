@@ -42,4 +42,7 @@ public interface GroupApi {
 
     @PUT("api/v1/groups/{id}")
     Call<Group> updateGroup(@Path("id") Long id, @Body Group group);
+
+    @DELETE("api/v1/groups/{id}")
+    Call<Void> deleteGroup(@Path("id") Long id);
 }

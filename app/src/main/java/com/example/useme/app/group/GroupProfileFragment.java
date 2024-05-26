@@ -120,6 +120,8 @@ public class GroupProfileFragment extends Fragment {
                         ((TextView)(getActivity().findViewById(R.id.group_title))).setText(newGroup.getName());
                         GroupActivity.targetSubject = newGroup.getTargetSubject();
                         GroupActivity.description = newGroup.getDescription();
+                        Toast.makeText(getLayoutInflater().getContext(), "Информация изменена", Toast.LENGTH_LONG).show();
+
                         onUpdateView();
                         nameTV.setVisibility(View.VISIBLE);
                         nameTIET.setVisibility(View.GONE);
@@ -147,7 +149,20 @@ public class GroupProfileFragment extends Fragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Call<Void> callDelete = groupApi.deleteGroup(GroupActivity.id);
+                callDelete.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(getLayoutInflater().getContext(), "Группа удалена", Toast.LENGTH_LONG).show();
+                        getActivity().getSupportFragmentManager().popBackStack();
+                    }
 
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
+                        Log.d("FAIL", t.toString());
+                    }
+                });
             }
         });
 
