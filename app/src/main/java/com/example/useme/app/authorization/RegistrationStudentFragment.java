@@ -1,6 +1,9 @@
 package com.example.useme.app.authorization;
 
+import static androidx.core.content.res.ResourcesCompat.getColor;
+
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -34,12 +37,14 @@ import com.example.useme.retrofit.MyErrorMessage;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.StudentApi;
 import com.example.useme.app.student.StudentActivity;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -61,7 +66,8 @@ public class RegistrationStudentFragment extends DialogFragment {
     private EditText passwordCheckET;
     private TextInputLayout passwordCheckTIL;
 
-    private DatePicker dateOfBirthDP;
+    private MaterialButton pickDateButton;
+    private LocalDate dateOfBirth;
     private TextView genderTV;
     private RadioButton maleRB;
     private RadioButton femaleRB;
@@ -87,7 +93,14 @@ public class RegistrationStudentFragment extends DialogFragment {
         passwordCheckET = view.findViewById(R.id.student_registration_form_PasswordCheck);
         passwordCheckTIL = view.findViewById(R.id.student_containerPasswordCheck);
 
-        dateOfBirthDP = view.findViewById(R.id.student_DP);
+        pickDateButton = view.findViewById(R.id.pickDateButton);
+        pickDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDatePickerDialog();
+            }
+        });
+
 
         genderTV = view.findViewById(R.id.student_genderTV);
         maleRB = view.findViewById(R.id.student_RB_male);
@@ -160,9 +173,23 @@ public class RegistrationStudentFragment extends DialogFragment {
         addRadioButtonListener(maleRB);
         addRadioButtonListener(femaleRB);
 
-        dateOfBirthDP.setMaxDate(new Date().getTime());
-
         return view;
+    }
+
+    private void openDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                dateOfBirth = LocalDate.of(year, month+1, dayOfMonth);
+                pickDateButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+                pickDateButton.setStrokeColorResource(R.color.colorPrimary);
+                pickDateButton.setText("Выбрать дату рождения");
+                Toast.makeText(getContext(), "Выбранная дата: " + dateOfBirth.toString(), Toast.LENGTH_LONG).show();
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        dialog.getDatePicker().setMaxDate(new Date().getTime());
+        dialog.show();
     }
 
     private boolean isPasswordCorrect() {
@@ -218,8 +245,7 @@ public class RegistrationStudentFragment extends DialogFragment {
         RB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                genderTV.setTextColor(Color.GRAY);
-                genderTV.setText("Пол");
+                genderTV.setVisibility(View.GONE);
                 enableRegisterButtonIfReady();
             }
         });
@@ -229,14 +255,13 @@ public class RegistrationStudentFragment extends DialogFragment {
     private void enableRegisterButtonIfReady() {
 
         if (isPasswordCorrect() && isPasswordCheckCorrect() && isEmailCorrect()
-                && (maleRB.isChecked() || femaleRB.isChecked())) {
+                && (maleRB.isChecked() || femaleRB.isChecked()) && dateOfBirth != null) {
             registerButton.setEnabled(true);
             registerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String firstname = firstnameET.getText().toString();
                     String lastname = lastnameET.getText().toString();
-                    LocalDate dateOfBirth = LocalDate.of(dateOfBirthDP.getYear(), dateOfBirthDP.getMonth() + 1, dateOfBirthDP.getDayOfMonth());
                     Boolean isMale = maleRB.isChecked();
                     String email = emailET.getText().toString();
                     String password = passwordET.getText().toString();

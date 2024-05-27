@@ -55,47 +55,27 @@
                 android:hint="@string/lastname"
                 android:minHeight="48dp" />
         </com.google.android.material.textfield.TextInputLayout>
-        
-        <LinearLayout
-            android:id="@+id/containerDP"
-            android:layout_width="wrap_content"
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pickDateButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lastnameContainer"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/date_of_birth"
-                android:textSize="16sp" />
-
-            <DatePicker
-                android:id="@+id/student_DP"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:calendarViewShown="false"
-                android:datePickerMode="spinner" />
-        </LinearLayout>
+            android:text="@string/choose_date_of_birth"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textColor="@color/red_warning"
+            app:strokeColor="@color/red_warning"
+            android:layout_marginBottom="10dp"/>
 
         <LinearLayout
             android:id="@+id/containerGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/containerDP"
+            android:layout_below="@+id/pickDateButton"
             android:layout_centerInParent="true"
             android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/student_genderTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/gender"
-                android:textSize="16sp"
-                android:textColor="@color/red_warning"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -127,6 +107,14 @@
                     android:text="@string/female"
                     android:textSize="16sp" />
             </RadioGroup>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/student_genderTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/gender"
+                android:textSize="16sp"
+                android:textColor="@color/red_warning"/>
         </LinearLayout>
 
 

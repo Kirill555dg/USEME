@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".app.authorization.RegistrationTeacherFragment">
@@ -23,12 +23,13 @@
             android:textSize="24sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_below="@+id/TV_fill_fields"
             android:id="@+id/firstnameContainer"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_fill_fields"
             android:layout_marginBottom="10dp">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/teacher_registration_form_Firstname"
                 android:layout_width="match_parent"
@@ -39,12 +40,13 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_below="@+id/firstnameContainer"
             android:id="@+id/lastnameContainer"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/firstnameContainer"
             android:layout_marginBottom="10dp">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/teacher_registration_form_Lastname"
                 android:layout_width="match_parent"
@@ -55,12 +57,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_below="@+id/lastnameContainer"
             android:id="@+id/middlenameContainer"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/lastnameContainer"
             android:layout_marginBottom="10dp">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/teacher_registration_form_MiddleName"
                 android:layout_width="match_parent"
@@ -71,46 +74,26 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <LinearLayout
-            android:id="@+id/containerDP"
-            android:layout_width="wrap_content"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pickDateButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/middlenameContainer"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/date_of_birth"
-                android:textSize="16sp" />
-
-            <DatePicker
-                android:id="@+id/teacher_DP"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:calendarViewShown="false"
-                android:datePickerMode="spinner" />
-        </LinearLayout>
+            android:text="@string/choose_date_of_birth"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textColor="@color/red_warning"
+            app:strokeColor="@color/red_warning"
+            android:layout_marginBottom="10dp"/>
 
         <LinearLayout
             android:id="@+id/containerGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/containerDP"
+            android:layout_below="@+id/pickDateButton"
             android:layout_centerInParent="true"
             android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/teacher_genderTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/gender"
-                android:textSize="16sp"
-                android:textColor="@color/red_warning"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -142,75 +125,87 @@
                     android:text="@string/female"
                     android:textSize="16sp" />
             </RadioGroup>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/teacher_genderTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/gender"
+                android:textColor="@color/red_warning"
+                android:textSize="16sp" />
         </LinearLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_below="@+id/containerGender"
             android:id="@+id/teacher_containerEmail"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:helperText="@string/required"
-            app:helperTextTextColor="@color/red_warning"
+            android:layout_below="@+id/containerGender"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            app:helperText="@string/required"
+            app:helperTextTextColor="@color/red_warning">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/teacher_registration_form_Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:lines="1"
                 android:ems="10"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
+                android:lines="1"
                 android:minHeight="48dp"
                 android:textSize="18sp"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_below="@+id/teacher_containerEmail"
             android:id="@+id/teacher_containerPassword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/teacher_containerEmail"
+            android:layout_marginBottom="16dp"
             app:helperText="@string/required"
             app:helperTextTextColor="@color/red_warning"
-            app:passwordToggleEnabled="true"
-            android:layout_marginBottom="16dp">
+            app:passwordToggleEnabled="true">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/teacher_registration_form_Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:lines="1"
                 android:ems="10"
                 android:hint="@string/password"
                 android:inputType="textPassword"
+                android:lines="1"
                 android:minHeight="48dp"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_below="@+id/teacher_containerPassword"
             android:id="@+id/teacher_containerPasswordCheck"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/teacher_containerPassword"
+            android:layout_marginBottom="16dp"
             app:helperText="@string/required"
             app:helperTextTextColor="@color/red_warning"
-            app:passwordToggleEnabled="true"
-            android:layout_marginBottom="16dp">
+            app:passwordToggleEnabled="true">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/teacher_registration_form_PasswordCheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:lines="1"
                 android:ems="10"
                 android:hint="@string/passwordCheck"
                 android:inputType="textPassword"
+                android:lines="1"
                 android:minHeight="48dp"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>

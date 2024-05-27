@@ -113,4 +113,7 @@
     <string name="fill_group_password">Введите пароль для вступления</string>
     <string name="accept">Принять</string>
     <string name="decline">Отклонить</string>
+    <string name="homework_title">Название Д/З</string>
+    <string name="pick_a_date">Выбрать дату рождения</string>
+    <string name="choose_date_of_birth">Выберите дату рождения</string>
 </resources>
