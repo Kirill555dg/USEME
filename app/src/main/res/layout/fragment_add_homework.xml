@@ -31,25 +31,82 @@
             android:text="Новое Д/З"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="28sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
     </RelativeLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_below="@id/container"
-        android:id="@+id/TIL_GroupId"
+        android:id="@+id/TIL_HomeworkTitle"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:helperText="@string/required"
-        app:helperTextTextColor="@color/red_warning">
+        app:helperTextTextColor="@color/red_warning"
+        android:layout_marginBottom="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TIET_GroupId"
+            android:id="@+id/TIET_HomeworkTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/homework_title"
             android:minHeight="48dp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/pickDeadlineButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TIL_HomeworkTitle"
+        android:text="@string/choose_deadline"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textColor="@color/red_warning"
+        app:strokeColor="@color/red_warning"
+        android:layout_marginBottom="10dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addTaskButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pickDeadlineButton"
+        android:text="@string/add_tasks"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:strokeColor="@color/colorPrimary"
+        android:layout_marginBottom="10dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addTaskButton"
+        android:layout_centerVertical="true"
+        android:text="@string/selected_tasks"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tasksRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/materialTextView"
+        android:layout_above="@id/sendHomeworkButton"
+        tools:listitem="@layout/task_mini_item"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sendHomeworkButton"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:minHeight="60dp"
+        android:layout_marginTop="10dp"
+        android:text="Отправить Д/З"
+        android:textSize="18sp"/>
 
 </RelativeLayout>

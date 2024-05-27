@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/solve_title_group"
         android:layout_marginTop="8dp"
-        tools:listitem="@layout/mini_task_item" />
+        tools:listitem="@layout/num_task_item" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/solve_task_container"

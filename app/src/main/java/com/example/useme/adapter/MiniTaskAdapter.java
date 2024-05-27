@@ -1,14 +1,11 @@
 package com.example.useme.adapter;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
@@ -26,7 +23,7 @@ public class MiniTaskAdapter extends RecyclerView.Adapter<com.example.useme.adap
     @Override
     public com.example.useme.adapter.MiniTaskAdapter.MiniTaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.mini_task_item, parent, false);
+                .inflate(R.layout.num_task_item, parent, false);
         mDisabledRows = new ArrayList<>();
         mDisabledRows.add(0);
         return new com.example.useme.adapter.MiniTaskAdapter.MiniTaskHolder(itemView);

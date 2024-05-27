@@ -116,4 +116,7 @@
     <string name="homework_title">Название Д/З</string>
     <string name="pick_a_date">Выбрать дату рождения</string>
     <string name="choose_date_of_birth">Выберите дату рождения</string>
+    <string name="choose_deadline">Укажите дедлайн</string>
+    <string name="selected_tasks">Добавленные задачи:</string>
+    <string name="add_tasks">Добавить задачи</string>
 </resources>
