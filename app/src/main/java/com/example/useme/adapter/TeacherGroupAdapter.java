@@ -97,6 +97,7 @@ public class TeacherGroupAdapter extends RecyclerView.Adapter<TeacherGroupAdapte
                             bundle.putString(GroupActivity.KEY_NAME, group.getName());
                             bundle.putString(GroupActivity.KEY_TARGET_SUBJECT, group.getTargetSubject());
                             bundle.putString(GroupActivity.KEY_DESCRIPTION, group.getDescription());
+                            bundle.putString(GroupActivity.KEY_PASSWORD, group.getPassword());
                             Navigation.findNavController(itemView).navigate(R.id.action_teacherGroupsFragment_to_groupActivity, bundle);
                         }
 

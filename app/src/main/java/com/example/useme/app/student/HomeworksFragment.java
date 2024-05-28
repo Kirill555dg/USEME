@@ -35,7 +35,6 @@ public class HomeworksFragment extends Fragment {
     private StudentHomeworkAdapter adapter;
     private RecyclerView recyclerView;
     private HomeworkApi homeworkApi;
-    private StatisticApi statisticApi;
 
     private static final String KEY_GROUP_ID = "ID";
     private Long id;

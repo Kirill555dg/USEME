@@ -51,7 +51,8 @@ public class GroupProfileFragment extends Fragment {
     private AutoCompleteTextView targetSubjectACTV;
     private TextView descriptionTV;
     private TextInputEditText descriptionTIET;
-
+    private TextView passwordTV;
+    private TextInputEditText passwordTIET;
     public GroupProfileFragment() {
     }
 
@@ -78,6 +79,8 @@ public class GroupProfileFragment extends Fragment {
         targetSubjectTIL = view.findViewById(R.id.TIL_ProfileGroupTargetSubject);
         targetSubjectACTV = view.findViewById(R.id.ACTV_ProfileGroupTargetSubject);
 
+        passwordTV = view.findViewById(R.id.TV_ProfileGroupPassword);
+        passwordTIET = view.findViewById(R.id.TIET_ProfileGroupPassword);
 
         changeInfoButton = view.findViewById(R.id.Button_GroupChangeInfo);
         saveInfoButton = view.findViewById(R.id.Button_GroupSaveInfo);
@@ -95,6 +98,9 @@ public class GroupProfileFragment extends Fragment {
                 targetSubjectTIL.setVisibility(View.VISIBLE);
                 targetSubjectACTV.setVisibility(View.VISIBLE);
 
+                passwordTV.setVisibility(View.GONE);
+                passwordTIET.setVisibility(View.VISIBLE);
+
                 changeInfoButton.setVisibility(View.GONE);
                 saveInfoButton.setVisibility(View.VISIBLE);
             }
@@ -106,11 +112,13 @@ public class GroupProfileFragment extends Fragment {
                 String name = nameTIET.getText().toString();
                 String targetSubject = targetSubjectACTV.getText().toString();
                 String description = descriptionTIET.getText().toString();
+                String password = passwordTIET.getText().toString();
 
                 Group group = new Group();
                 group.setName(name);
                 group.setTargetSubject(targetSubject);
                 group.setDescription(description);
+                group.setPassword(password);
 
                 Call<Group> callUpdateGroup = groupApi.updateGroup(GroupActivity.id, group);
                 callUpdateGroup.enqueue(new Callback<Group>() {
@@ -122,6 +130,7 @@ public class GroupProfileFragment extends Fragment {
                         ((TextView)(getActivity().findViewById(R.id.group_title))).setText(newGroup.getName());
                         GroupActivity.targetSubject = newGroup.getTargetSubject();
                         GroupActivity.description = newGroup.getDescription();
+                        GroupActivity.password = newGroup.getPassword();
                         Toast.makeText(getLayoutInflater().getContext(), "Информация изменена", Toast.LENGTH_LONG).show();
 
                         onUpdateView();
@@ -134,6 +143,9 @@ public class GroupProfileFragment extends Fragment {
                         targetSubjectTV.setVisibility(View.VISIBLE);
                         targetSubjectTIL.setVisibility(View.GONE);
                         targetSubjectACTV.setVisibility(View.GONE);
+
+                        passwordTV.setVisibility(View.VISIBLE);
+                        passwordTIET.setVisibility(View.GONE);
 
                         changeInfoButton.setVisibility(View.VISIBLE);
                         saveInfoButton.setVisibility(View.GONE);
@@ -215,5 +227,8 @@ public class GroupProfileFragment extends Fragment {
         targetSubjectTV.setText(GroupActivity.targetSubject);
         targetSubjectACTV.setText(GroupActivity.targetSubject);
         targetSubjectACTV.setAdapter(getTargetSubjectAdapter());
+
+        passwordTV.setText(GroupActivity.password);
+        passwordTIET.setText(GroupActivity.password);
     }
 }

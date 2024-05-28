@@ -1,12 +1,10 @@
-package com.example.useme.app.teacher;
+package com.example.useme.app.group;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,14 +16,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.useme.R;
+import com.example.useme.adapter.AddTaskAdapter;
 import com.example.useme.adapter.TaskAdapter;
 import com.example.useme.app.FilterTaskFragment;
-import com.example.useme.app.authorization.RegistrationTeacherFragment;
+import com.example.useme.app.teacher.TaskFragment;
 import com.example.useme.data.model.Task;
 import com.example.useme.retrofit.RetrofitService;
-import com.example.useme.retrofit.api.StudentApi;
 import com.example.useme.retrofit.api.TaskApi;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,19 +32,22 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class TaskFragment extends Fragment  {
+public class AddTaskFragment extends Fragment {
 
-    private TaskAdapter adapter;
+    private AddTaskAdapter adapter;
     RecyclerView recyclerView;
     private TaskApi taskApi;
 
-    public TaskFragment() {
+    public AddTaskFragment() {
+        // Required empty public constructor
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new TaskAdapter();
+        adapter = new AddTaskAdapter();
         RetrofitService retrofitService = new RetrofitService();
         taskApi = retrofitService.getRetrofit().create(TaskApi.class);
     }
@@ -55,9 +55,17 @@ public class TaskFragment extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_task, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_task, container, false);
 
-        recyclerView = view.findViewById(R.id.task_recycler_view);
+        Button backButton = view.findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+        recyclerView = view.findViewById(R.id.add_task_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         Call<List<Task>> callGetTasks = taskApi.getAllTasks();
@@ -74,21 +82,12 @@ public class TaskFragment extends Fragment  {
             }
         });
 
-        FloatingActionButton addTaskButton = view.findViewById(R.id.add_task_button);
-        addTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_taskFragment_to_createTaskFragment);
-            }
-        });
-
-        Button filterButton = view.findViewById(R.id.task_filter_button);
-
+        Button filterButton = view.findViewById(R.id.add_task_filter_button);
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FilterTaskFragment fragment = new FilterTaskFragment();
-                fragment.setTargetFragment(TaskFragment.this, 0);
+                fragment.setTargetFragment(AddTaskFragment.this, 0);
                 fragment.show(getParentFragmentManager(), fragment.getClass().getName());
             }
         });
@@ -96,8 +95,8 @@ public class TaskFragment extends Fragment  {
         return view;
     }
 
-    public void setTaskAdapter(List<Task> list){
-        adapter = new TaskAdapter();
+    private void setTaskAdapter(List<Task> list) {
+        adapter = new AddTaskAdapter();
         adapter.setTasks(list);
         recyclerView.setAdapter(adapter);
     }

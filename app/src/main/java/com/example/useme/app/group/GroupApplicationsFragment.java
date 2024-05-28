@@ -1,6 +1,5 @@
 package com.example.useme.app.group;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,16 +15,10 @@ import android.widget.Toast;
 
 import com.example.useme.R;
 import com.example.useme.adapter.ApplicationAdapter;
-import com.example.useme.adapter.MiniTaskAdapter;
-import com.example.useme.adapter.StudentAdapter;
 import com.example.useme.data.model.Student;
-import com.example.useme.data.model.statistic.Statistic;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.ApplicationApi;
-import com.example.useme.tool.RecyclerTouchListener;
 
-import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 
 import retrofit2.Call;

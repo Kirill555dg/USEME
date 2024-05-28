@@ -119,4 +119,5 @@
     <string name="choose_deadline">Укажите дедлайн</string>
     <string name="selected_tasks">Добавленные задачи:</string>
     <string name="add_tasks">Добавить задачи</string>
+    <string name="add_task">Добавить задачу</string>
 </resources>

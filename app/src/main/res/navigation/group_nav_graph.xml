@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addHomeworkFragment"
-        android:name="com.example.useme.app.group.AddHomeworkFragment"
+        android:name="com.example.useme.app.group.CreateHomeworkFragment"
         tools:layout="@layout/fragment_add_homework"
         android:label="fragment_add_homework" />
     <fragment

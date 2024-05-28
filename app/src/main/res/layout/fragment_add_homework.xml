@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".app.group.AddHomeworkFragment"
+    tools:context=".app.group.CreateHomeworkFragment"
     android:background="@color/colorBackground"
     android:padding="8dp">
     <RelativeLayout

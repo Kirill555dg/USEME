@@ -32,6 +32,7 @@ public class GroupActivity extends AppCompatActivity {
     public static final String KEY_NAME = "NAME";
     public static final String KEY_TARGET_SUBJECT = "TARGET_SUBJECT";
     public static final String KEY_DESCRIPTION = "DESCRIPTION";
+    public static final String KEY_PASSWORD = "PASSWORD";
 
     public static Long id;
     public static Integer countHomeworks;
@@ -39,6 +40,7 @@ public class GroupActivity extends AppCompatActivity {
     public static String name;
     public static String targetSubject;
     public static String description;
+    public static String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class GroupActivity extends AppCompatActivity {
         name = getIntent().getStringExtra(KEY_NAME);
         targetSubject = getIntent().getStringExtra(KEY_TARGET_SUBJECT);
         description = getIntent().getStringExtra(KEY_DESCRIPTION);
+        password = getIntent().getStringExtra(KEY_PASSWORD);
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_group);

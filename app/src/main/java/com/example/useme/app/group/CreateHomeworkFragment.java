@@ -12,9 +12,9 @@ import android.widget.Button;
 import com.example.useme.R;
 
 
-public class AddHomeworkFragment extends Fragment {
+public class CreateHomeworkFragment extends Fragment {
 
-    public AddHomeworkFragment() {
+    public CreateHomeworkFragment() {
         // Required empty public constructor
     }
 
