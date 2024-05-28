@@ -1,5 +1,6 @@
 package com.example.useme.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,37 +15,49 @@ import com.example.useme.data.model.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NumTaskAdapter extends RecyclerView.Adapter<NumTaskAdapter.MiniTaskHolder> {
+public class NumTaskAdapter extends RecyclerView.Adapter<NumTaskAdapter.NumTaskHolder> {
 
     private List<Task> tasks = new ArrayList<>();
-    private Integer ChosenTask;
-    private ArrayList<Integer> CompletedTasks;
+    private Integer chosenTask;
+    private List<Long> completedTasksIds;
 
     @NonNull
     @Override
-    public NumTaskAdapter.MiniTaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NumTaskAdapter.NumTaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.num_task_item, parent, false);
-        ChosenTask = 0;
-        return new NumTaskAdapter.MiniTaskHolder(itemView);
+        return new NumTaskAdapter.NumTaskHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NumTaskAdapter.MiniTaskHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NumTaskAdapter.NumTaskHolder holder, int position) {
 
         Task task = tasks.get(position);
 
-        if (ChosenTask == position) {
+        Log.d("chosenTask", String.valueOf(chosenTask));
+        Log.d("position", String.valueOf(position));
+        if (chosenTask == position) {
             holder.taskNumTV.setBackgroundResource(R.color.holo_red_light);
         } else {
-            holder.taskNumTV.setBackgroundResource(R.color.mini_task);
+            Log.d("COMPLETED TASKS", completedTasksIds.toString());
+            Log.d("TASKID", String.valueOf(task.getId()));
+            if (completedTasksIds.contains(task.getId())) {
+                holder.taskNumTV.setBackgroundResource(R.color.answered);
+            } else {
+                holder.taskNumTV.setBackgroundResource(R.color.mini_task);
+            }
         }
-
         holder.taskNumTV.setText(""+(position+1));
     }
 
-    public void setMiniTasks(List<Task> tasks) {
+    public void setTasks(List<Task> tasks, List<Long> completedTasksIds) {
         this.tasks = tasks;
+        this.completedTasksIds = completedTasksIds;
+        notifyDataSetChanged();
+    }
+
+    public void setCompletedTasks(List<Long> completedTasksIds) {
+        this.completedTasksIds = completedTasksIds;
         notifyDataSetChanged();
     }
 
@@ -58,15 +71,16 @@ public class NumTaskAdapter extends RecyclerView.Adapter<NumTaskAdapter.MiniTask
     }
 
     public void setChosenTask(int index){
-        ChosenTask = index;
+        chosenTask = index;
+        Log.d("CHOSEN TASK", String.valueOf(index));
         notifyDataSetChanged();
     }
 
-    public class MiniTaskHolder extends RecyclerView.ViewHolder {
+    public class NumTaskHolder extends RecyclerView.ViewHolder {
 
         private TextView taskNumTV;
 
-        public MiniTaskHolder(@NonNull View itemView) {
+        public NumTaskHolder(@NonNull View itemView) {
             super(itemView);
             taskNumTV = itemView.findViewById(R.id.mini_task_num);
         }

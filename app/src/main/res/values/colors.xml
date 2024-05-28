@@ -27,4 +27,5 @@
     <color name="failed">#FF8686</color>
     <color name="accept">#4CAF50</color>
     <color name="decline">#FF5722</color>
+    <color name="answered">#FFD88B</color>
 </resources>

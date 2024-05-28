@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.example.useme.R;
 import com.example.useme.adapter.NumTaskAdapter;
-import com.example.useme.app.group.GroupActivity;
 import com.example.useme.data.model.Homework;
 import com.example.useme.data.model.Student;
 import com.example.useme.data.model.Task;
@@ -31,9 +30,8 @@ import com.example.useme.retrofit.api.HomeworkApi;
 import com.example.useme.retrofit.api.StatisticApi;
 import com.example.useme.tool.RecyclerTouchListener;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -49,6 +47,7 @@ public class SolveHomeworkFragment extends Fragment {
 
     public static Long id;
     private Boolean isCompleted;
+    private List<Long> completedTasksIds;
 
     private NumTaskAdapter adapter;
     private RecyclerView recyclerView;
@@ -71,8 +70,6 @@ public class SolveHomeworkFragment extends Fragment {
         }
         repository = new LocalStatisticRepository(getActivity().getApplication().getApplicationContext());
 
-        //new GetCompletedTasksAsyncTask().execute();
-
         RetrofitService retrofitService = new RetrofitService();
         homeworkApi = retrofitService.getRetrofit().create(HomeworkApi.class);
         statisticApi = retrofitService.getRetrofit().create(StatisticApi.class);
@@ -87,53 +84,13 @@ public class SolveHomeworkFragment extends Fragment {
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        Call<List<Task>> callGetHomeworkTasks = homeworkApi.getHomeworkTasks(id);
 
-        callGetHomeworkTasks.enqueue(new Callback<List<Task>>() {
-            @Override
-            public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
-                tasks = response.body();
-                Log.d("RESPONSE", tasks.toString());
-                setMiniTasksAdapter(tasks);
-                Task task = adapter.getTask(0);
-                Bundle bundle = new Bundle();
-                bundle.putLong("TaskID", task.getId());
-                bundle.putString("TaskCondition", task.getCondition());
-                bundle.putString("TaskSubject", task.getTopicPK().getSubject());
-                bundle.putString("TaskTopic", "Задача №" + task.getTopicPK().getTopicNumber());
-                bundle.putString("TaskCategory", task.getCategory());
-                bundle.putString("TaskAnswer", task.getAnswer());
-                bundle.putBoolean(KEY_COMPLETE, isCompleted);
-                Log.d(KEY_COMPLETE, String.valueOf(isCompleted));
-                SolveTaskFragment solveTaskFragment = new SolveTaskFragment();
-                solveTaskFragment.setArguments(bundle);
-                getParentFragmentManager().beginTransaction().replace(R.id.solveTaskFragment, solveTaskFragment).commit();
-            }
-
-            @Override
-            public void onFailure(Call<List<Task>> call, Throwable t) {
-                Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
-                Log.d("FAIL", t.toString());
-            }
-        });
+        new UpdateTasksAsyncTask().execute(0);
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                adapter.setChosenTask(position);
-                Task task = adapter.getTask(position);
-                Bundle bundle = new Bundle();
-                bundle.putLong("TaskID", task.getId());
-                bundle.putString("TaskCondition", task.getCondition());
-                bundle.putString("TaskSubject", task.getTopicPK().getSubject());
-                bundle.putString("TaskTopic", "Задача №" + task.getTopicPK().getTopicNumber());
-                bundle.putString("TaskCategory", task.getCategory());
-                bundle.putString("TaskAnswer", task.getAnswer());
-                bundle.putBoolean(KEY_COMPLETE, isCompleted);
-                Log.d(KEY_COMPLETE, String.valueOf(isCompleted));
-                SolveTaskFragment solveTaskFragment = new SolveTaskFragment();
-                solveTaskFragment.setArguments(bundle);
-                getParentFragmentManager().beginTransaction().replace(R.id.solveTaskFragment, solveTaskFragment).commit();
+                new UpdateTasksAsyncTask().execute(position);
             }
 
             @Override
@@ -245,17 +202,18 @@ public class SolveHomeworkFragment extends Fragment {
         return view;
     }
 
-    public void setMiniTasksAdapter(List<Task> list) {
+    public void setNumTasksAdapter(List<Task> list, List<Long> ids) {
         adapter = new NumTaskAdapter();
-        adapter.setMiniTasks(list);
+        adapter.setTasks(list, ids);
         recyclerView.setAdapter(adapter);
     }
 
-    /*public class GetCompletedTasksAsyncTask extends AsyncTask {
-        List<Student> students;
+    public class UpdateTasksAsyncTask extends AsyncTask<Integer, Void, Boolean> {
+
         @Override
-        protected Object doInBackground(Object[] objects) {
-            List<LocalStatistic> statistics = repository.findHomeworkStatistics(StudentActivity.id, GroupActivity.id);
+        protected Boolean doInBackground(Integer... integers) {
+            Log.d("DEBUG", Arrays.toString(integers));
+            List<LocalStatistic> statistics = repository.findHomeworkStatistics(StudentActivity.id, SolveHomeworkFragment.id);
             completedTasksIds = new ArrayList<>();
             for (LocalStatistic statistic : statistics) {
                 completedTasksIds.add(statistic.getTaskId());
@@ -266,8 +224,9 @@ public class SolveHomeworkFragment extends Fragment {
                 public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
                     tasks = response.body();
                     Log.d("RESPONSE", tasks.toString());
-                    setMiniTasksAdapter(tasks, completedTasksIds);
-                    Task task = adapter.getTask(0);
+                    setNumTasksAdapter(tasks, completedTasksIds);
+                    adapter.setChosenTask(integers[0]);
+                    Task task = adapter.getTask(integers[0]);
                     Bundle bundle = new Bundle();
                     bundle.putLong("TaskID", task.getId());
                     bundle.putString("TaskCondition", task.getCondition());
@@ -275,9 +234,8 @@ public class SolveHomeworkFragment extends Fragment {
                     bundle.putString("TaskTopic", "Задача №" + task.getTopicPK().getTopicNumber());
                     bundle.putString("TaskCategory", task.getCategory());
                     bundle.putString("TaskAnswer", task.getAnswer());
-                    bundle.putBoolean(KEY_HOMEWORK_COMPLETE, isHomeworkCompleted);
-                    Log.d("DEBUG", String.valueOf(isHomeworkCompleted));
-                    bundle.putBoolean("TaskComplete", completedTasksIds.contains(task.getId()));
+                    bundle.putBoolean(KEY_COMPLETE, isCompleted);
+                    Log.d(KEY_COMPLETE, String.valueOf(isCompleted));
                     SolveTaskFragment solveTaskFragment = new SolveTaskFragment();
                     solveTaskFragment.setArguments(bundle);
                     getParentFragmentManager().beginTransaction().replace(R.id.solveTaskFragment, solveTaskFragment).commit();
@@ -291,11 +249,5 @@ public class SolveHomeworkFragment extends Fragment {
             });
             return null;
         }
-
-        *//*@Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
-
-        }*//*
-    }*/
+    }
 }
