@@ -1,5 +1,6 @@
 package com.example.useme.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
+import com.example.useme.app.group.AddTaskFragment;
 import com.example.useme.data.model.Task;
 
 import java.util.ArrayList;
@@ -74,7 +76,8 @@ public class AddTaskAdapter extends RecyclerView.Adapter<AddTaskAdapter.AddTaskH
             addTaskButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Task task = tasks.get(getAbsoluteAdapterPosition());
+                    AddTaskFragment.addTask(task);
                     tasks.remove(getAbsoluteAdapterPosition());
                     notifyItemRemoved(getAbsoluteAdapterPosition());
                 }

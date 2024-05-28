@@ -59,5 +59,11 @@
         android:id="@+id/addTaskFragment"
         android:name="com.example.useme.app.group.AddTaskFragment"
         android:label="fragment_add_task"
-        tools:layout="@layout/fragment_add_task" />
+        tools:layout="@layout/fragment_add_task" >
+        <action
+            android:id="@+id/action_addTaskFragment_to_createHomeworkFragment"
+            app:destination="@id/createHomeworkFragment"
+            app:popUpTo="@+id/createHomeworkFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

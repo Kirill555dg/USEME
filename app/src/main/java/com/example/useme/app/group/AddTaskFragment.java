@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,13 +19,12 @@ import android.widget.Toast;
 
 import com.example.useme.R;
 import com.example.useme.adapter.AddTaskAdapter;
-import com.example.useme.adapter.TaskAdapter;
 import com.example.useme.app.FilterTaskFragment;
-import com.example.useme.app.teacher.TaskFragment;
 import com.example.useme.data.model.Task;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.TaskApi;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class AddTaskFragment extends Fragment {
     private AddTaskAdapter adapter;
     RecyclerView recyclerView;
     private TaskApi taskApi;
+    private static final String KEY_TASKS = "TASKS";
+    private static List<Task> takedTasks;
 
     public AddTaskFragment() {
         // Required empty public constructor
@@ -47,6 +50,12 @@ public class AddTaskFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            takedTasks = (List<Task>) getArguments().getSerializable(KEY_TASKS);
+        } else {
+            takedTasks = new ArrayList<>();
+        }
+        Log.d("DEBUG", takedTasks.toString());
         adapter = new AddTaskAdapter();
         RetrofitService retrofitService = new RetrofitService();
         taskApi = retrofitService.getRetrofit().create(TaskApi.class);
@@ -61,7 +70,10 @@ public class AddTaskFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(KEY_TASKS, (Serializable) takedTasks);
+                Log.d("DEBUG", takedTasks.toString());
+                Navigation.findNavController(view).navigate(R.id.action_addTaskFragment_to_createHomeworkFragment, bundle);
             }
         });
 
@@ -72,7 +84,15 @@ public class AddTaskFragment extends Fragment {
         callGetTasks.enqueue(new Callback<List<Task>>() {
             @Override
             public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
-                setTaskAdapter(response.body());
+                List<Task> tasks = response.body();
+                for (Task takedTask : takedTasks) {
+                    if (tasks.contains(takedTask)) {
+                        tasks.remove(takedTask);
+                    }
+                }
+                Log.d("DEBUG", takedTasks.toString());
+                Log.d("DEBUG", tasks.toString());
+                setTaskAdapter(tasks);
             }
 
             @Override
@@ -107,9 +127,18 @@ public class AddTaskFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             Intent intent = data;
             Bundle args = intent.getBundleExtra("BUNDLE");
-            ArrayList<Task> tasks = (ArrayList<Task>) args.getSerializable("TASKS");
+            List<Task> tasks = (ArrayList<Task>) args.getSerializable("TASKS");
+            for (Task takedTask : takedTasks) {
+                if (tasks.contains(takedTask)) {
+                    tasks.remove(takedTask);
+                }
+            }
             setTaskAdapter(tasks);
             Log.d("DEBUG", tasks.toString());
         }
+    }
+
+    public static void addTask(Task task){
+        takedTasks.add(task);
     }
 }

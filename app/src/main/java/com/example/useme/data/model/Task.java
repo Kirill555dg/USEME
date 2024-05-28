@@ -5,6 +5,8 @@ import com.example.useme.data.model.taskdata.TopicPK;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class Task {
 
     @SerializedName("id")
@@ -69,4 +71,27 @@ public class Task {
         this.answer = answer;
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", topicPK=" + topicPK +
+                ", category='" + category + '\'' +
+                ", condition='" + condition + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(id, task.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
