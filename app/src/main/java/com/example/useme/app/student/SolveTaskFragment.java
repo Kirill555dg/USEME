@@ -64,8 +64,6 @@ public class SolveTaskFragment extends Fragment {
             condition = getArguments().getString(KEY_CONDITION);
             answer = getArguments().getString(KEY_ANSWER);
             isCompleted = getArguments().getBoolean(KEY_COMPLETE);
-            Log.d("ANSWER", answer);
-            Log.d(KEY_COMPLETE + "finish", String.valueOf(isCompleted));
 
             requireActivity().runOnUiThread(new Runnable() {
                 @Override

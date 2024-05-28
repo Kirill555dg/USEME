@@ -14,27 +14,27 @@ import com.example.useme.data.model.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MiniTaskAdapter extends RecyclerView.Adapter<com.example.useme.adapter.MiniTaskAdapter.MiniTaskHolder> {
+public class NumTaskAdapter extends RecyclerView.Adapter<NumTaskAdapter.MiniTaskHolder> {
 
     private List<Task> tasks = new ArrayList<>();
-    private ArrayList<Integer> mDisabledRows;
+    private Integer ChosenTask;
+    private ArrayList<Integer> CompletedTasks;
 
     @NonNull
     @Override
-    public com.example.useme.adapter.MiniTaskAdapter.MiniTaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NumTaskAdapter.MiniTaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.num_task_item, parent, false);
-        mDisabledRows = new ArrayList<>();
-        mDisabledRows.add(0);
-        return new com.example.useme.adapter.MiniTaskAdapter.MiniTaskHolder(itemView);
+        ChosenTask = 0;
+        return new NumTaskAdapter.MiniTaskHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.example.useme.adapter.MiniTaskAdapter.MiniTaskHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NumTaskAdapter.MiniTaskHolder holder, int position) {
 
         Task task = tasks.get(position);
 
-        if (mDisabledRows.contains(position)) {
+        if (ChosenTask == position) {
             holder.taskNumTV.setBackgroundResource(R.color.holo_red_light);
         } else {
             holder.taskNumTV.setBackgroundResource(R.color.mini_task);
@@ -57,9 +57,8 @@ public class MiniTaskAdapter extends RecyclerView.Adapter<com.example.useme.adap
         return tasks.get(index);
     }
 
-    public void disableRow(int index){
-        mDisabledRows.clear();
-        mDisabledRows.add(index);
+    public void setChosenTask(int index){
+        ChosenTask = index;
         notifyDataSetChanged();
     }
 
