@@ -1,6 +1,8 @@
 package com.example.useme.app.group;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -149,20 +151,33 @@ public class GroupProfileFragment extends Fragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<Void> callDelete = groupApi.deleteGroup(GroupActivity.id);
-                callDelete.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        Toast.makeText(getLayoutInflater().getContext(), "Группа удалена", Toast.LENGTH_LONG).show();
-                        getActivity().getSupportFragmentManager().popBackStack();
-                    }
 
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
-                        Log.d("FAIL", t.toString());
-                    }
-                });
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Удаление группы")
+                        .setMessage("Вы точно хотите удалить данную группу?")
+                        .setPositiveButton("Да", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Call<Void> callDelete = groupApi.deleteGroup(GroupActivity.id);
+                                callDelete.enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        Toast.makeText(getLayoutInflater().getContext(), "Группа удалена", Toast.LENGTH_LONG).show();
+                                        getActivity().getSupportFragmentManager().popBackStack();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
+                                        Log.d("FAIL", t.toString());
+                                    }
+                                });
+                            }
+
+                        })
+                        .setNegativeButton("Нет", null)
+                        .show();
             }
         });
 
