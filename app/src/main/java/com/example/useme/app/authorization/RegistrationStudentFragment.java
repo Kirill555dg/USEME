@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -189,6 +190,10 @@ public class RegistrationStudentFragment extends DialogFragment {
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         dialog.getDatePicker().setMaxDate(new Date().getTime());
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setMessage("Выберите дату рождения");
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Выбрать", dialog);
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "", dialog);
         dialog.show();
     }
 

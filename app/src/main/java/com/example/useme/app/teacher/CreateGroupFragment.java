@@ -149,7 +149,7 @@ public class CreateGroupFragment extends Fragment {
                         @Override
                         public void onFailure(Call<Group> call, Throwable t) {
                             Log.d("CALL", t.toString());
-                            Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getLayoutInflater().getContext(), "Ошибка соединения", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -173,7 +173,7 @@ public class CreateGroupFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Subject>> call, Throwable t) {
                 Log.d("CALL", t.toString());
-                Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getLayoutInflater().getContext(), "Ошибка соединения", Toast.LENGTH_LONG).show();
             }
         });
         return new ArrayAdapter<>(requireContext(), R.layout.drop_down_item, subjects);

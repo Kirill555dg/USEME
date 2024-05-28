@@ -70,7 +70,7 @@ public class TeacherGroupsFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<List<Group>> call, Throwable t) {
-                Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
+                Toast.makeText(getLayoutInflater().getContext(), "Ошибка соединения", Toast.LENGTH_LONG).show();
                 Log.d("FAIL", t.toString());
             }
         });
@@ -93,7 +93,7 @@ public class TeacherGroupsFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<List<Group>> call, Throwable t) {
-                Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
+                Toast.makeText(getLayoutInflater().getContext(), "Ошибка соединения", Toast.LENGTH_LONG).show();
                 Log.d("FAIL", t.toString());
             }
         });

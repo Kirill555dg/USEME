@@ -196,7 +196,7 @@ public class StudentProfileFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<Student> call, Throwable t) {
-                        Toast.makeText(getLayoutInflater().getContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getLayoutInflater().getContext(), "Ошибка соединения", Toast.LENGTH_LONG).show();
                         Log.d("FAIL", t.toString());
                     }
                 });
