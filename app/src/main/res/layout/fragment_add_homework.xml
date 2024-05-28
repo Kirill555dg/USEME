@@ -94,11 +94,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/materialTextView"
-        android:layout_above="@id/sendHomeworkButton"
+        android:layout_above="@id/send_homework_button"
         tools:listitem="@layout/task_mini_item"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/sendHomeworkButton"
+        android:id="@+id/send_homework_button"
         style="@style/Widget.Material3.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

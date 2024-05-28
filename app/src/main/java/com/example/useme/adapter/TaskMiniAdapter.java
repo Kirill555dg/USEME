@@ -13,10 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
+import com.example.useme.app.group.CreateHomeworkFragment;
 import com.example.useme.app.group.GroupActivity;
+import com.example.useme.app.group.TaskInfoDialogFragment;
 import com.example.useme.data.model.Task;
 
 import java.util.ArrayList;
@@ -30,8 +33,11 @@ public class TaskMiniAdapter extends RecyclerView.Adapter<TaskMiniAdapter.TaskMi
 
     private List<Task> tasks = new ArrayList<>();
     private Context context;
-    public TaskMiniAdapter(Context context) {
+    private Fragment fragment;
+
+    public TaskMiniAdapter(Context context, Fragment fragment) {
         this.context = context;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -87,16 +93,25 @@ public class TaskMiniAdapter extends RecyclerView.Adapter<TaskMiniAdapter.TaskMi
                 @Override
                 public void onClick(View v) {
                     new AlertDialog.Builder(context)
-                            .setMessage("Вы точно хотите удалить данную задачу из Д/З?")
+                            .setMessage("Вы точно хотите удалить задачу "+ idTV.getText() +" из Д/З?")
                             .setPositiveButton("Да", new DialogInterface.OnClickListener()
                             {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    tasks.remove(getAbsoluteAdapterPosition());
+                                    notifyItemRemoved(getAbsoluteAdapterPosition());
                                 }
                             })
                             .setNegativeButton("Нет", null)
                             .show();
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TaskInfoDialogFragment taskInfoDialogFragment = new TaskInfoDialogFragment(tasks.get(getAbsoluteAdapterPosition()));
+                    taskInfoDialogFragment.show(fragment.getParentFragmentManager(), taskInfoDialogFragment.getClass().getName());
                 }
             });
         }

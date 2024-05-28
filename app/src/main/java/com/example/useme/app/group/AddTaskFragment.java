@@ -73,7 +73,8 @@ public class AddTaskFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(KEY_TASKS, (Serializable) takedTasks);
                 Log.d("DEBUG", takedTasks.toString());
-                Navigation.findNavController(view).navigate(R.id.action_addTaskFragment_to_createHomeworkFragment, bundle);
+                getParentFragment().setArguments(bundle);
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
 
