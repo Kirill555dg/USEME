@@ -10,14 +10,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
         android:padding="8dp">
 
         <RelativeLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp">
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.Material3.Button.IconButton"
@@ -29,7 +27,6 @@
                 android:clickable="true"
                 app:icon="@drawable/ic_back_24dp"
                 app:iconTint="@color/black"
-                android:layout_marginStart="8dp"
                 />
 
 

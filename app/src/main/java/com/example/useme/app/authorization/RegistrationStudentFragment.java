@@ -192,8 +192,8 @@ public class RegistrationStudentFragment extends DialogFragment {
         dialog.getDatePicker().setMaxDate(new Date().getTime());
         dialog.setCanceledOnTouchOutside(false);
         dialog.setMessage("Выберите дату рождения");
-        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Выбрать", dialog);
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "", dialog);
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "сохранить", dialog);
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "выйти", dialog);
         dialog.show();
     }
 

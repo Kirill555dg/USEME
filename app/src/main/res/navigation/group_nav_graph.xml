@@ -15,10 +15,14 @@
             app:destination="@id/groupApplicationsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addHomeworkFragment"
+        android:id="@+id/createHomeworkFragment"
         android:name="com.example.useme.app.group.CreateHomeworkFragment"
         tools:layout="@layout/fragment_add_homework"
-        android:label="fragment_add_homework" />
+        android:label="fragment_add_homework" >
+        <action
+            android:id="@+id/action_createHomeworkFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
     <fragment
         android:id="@+id/groupStatisticFragment"
         android:name="com.example.useme.app.group.GroupStatisticFragment"
@@ -35,8 +39,8 @@
         android:label="fragment_group_homeworks"
         tools:layout="@layout/fragment_group_homeworks" >
         <action
-            android:id="@+id/action_groupHomeworksFragment_to_addHomeworkFragment"
-            app:destination="@id/addHomeworkFragment" />
+            android:id="@+id/action_groupHomeworksFragment_to_createHomeworkFragment"
+            app:destination="@id/createHomeworkFragment" />
         <action
             android:id="@+id/action_groupHomeworksFragment_to_changeHomeworkFragment"
             app:destination="@id/changeHomeworkFragment" />
@@ -51,4 +55,9 @@
         android:name="com.example.useme.app.group.GroupApplicationsFragment"
         android:label="fragment_applications"
         tools:layout="@layout/fragment_group_applications" />
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.useme.app.group.AddTaskFragment"
+        android:label="fragment_add_task"
+        tools:layout="@layout/fragment_add_task" />
 </navigation>

@@ -80,7 +80,7 @@ public class GroupHomeworksFragment extends Fragment {
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_groupHomeworksFragment_to_addHomeworkFragment);
+                Navigation.findNavController(view).navigate(R.id.action_groupHomeworksFragment_to_createHomeworkFragment);
             }
         });
 

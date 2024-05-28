@@ -11,7 +11,6 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp">
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.Material3.Button.IconButton"
@@ -67,7 +66,7 @@
         android:layout_marginBottom="10dp"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/addTaskButton"
+        android:id="@+id/add_tasks_button"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,7 +81,7 @@
         android:id="@+id/materialTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/addTaskButton"
+        android:layout_below="@id/add_tasks_button"
         android:layout_centerVertical="true"
         android:text="@string/selected_tasks"
         android:textAlignment="center"
