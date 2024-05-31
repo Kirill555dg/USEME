@@ -101,7 +101,7 @@ public class AddTaskFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Task>> call, Throwable t) {
-                Toast.makeText(getLayoutInflater().getContext(), t.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getLayoutInflater().getContext(), "Ошибка подключения", Toast.LENGTH_LONG).show();
                 Log.d("FAIL", t.toString());
             }
         });

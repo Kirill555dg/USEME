@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Homework {
 
@@ -37,6 +38,8 @@ public class Homework {
     @SerializedName("completed")
     @Expose
     private List<Long> completed;
+
+    private Integer completedTasks;
 
     private int countStudents;
 
@@ -120,6 +123,14 @@ public class Homework {
         this.countTasks = countTasks;
     }
 
+    public Integer getCompletedTasks() {
+        return completedTasks;
+    }
+
+    public void setCompletedTasks(Integer completedTasks) {
+        this.completedTasks = completedTasks;
+    }
+
     @Override
     public String toString() {
         return "Homework{" +
@@ -132,7 +143,21 @@ public class Homework {
                 ", statistics=" + statistics +
                 ", countTasks=" + countTasks +
                 ", completed=" + completed +
+                ", completedTasks=" + completedTasks +
                 ", countStudents=" + countStudents +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Homework homework = (Homework) o;
+        return Objects.equals(id, homework.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

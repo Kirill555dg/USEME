@@ -28,7 +28,7 @@
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/homework_item_title"
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/homework_item_id"
@@ -43,7 +43,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/homework_item_id"
+                android:id="@+id/id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -54,7 +54,7 @@
 
             <TableLayout
                 android:id="@+id/table_container"
-                android:layout_below="@id/homework_item_title"
+                android:layout_below="@id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp">
@@ -74,7 +74,7 @@
                         android:layout_marginRight="6dp" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/homework_item_date_of_issue"
+                        android:id="@+id/date_of_issue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="24.05.2024"
@@ -100,7 +100,7 @@
                         android:layout_marginRight="6dp"/>
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/homework_item_count_completed"
+                        android:id="@+id/group_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="#id"
@@ -138,10 +138,10 @@
                 android:layout_marginTop="16dp"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:scaleY="1"
-                android:progressDrawable="@drawable/progress"
+                android:progressDrawable="@drawable/progress_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progress="30"/>
+                android:progress="0"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

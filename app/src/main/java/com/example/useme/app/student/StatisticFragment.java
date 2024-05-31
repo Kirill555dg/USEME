@@ -3,64 +3,104 @@ package com.example.useme.app.student;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.useme.R;
+import com.example.useme.adapter.HomeworkStatisticAdapter;
+import com.example.useme.adapter.StudentGroupAdapter;
+import com.example.useme.data.model.Group;
+import com.example.useme.data.model.Homework;
+import com.example.useme.data.model.Task;
+import com.example.useme.data.model.statistic.Statistic;
+import com.example.useme.retrofit.RetrofitService;
+import com.example.useme.retrofit.api.StatisticApi;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StatisticFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class StatisticFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private StatisticApi statisticApi;
+    private List<Statistic> statisticList;
+    private Long studentId;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RecyclerView recyclerView;
+    private HomeworkStatisticAdapter adapter;
 
     public StatisticFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StatisticFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StatisticFragment newInstance(String param1, String param2) {
-        StatisticFragment fragment = new StatisticFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
+        studentId = StudentActivity.id;
+        RetrofitService retrofitService = new RetrofitService();
+        statisticApi = retrofitService.getRetrofit().create(StatisticApi.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistic, container, false);
+        View view = inflater.inflate(R.layout.fragment_statistic, container, false);
+
+        recyclerView = view.findViewById(R.id.statistics_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        Call<List<Statistic>> callGetStatistics = statisticApi.findStudentStatistic(studentId);
+        callGetStatistics.enqueue(new Callback<List<Statistic>>() {
+            @Override
+            public void onResponse(Call<List<Statistic>> call, Response<List<Statistic>> response) {
+                Log.d("RESPONSE", response.body().toString());
+                statisticList = response.body();
+                HashMap<Homework, Integer> completed = new HashMap<>();
+                HashSet<Homework> homeworks = new HashSet<>();
+                for (Statistic statistic : statisticList) {
+                    Homework curHomework = statistic.getPk().getHomework();
+                    homeworks.add(curHomework);
+                    Integer countCompleted = completed.get(curHomework);
+                    if (countCompleted == null) {
+                        countCompleted = 0;
+                    }
+                    if (statistic.getIsCorrect()) countCompleted++;
+                    completed.put(curHomework, countCompleted);
+                }
+                for (Homework homework : homeworks) {
+                    homework.setCompletedTasks(completed.get(homework));
+                }
+                List<Homework> fullHomework = new ArrayList<>(homeworks);
+                setStatisticAdapter(fullHomework);
+            }
+
+            @Override
+            public void onFailure(Call<List<Statistic>> call, Throwable t) {
+                Toast.makeText(getLayoutInflater().getContext(), "Ошибка подключения", Toast.LENGTH_LONG).show();
+                Log.d("FAIL", t.toString());
+            }
+        });
+
+        return view;
+    }
+
+
+    public void setStatisticAdapter(List<Homework> list){
+        adapter = new HomeworkStatisticAdapter(getResources());
+        adapter.setStatistics(list);
+        recyclerView.setAdapter(adapter);
     }
 }
