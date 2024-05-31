@@ -47,9 +47,10 @@ public class StatisticFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            studentId = getArguments().getLong("ID");
+        } else {
+            studentId = StudentActivity.id;
         }
-        studentId = StudentActivity.id;
         RetrofitService retrofitService = new RetrofitService();
         statisticApi = retrofitService.getRetrofit().create(StatisticApi.class);
     }

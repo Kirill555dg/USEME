@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_groupPageFragment_to_applicationsFragment"
             app:destination="@id/groupApplicationsFragment" />
+        <action
+            android:id="@+id/action_groupPageFragment_to_statisticFragment2"
+            app:destination="@id/statisticFragment2" />
     </fragment>
     <fragment
         android:id="@+id/createHomeworkFragment"
@@ -52,4 +55,9 @@
         android:name="com.example.useme.app.group.AddTaskFragment"
         android:label="fragment_add_task"
         tools:layout="@layout/fragment_add_task" />
+    <fragment
+        android:id="@+id/statisticFragment2"
+        android:name="com.example.useme.app.student.StatisticFragment"
+        android:label="fragment_statistic"
+        tools:layout="@layout/fragment_statistic" />
 </navigation>

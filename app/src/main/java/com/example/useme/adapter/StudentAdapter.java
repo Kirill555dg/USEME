@@ -1,5 +1,6 @@
 package com.example.useme.adapter;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
@@ -81,14 +83,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
             ageTV = itemView.findViewById(R.id.student_item_age);
             completeHomeworksTV = itemView.findViewById(R.id.student_item_complete_homeworks);
 
-            /*itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putLong("ID", id);
-                    Navigation.findNavController(itemView).navigate(R.id.action_teacherGroupsFragment_to_groupActivity, bundle);
+                    Navigation.findNavController(itemView).navigate(R.id.action_groupPageFragment_to_statisticFragment2, bundle);
                 }
-            });*/
+            });
         }
     }
 
