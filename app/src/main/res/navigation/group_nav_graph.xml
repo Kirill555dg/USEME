@@ -41,18 +41,6 @@
         <action
             android:id="@+id/action_groupHomeworksFragment_to_createHomeworkFragment"
             app:destination="@id/createHomeworkFragment" />
-        <action
-            android:id="@+id/action_groupHomeworksFragment_to_changeHomeworkFragment"
-            app:destination="@id/changeHomeworkFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/changeHomeworkFragment"
-        android:name="com.example.useme.app.group.ChangeHomeworkFragment"
-        android:label="fragment_change_homework"
-        tools:layout="@layout/fragment_change_homework" >
-        <action
-            android:id="@+id/action_changeHomeworkFragment_to_addTaskFragment"
-            app:destination="@id/addTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/groupApplicationsFragment"

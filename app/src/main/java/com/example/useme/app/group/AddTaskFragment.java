@@ -73,7 +73,10 @@ public class AddTaskFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(KEY_TASKS, (Serializable) takedTasks);
                 Log.d("DEBUG", takedTasks.toString());
+                Log.d("DEBUG2", bundle.toString());
                 getParentFragment().setArguments(bundle);
+                Log.d("DEBUG3", getParentFragment().getArguments().toString());
+                Log.d("DEBUG3", getParentFragment().getClass().getName());
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });

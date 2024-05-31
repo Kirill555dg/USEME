@@ -1,6 +1,7 @@
 package com.example.useme.adapter;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.useme.R;
+import com.example.useme.app.student.StudentActivity;
 import com.example.useme.data.model.Homework;
+import com.example.useme.data.model.statistic.Statistic;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.HomeworkApi;
 
@@ -22,61 +25,59 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TeacherHomeworkAdapter extends RecyclerView.Adapter<TeacherHomeworkAdapter.HomeworkHolder>{
-    private List<Homework> homeworks = new ArrayList<>();
+public class HomeworkStatisticAdapter extends RecyclerView.Adapter<HomeworkStatisticAdapter.HomeworkStatisticHolder> {
+
+    private List<Statistic> statistics = new ArrayList<>();
 
     @NonNull
     @Override
-    public TeacherHomeworkAdapter.HomeworkHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeworkStatisticAdapter.HomeworkStatisticHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.homework_item, parent, false);
+                .inflate(R.layout.homework_statistic_item, parent, false);
 
 
 
-        return new TeacherHomeworkAdapter.HomeworkHolder(itemView);
+        return new HomeworkStatisticAdapter.HomeworkStatisticHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TeacherHomeworkAdapter.HomeworkHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HomeworkStatisticAdapter.HomeworkStatisticHolder holder, int position) {
 
-        Homework homework = homeworks.get(position);
-        holder.id = homework.getId();
-        holder.titleTV.setText(homework.getTitle());
-        holder.idTV.setText("#"+holder.id);
-        holder.dateOfIssueTV.setText(homework.getDateOfIssue());
-        holder.deadlineTV.setText(homework.getDeadline());
-        holder.countCompletedTV.setText(homework.getCompleted().size()+"/"+homework.getCountStudents());
+        Statistic statistic = statistics.get(position);
+
+        holder.id = statistic.getPk().getHomework().getId();
     }
 
-    public void setHomeworks(List<Homework> homeworks) {
-        this.homeworks = homeworks;
+    public void setStatistics(List<Statistic> statistics) {
+        this.statistics = statistics;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return homeworks.size();
+        return statistics.size();
     }
 
 
-    public class HomeworkHolder extends RecyclerView.ViewHolder {
+    public class HomeworkStatisticHolder extends RecyclerView.ViewHolder {
 
         private Long id;
         private TextView titleTV;
         private TextView idTV;
         private TextView dateOfIssueTV;
         private TextView deadlineTV;
-        private TextView countCompletedTV;
+        private TextView completedTV;
+        private Boolean isCompleted;
 
-        public HomeworkHolder(@NonNull View itemView) {
+        public HomeworkStatisticHolder(@NonNull View itemView) {
             super(itemView);
 
-            titleTV = itemView.findViewById(R.id.homework_item_title);
-            idTV = itemView.findViewById(R.id.homework_item_id);
+            titleTV = itemView.findViewById(R.id.student_homework_item_title);
+            idTV = itemView.findViewById(R.id.student_homework_item_id);
 
-            dateOfIssueTV = itemView.findViewById(R.id.homework_item_date_of_issue);
-            deadlineTV = itemView.findViewById(R.id.homework_item_deadline);
-            countCompletedTV = itemView.findViewById(R.id.homework_item_count_completed);
+            dateOfIssueTV = itemView.findViewById(R.id.student_homework_item_date_of_issue);
+            deadlineTV = itemView.findViewById(R.id.student_homework_item_deadline);
+            completedTV = itemView.findViewById(R.id.student_homework_item_completed);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,7 +92,8 @@ public class TeacherHomeworkAdapter extends RecyclerView.Adapter<TeacherHomework
 
                             Bundle bundle = new Bundle();
                             bundle.putLong("ID", id);
-                            Navigation.findNavController(itemView).navigate(R.id.action_groupHomeworksFragment_to_createHomeworkFragment, bundle);
+                            bundle.putBoolean("COMPLETE", isCompleted);
+                            Navigation.findNavController(itemView).navigate(R.id.action_homeworkFragment_to_solveFragment, bundle);
                         }
 
                         @Override
@@ -102,4 +104,5 @@ public class TeacherHomeworkAdapter extends RecyclerView.Adapter<TeacherHomework
             });
         }
     }
+
 }

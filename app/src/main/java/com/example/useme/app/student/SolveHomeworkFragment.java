@@ -39,9 +39,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SolveHomeworkFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String KEY_GROUP_ID = "ID";
     private static final String KEY_COMPLETE = "COMPLETE";
 

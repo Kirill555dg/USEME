@@ -21,11 +21,13 @@ import android.widget.Toast;
 
 import com.example.useme.R;
 import com.example.useme.adapter.TaskMiniAdapter;
+import com.example.useme.app.student.SolveHomeworkFragment;
 import com.example.useme.data.model.Group;
 import com.example.useme.data.model.Homework;
 import com.example.useme.data.model.Task;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.HomeworkApi;
+import com.example.useme.tool.RecyclerTouchListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -56,27 +58,32 @@ public class CreateHomeworkFragment extends Fragment {
     private String deadline;
     private static final String KEY_TASKS = "TASKS";
     private List<Task> takedTasks;
+    private Long id;
+    private boolean first;
 
     public CreateHomeworkFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         takedTasks = new ArrayList<>();
-        RetrofitService retrofitService = new RetrofitService();
-        homeworkApi = retrofitService.getRetrofit().create(HomeworkApi.class);
+        id = -1L;
         title = "";
         deadline = "";
+        first = true;
+
+        RetrofitService retrofitService = new RetrofitService();
+        homeworkApi = retrofitService.getRetrofit().create(HomeworkApi.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (getArguments() != null) {
-            takedTasks = (List<Task>) getArguments().getSerializable(KEY_TASKS);
+            if (id == -1L) id = getArguments().getLong("ID");
         }
         View view = inflater.inflate(R.layout.fragment_add_homework, container, false);
         Button backButton = view.findViewById(R.id.back_button);
@@ -91,8 +98,9 @@ public class CreateHomeworkFragment extends Fragment {
         if (!deadline.isEmpty()) {
             pickDeadlineButton.setTextColor(getResources().getColor(R.color.colorPrimary));
             pickDeadlineButton.setStrokeColorResource(R.color.colorPrimary);
-            pickDeadlineButton.setText("Указать дедлайн");
+            pickDeadlineButton.setText(R.string.change_deadline);
         }
+
         pickDeadlineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,12 +125,50 @@ public class CreateHomeworkFragment extends Fragment {
 
         homeworkTitleTIET = view.findViewById(R.id.TIET_HomeworkTitle);
         homeworkTitleTIL = view.findViewById(R.id.TIL_HomeworkTitle);
-        if (!title.isEmpty()){
+        if (!title.isEmpty()) {
             homeworkTitleTIET.setText(title);
         }
         addTextListener(homeworkTitleTIL, homeworkTitleTIET);
 
-        setTaskAdapter(takedTasks);
+        if (id != -1L) {
+            Call<Homework> callGetHomework = homeworkApi.findHomework(id);
+            if (first) {
+                first = false;
+
+                callGetHomework.enqueue(new Callback<Homework>() {
+                    @Override
+                    public void onResponse(Call<Homework> call, Response<Homework> response) {
+                        Homework homework = response.body();
+                        deadline = homework.getDeadline();
+                        title = homework.getTitle();
+                        takedTasks = homework.getTasks();
+                        sendButton.setText(R.string.change_homework);
+                        pickDeadlineButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        pickDeadlineButton.setStrokeColorResource(R.color.colorPrimary);
+                        pickDeadlineButton.setText(R.string.change_deadline);
+                        homeworkTitleTIET.setText(title);
+                        homeworkTitleTIL.setHelperText(null);
+                        setTaskAdapter(takedTasks);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Homework> call, Throwable t) {
+                        Log.d("CALL", t.toString());
+                        Toast.makeText(getLayoutInflater().getContext(), "Ошибка соединения", Toast.LENGTH_LONG).show();
+                    }
+                });
+            } else {
+                sendButton.setText(R.string.change_homework);
+                pickDeadlineButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+                pickDeadlineButton.setStrokeColorResource(R.color.colorPrimary);
+                pickDeadlineButton.setText(R.string.change_deadline);
+                homeworkTitleTIET.setText(title);
+                homeworkTitleTIL.setHelperText(null);
+                setTaskAdapter(takedTasks);
+            }
+        } else {
+            setTaskAdapter(takedTasks);
+        }
         return view;
     }
 
@@ -158,6 +204,11 @@ public class CreateHomeworkFragment extends Fragment {
             sendButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (takedTasks.isEmpty()) {
+                        Toast.makeText(getContext(), "Нужно добавить задачи", Toast.LENGTH_SHORT).show();
+                        sendButton.setEnabled(false);
+                        return;
+                    }
                     Homework homework = new Homework();
                     homework.setGroup(new Group(GroupActivity.id));
                     homework.setTasks(takedTasks);
@@ -165,24 +216,41 @@ public class CreateHomeworkFragment extends Fragment {
                     homework.setDeadline(deadline);
                     homework.setDateOfIssue(LocalDate.now().toString());
 
-                    Call<Homework> callCreateHomework = homeworkApi.createHomework(homework);
-                    callCreateHomework.enqueue(new Callback<Homework>() {
-                        @Override
-                        public void onResponse(Call<Homework> call, Response<Homework> response) {
-                            Log.d("RESPONSE", response.body().toString());
-                            Toast.makeText(getLayoutInflater().getContext(), "Домашнее задание успешно создано", Toast.LENGTH_SHORT).show();
-                            getActivity().getSupportFragmentManager().popBackStack();
-                        }
+                    if (id == -1L) {
+                        Call<Homework> callCreateHomework = homeworkApi.createHomework(homework);
+                        callCreateHomework.enqueue(new Callback<Homework>() {
+                            @Override
+                            public void onResponse(Call<Homework> call, Response<Homework> response) {
+                                Log.d("RESPONSE", response.body().toString());
+                                Toast.makeText(getLayoutInflater().getContext(), "Домашнее задание успешно создано", Toast.LENGTH_SHORT).show();
+                                getActivity().getSupportFragmentManager().popBackStack();
+                            }
 
-                        @Override
-                        public void onFailure(Call<Homework> call, Throwable t) {
-                            Log.d("CALL", t.toString());
-                            Toast.makeText(getLayoutInflater().getContext(), "Ошибка соединения", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<Homework> call, Throwable t) {
+                                Log.d("CALL", t.toString());
+                                Toast.makeText(getLayoutInflater().getContext(), "Ошибка соединения", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    } else {
+                        Call<Homework> callCreateHomework = homeworkApi.updateHomework(id, homework);
+                        callCreateHomework.enqueue(new Callback<Homework>() {
+                            @Override
+                            public void onResponse(Call<Homework> call, Response<Homework> response) {
+                                Log.d("RESPONSE", response.body().toString());
+                                Toast.makeText(getLayoutInflater().getContext(), "Домашнее задание успешно изменено", Toast.LENGTH_SHORT).show();
+                                getActivity().getSupportFragmentManager().popBackStack();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Homework> call, Throwable t) {
+                                Log.d("CALL", t.toString());
+                                Toast.makeText(getLayoutInflater().getContext(), "Ошибка соединения", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
                 }
             });
-
         } else {
             sendButton.setEnabled(false);
         }
@@ -193,7 +261,7 @@ public class CreateHomeworkFragment extends Fragment {
         DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                deadline = LocalDate.of(year, month+1, dayOfMonth).toString();
+                deadline = LocalDate.of(year, month + 1, dayOfMonth).toString();
                 pickDeadlineButton.setTextColor(getResources().getColor(R.color.colorPrimary));
                 pickDeadlineButton.setStrokeColorResource(R.color.colorPrimary);
                 pickDeadlineButton.setText("Указать дедлайн");

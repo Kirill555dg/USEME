@@ -31,24 +31,23 @@
                 android:id="@+id/homework_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/homework_item_id"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/homework_item_id"
                 android:text="Шаблон названия"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"/>
+                android:textStyle="bold" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/homework_item_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/homework_item_title"
-                android:layout_alignBottom="@+id/homework_item_title"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
                 android:text="#id"
                 android:textColor="@color/gray"
                 android:textSize="18sp" />
@@ -81,31 +80,6 @@
                         android:text="24.05.2024"
                         android:textColor="@color/black"
                         android:textSize="16sp"/>
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:padding="6dp">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Дата выполнения:"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_marginRight="6dp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/homework_item_deadline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="25.05.2024"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"/>
-
                 </TableRow>
 
 

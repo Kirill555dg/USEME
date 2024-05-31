@@ -19,6 +19,15 @@
             android:orientation="vertical"
             android:padding="4dp">
 
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/solve_task_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Предмет"
+                android:textSize="16sp"
+                android:layout_margin="6dp"/>
+
             <RelativeLayout
                 android:id="@+id/task_container"
                 android:layout_width="match_parent"
@@ -44,17 +53,6 @@
                     android:layout_toRightOf="@id/solve_task_topic"
                     android:text="#id"
                     android:textSize="20sp" />
-
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/solve_task_subject"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:text="Предмет"
-                    android:layout_centerVertical="true"
-                    android:textSize="16sp" />
             </RelativeLayout>
 
             <com.google.android.material.textview.MaterialTextView
