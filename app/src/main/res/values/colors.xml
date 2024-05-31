@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorBackground">#FDF0EC</color>
     <color name="mini_task">#DFCFCF</color>
+    <color name="light_gray">#D1D1D1</color>
     <color name="colorBackgroundLight">#FFF8F7</color>
     <color name="colorPrimary">#FFA200</color>
     <color name="colorPrimaryVariant">#FFA200</color>
@@ -28,4 +29,9 @@
     <color name="accept">#4CAF50</color>
     <color name="decline">#FF5722</color>
     <color name="answered">#FFD88B</color>
+
+    <color name="bad">#FF4A4A</color>
+    <color name="medium">#FFB41E</color>
+    <color name="good">#0BA500</color>
+
 </resources>

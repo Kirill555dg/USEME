@@ -19,7 +19,11 @@
         android:id="@+id/statisticFragment"
         android:name="com.example.useme.app.student.StatisticFragment"
         android:label="fragment_statistic"
-        tools:layout="@layout/fragment_statistic" />
+        tools:layout="@layout/fragment_statistic" >
+        <action
+            android:id="@+id/action_statisticFragment_to_homeworkStatisticFragment"
+            app:destination="@id/homeworkStatisticFragment" />
+    </fragment>
     <fragment
         android:id="@+id/studentGroupsFragment"
         android:name="com.example.useme.app.student.StudentGroupsFragment"
@@ -46,4 +50,9 @@
         android:name="com.example.useme.app.student.SolveHomeworkFragment"
         android:label="fragment_solve"
         tools:layout="@layout/fragment_solve" />
+    <fragment
+        android:id="@+id/homeworkStatisticFragment"
+        android:name="com.example.useme.app.student.HomeworkStatisticFragment"
+        android:label="fragment_homework_statistic"
+        tools:layout="@layout/fragment_homework_statistic" />
 </navigation>

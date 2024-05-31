@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".app.student.StatisticFragment"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:padding="12dp">
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/statistic_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/statistic_title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/task_filter_button"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignTop="@+id/statistic_title"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        app:icon="@drawable/ic_filter_24dp"
+        app:iconGravity="textStart"
+        app:iconSize="32dp"
+        app:iconTint="@color/black" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/student_groups_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/statistic_title"
+        tools:listitem="@layout/homework_statistic_item" />
+
+</RelativeLayout>

@@ -120,4 +120,9 @@
     <string name="selected_tasks">Добавленные задачи:</string>
     <string name="add_tasks">Добавить задачи</string>
     <string name="add_task">Добавить задачу</string>
+    <string name="change_homework">Изменить Д/З</string>
+    <string name="change_homework_title">Изменение Д/З</string>
+    <string name="fill_title_homework">Введите название</string>
+    <string name="change_deadline">Поменять дедлайн</string>
+    <string name="statistic_title">Статистика</string>
 </resources>

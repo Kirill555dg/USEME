@@ -165,7 +165,6 @@ public class SolveHomeworkFragment extends Fragment {
                                                 }
                                             }
                                             Log.d("STATISTICS", sendStatistics.toString());
-
                                             Call<List<Statistic>> callSaveStatistic = statisticApi.createHomeworkStatistic(sendStatistics);
                                             callSaveStatistic.enqueue(new Callback<List<Statistic>>() {
                                                 @Override

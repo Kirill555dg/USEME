@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.student.StudentGroupsFragment"
     android:background="@color/colorBackground"
-    android:padding="12dp">
+    android:padding="12dp"
+    tools:context=".app.student.StudentGroupsFragment">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/teacher_title_group"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/groups_title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/teacher_title_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/groups_title"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textAlignment="center"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/student_groups_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/teacher_title_group"
+        tools:listitem="@layout/student_group_item" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/student_groups_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/teacher_title_group"
-            tools:listitem="@layout/student_group_item" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/invite_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:contentDescription="@string/applications"
+        android:src="@drawable/ic_application_24dp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/invite_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:src="@drawable/ic_application_24dp"
-            android:contentDescription="@string/applications" />
-
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>

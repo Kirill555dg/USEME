@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".app.student.TaskStatisticFragment"
+    android:background="@color/colorBackground"
+    android:padding="8dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackgroundLight"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <RelativeLayout
+                android:id="@+id/task_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/solve_task_topic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="10dp"
+                    android:text="Номер"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/solve_task_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/solve_task_topic"
+                    android:text="#id"
+                    android:textSize="20sp" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/solve_task_subject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:text="Предмет"
+                    android:layout_centerVertical="true"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/solve_task_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="Категория"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/task_item_condition"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/solve_task_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:text="шаблон условия"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TableLayout
+                android:id="@+id/table_container"
+                android:layout_below="@id/homework_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:padding="6dp">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Введенный ответ"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="6dp" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/student_answer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="6dp"
+                        android:text="Введенный ответ"
+                        android:background="@drawable/border"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:padding="6dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Правильный ответ"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="6dp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/correct_answer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="6dp"
+                        android:text="Правильный ответ"
+                        android:background="@drawable/border"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+
+                </TableRow>
+            </TableLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>
