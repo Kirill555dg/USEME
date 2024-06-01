@@ -14,6 +14,10 @@ public class Statistic {
     @Expose
     private Boolean isCorrect;
 
+    @SerializedName("answer")
+    @Expose
+    private String answer;
+
     public StatisticPK getPk() {
         return pk;
     }
@@ -22,12 +26,20 @@ public class Statistic {
         this.pk = pk;
     }
 
-    public Boolean getIsCorrect() {
+    public Boolean getCorrect() {
         return isCorrect;
     }
 
-    public void setIsCorrect(Boolean isCorrect) {
+    public void setCorrect(Boolean isCorrect) {
         this.isCorrect = isCorrect;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     @Override

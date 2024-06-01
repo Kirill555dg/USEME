@@ -14,10 +14,7 @@ import android.widget.Toast;
 
 import com.example.useme.R;
 import com.example.useme.adapter.HomeworkStatisticAdapter;
-import com.example.useme.adapter.StudentGroupAdapter;
-import com.example.useme.data.model.Group;
 import com.example.useme.data.model.Homework;
-import com.example.useme.data.model.Task;
 import com.example.useme.data.model.statistic.Statistic;
 import com.example.useme.retrofit.RetrofitService;
 import com.example.useme.retrofit.api.StatisticApi;
@@ -78,7 +75,7 @@ public class StatisticFragment extends Fragment {
                     if (countCompleted == null) {
                         countCompleted = 0;
                     }
-                    if (statistic.getIsCorrect()) countCompleted++;
+                    if (statistic.getCorrect()) countCompleted++;
                     completed.put(curHomework, countCompleted);
                 }
                 for (Homework homework : homeworks) {

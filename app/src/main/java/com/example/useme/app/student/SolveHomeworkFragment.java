@@ -135,8 +135,8 @@ public class SolveHomeworkFragment extends Fragment {
                                                 completedTaskIds.add(statistic.getTaskId());
 
                                                 sendStatistic.setPk(pk);
-                                                sendStatistic.setIsCorrect(statistic.getCorrect());
-
+                                                sendStatistic.setCorrect(statistic.getCorrect());
+                                                sendStatistic.setAnswer(statistic.getAnswer());
                                                 sendStatistics.add(sendStatistic);
                                             }
                                             for (Task task : tasks) {
@@ -156,8 +156,8 @@ public class SolveHomeworkFragment extends Fragment {
                                                     pk.setTask(task);
 
                                                     sendStatistic.setPk(pk);
-                                                    sendStatistic.setIsCorrect(false);
-
+                                                    sendStatistic.setCorrect(false);
+                                                    sendStatistic.setAnswer("None");
                                                     sendStatistics.add(sendStatistic);
                                                 }
                                             }
